@@ -14,22 +14,28 @@ function GettingAd(number_ads, promotion) {
   var ads = Bot.getProperty("all_in_ads")
   var json = ads.list[number_ads]
   if (promotion == "Bot 🤖") {
-    Bot.sendInlineKeyboard(
-      [
-        [{ title: "🚀 Go to Bot 🚀", url: json.link }],
-        [
-          { title: "➡️ Skip", command: "/skip /bots " + number_ads },
-          { title: "🚫 Report", command: "/report " + number_ads + "&Bot 🤖" },
-          { title: "✅ Joined", command: "/bot " + number_ads }
-        ]
-      ],
-      json.title +
+    Api.sendMessage({
+      text:
+        json.title +
         "\n\n" +
         json.description +
-        "\n\n------------------------------------------------\n⚠️_ You will be redirected to a third party telegram bot._",
-      { parse_mode: "Markdown", disable_web_page_preview: true }
-    )
-
+        "\n\n------------------------------------------------\n⚠️<i> You will be redirected to a third party telegram bot.</i>",
+      disable_web_page_preview: true,
+      parse_mode: "html",
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "🚀 Go to Bot 🚀", url: json.link }],
+          [
+            { text: "➡️ Skip", callback_data: "/skip /bots " + number_ads },
+            {
+              text: "🚫 Report",
+              callback_data: "/report " + number_ads + "&Bot 🤖"
+            },
+            { text: "✅ Joined", callback_data: "/bot " + number_ads }
+          ]
+        ]
+      }
+    })
     return
   }
   if (promotion == "Link URL 🔗") {
@@ -46,30 +52,33 @@ function GettingAd(number_ads, promotion) {
     return
   }
   if (promotion == "Channel / Group 📣") {
-    Bot.sendInlineKeyboard(
-      [
-        [
-          {
-            title: "🚀 Go to Channel 🚀",
-            url: json.link
-          }
-        ],
-        [
-          { title: "➡️ Skip", command: "/skip /join " + number_ads },
-          {
-            title: "🚫 Report",
-            command: "/report " + number_ads + "&Channel / Group 📣"
-          },
-          { title: "✅ Joined", command: "/joins " + number_ads }
-        ]
-      ],
-      json.title +
+    Api.sendMessage({
+      text:
+        json.title +
         "\n\n" +
         json.description +
-        "\n\n------------------------------------------------\n⚠️_You will be redirected to a third party telegram channel._",
-      { disable_web_page_preview: true }
-    )
-
+        "\n\n------------------------------------------------\n⚠️<i>You will be redirected to a third party telegram channel.</i>",
+      disable_web_page_preview: true,
+      parse_mode: "html",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "🚀 Go to Channel 🚀",
+              url: json.link
+            }
+          ],
+          [
+            { text: "➡️ Skip", callback_data: "/skip /join " + number_ads },
+            {
+              text: "🚫 Report",
+              callback_data: "/report " + number_ads + "&Channel / Group 📣"
+            },
+            { text: "✅ Joined", command: "/joins " + number_ads }
+          ]
+        ]
+      }
+    })
     return
   }
   if (promotion == "Post views 📃") {
@@ -98,29 +107,33 @@ function GettingAd(number_ads, promotion) {
       return
     }
     User.setProperty("last_run_at" + number_ads, Date.now(), "integer")
-    Bot.sendInlineKeyboard(
-      [
-        [
-          {
-            title: "➡️ Skip",
-            command: "/skip /view " + number_ads
-          },
-          {
-            title: "🚫 Report",
-            command: "/report " + number_ads + "&Post views 📃"
-          },
-          {
-            title: "✅ Wached",
-            command: "/watch " + number_ads
-          }
-        ]
-      ],
-      "📄 *Post Promotion*\n\n🧾 *Task*: Read *this post* to earn *" +
+    Api.sendMessage({
+      text:
+        "📄 <b>Post Promotion\n\n🧾 Task</b>: Read <b>this post</b> to earn <b>" +
         cur +
-        "*\n\n⏳ *Available Submissions*: " +
-        json.total
-    )
-
+        "\n\n⏳ Available Submissions</b>: " +
+        json.total,
+      disable_web_page_preview: true,
+      parse_mode: "html",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "➡️ Skip",
+              callback_data: "/skip /view " + number_ads
+            },
+            {
+              text: "🚫 Report",
+              callback_data: "/report " + number_ads + "&Post views 📃"
+            },
+            {
+              text: "✅ Wached",
+              callback_data: "/watch " + number_ads
+            }
+          ]
+        ]
+      }
+    })
     Api.forwardMessage({
       from_chat_id: json.owner,
       message_id: json.title
@@ -144,37 +157,44 @@ function EditingAd(number_ads, promotion) {
     }
     var button = [
       [
-        { title: "✏️ Edit", command: "/edit bot " + json.ads },
-        { title: sts, command: cdm }
+        { text: "✏️ Edit", callback_data: "/edit bot " + json.ads },
+        { text: sts, callback_data: cdm }
       ]
     ]
     var text =
-      "*Campaign #" +
+      "<b>Campaign #" +
       json.ads +
-      "* - Bot 🤖\n\n*Title*: " +
+      "</b> - Bot 🤖\n\n<b>Title</b>: " +
       json.title +
-      "\n*Description*: " +
+      "\n<b>Description</b>: " +
       json.description +
-      "\n\n*Bot*: *@" +
+      "\n\n<b>Bot</b>: @" +
       json.name +
-      "\nURL*: *" +
+      "\n<b>URL</b>: " +
       json.link +
-      "\nStatus*: " +
+      "\n<b>Status</b>: " +
       json.status +
-      "\n\n*Daily budget*: " +
+      "\n\n<b>Daily budget</b>: " +
       json.budget +
       " " +
       cur +
-      "\n*CPC*: " +
+      "\n<b>CPC</b>: " +
       json.cpc +
       " " +
       cur +
-      "\n*Clicks*: " +
+      "\n<b>Clicks</b>: " +
       json.total +
       " total / " +
       json.clicks +
       " today"
-    Bot.sendInlineKeyboard(button, text, { disable_web_page_preview: true })
+    Api.sendMessage({
+      text: text,
+      disable_web_page_preview: true,
+      parse_mode: "html",
+      reply_markup: {
+        inline_keyboard: button
+      }
+    })
     return
   }
   if (promotion == "Link URL 🔗") {
@@ -187,35 +207,42 @@ function EditingAd(number_ads, promotion) {
     }
     var button1 = [
       [
-        { title: "✏️ Edit", command: "/edit visit " + json.ads },
-        { title: sts, command: cdm }
+        { text: "✏️ Edit", callback_data: "/edit visit " + json.ads },
+        { text: sts, callback_data: cdm }
       ]
     ]
     var text1 =
-      "*Campaign #" +
+      "<b>Campaign #" +
       json.ads +
-      "* - Link URL 🔗\n\n*Title*: " +
+      "</b> - Link URL 🔗\n\n<b>Title</b>: " +
       json.title +
-      "\n*Description*: " +
+      "\n<b>Description</b>: " +
       json.description +
-      "\n\n*URL*: *" +
+      "\n\n<b>URL</b>: " +
       json.link +
-      "\nStatus*: " +
+      "\n<b>Status</b>: " +
       json.status +
-      "\n\n*Daily budget*: " +
+      "\n\n<b>Daily budget</b>: " +
       json.budget +
       " " +
       cur +
-      "\n*CPC*: " +
+      "\n<b>CPC</b>: " +
       json.cpc +
       " " +
       cur +
-      "\n*Clicks*: " +
+      "\n<b>Clicks</b>: " +
       json.total +
       " total / " +
       json.clicks +
       " today"
-    Bot.sendInlineKeyboard(button1, text1, { disable_web_page_preview: true })
+    Api.sendMessage({
+      text: text1,
+      disable_web_page_preview: true,
+      parse_mode: "html",
+      reply_markup: {
+        inline_keyboard: button1
+      }
+    })
     return
   }
   if (promotion == "Channel / Group 📣") {
@@ -228,37 +255,44 @@ function EditingAd(number_ads, promotion) {
     }
     var button2 = [
       [
-        { title: "✏️ Edit", command: "/edit join " + json.ads },
-        { title: sts, command: cdm }
+        { text: "✏️ Edit", callback_data: "/edit join " + json.ads },
+        { text: sts, callback_data: cdm }
       ]
     ]
     var text2 =
-      "*Campaign #" +
+      "<b>Campaign #" +
       json.ads +
-      "* - Channel / Group 📣\n\n*Title*: " +
+      "</b> - Channel / Group 📣\n\n<b>Title</b>: " +
       json.title +
-      "\n*Description*: " +
+      "\n<b>Description</b>: " +
       json.description +
-      "\n\n*Channel*: *" +
+      "\n\n<b>Channel</b>: " +
       json.name +
-      "\nURL*: *" +
+      "\n<b>URL</b>: " +
       json.link +
-      "\nStatus*: " +
+      "\n<b>Status</b>: " +
       json.status +
-      "\n\n*Daily budget*: " +
+      "\n\n<b>Daily budget</b>: " +
       json.budget +
       " " +
       cur +
-      "\n*CPC*: " +
+      "\n<b>CPC</b>: " +
       json.cpc +
       " " +
       cur +
-      "\n*Clicks*: " +
+      "\n<b>Clicks</b>: " +
       json.total +
       " total / " +
       json.clicks +
       " today"
-    Bot.sendInlineKeyboard(button2, text2, { disable_web_page_preview: true })
+    Api.sendMessage({
+      text: text2,
+      disable_web_page_preview: true,
+      parse_mode: "html",
+      reply_markup: {
+        inline_keyboard: button2
+      }
+    })
     return
   }
   if (promotion == "Post views 📃") {
@@ -271,33 +305,40 @@ function EditingAd(number_ads, promotion) {
     }
     var button3 = [
       [
-        { title: "✏️ Edit", command: "/edit view " + json.ads },
-        { title: sts, command: cdm }
+        { text: "✏️ Edit", callback_data: "/edit view " + json.ads },
+        { text: sts, callback_data: cdm }
       ]
     ]
     var text3 =
-      "*Campaign #" +
+      "<b>Campaign #" +
       json.ads +
-      "* - Post views 📃\n\n*Channel*: *" +
+      "</b> - Post views 📃\n\n<b>Channel</b>: " +
       json.name +
-      "\nURL*: *" +
+      "\n<b>URL</b>: " +
       json.link +
-      "\nStatus*: " +
+      "\n<b>Status</b>: " +
       json.status +
-      "\n\n*Daily budget*: " +
+      "\n\n<b>Daily budget</b>: " +
       json.budget +
       " " +
       cur +
-      "\n*CPC*: " +
+      "\n<b>CPC</b>: " +
       json.cpc +
       " " +
       cur +
-      "\n*Clicks*: " +
+      "\n<b>Clicks</b>: " +
       json.total +
       " total / " +
       json.clicks +
       " today"
-    Bot.sendInlineKeyboard(button3, text3, { disable_web_page_preview: true })
+    Api.sendMessage({
+      text: text3,
+      disable_web_page_preview: true,
+      parse_mode: "html",
+      reply_markup: {
+        inline_keyboard: button3
+      }
+    })
     return
   }
 }

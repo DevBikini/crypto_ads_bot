@@ -18,20 +18,18 @@ CMD*/
 if (chat.chat_type != "private") {
   return
 }
-function doTouchOwnLink() {
-  Bot.sendMessage("*You're Trying To Invite You're Self ❌*")
-}
-function doAttracted(channel) {}
+
+
 function doAtractedByUser(refUser) {
   var dede = Libs.ResourcesLib.anotherUserRes("dede", refUser.telegramid)
   dede.add(+1)
 }
-function doAlreadyAttracted() {}
+
 var trackOptions = {
-  onTouchOwnLink: doTouchOwnLink,
-  onAttracted: doAttracted,
-  onAtractedByUser: doAtractedByUser,
-  onAlreadyAttracted: doAlreadyAttracted
+  
+  
+  onAtractedByUser: doAtractedByUser
+  
 }
 
 Libs.ReferralLib.currentUser.track(trackOptions)

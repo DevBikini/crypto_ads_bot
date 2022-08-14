@@ -74,7 +74,7 @@ function GettingAd(number_ads, promotion) {
               text: "🚫 Report",
               callback_data: "/report " + number_ads + "&Channel / Group 📣"
             },
-            { text: "✅ Joined", command: "/joins " + number_ads }
+            { text: "✅ Joined", callback_data: "/joins " + number_ads }
           ]
         ]
       }

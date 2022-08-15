@@ -21,22 +21,22 @@ var sec = User.getProperty("User-" + any)
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
 if (!balance.value()) {
-  var balko = payout.value() + 0.0005
+  var balko = payout.value()
   var green = payout.add(-json.cpc)
 } else {
-  if (json.cpc > balance.value() + 0.0005) {
-    var balko = payout.value() + 0.0005
+  if (balance.value() < json.cpc) {
+    var balko = payout.value()
     var green = payout.add(-json.cpc)
   } else {
     var green = balance.add(-json.cpc)
-    var balko = balance.value() + 0.0005
+    var balko = balance.value()
   }
 }
 if (
   !ads.list[any] ||
   sec ||
   json.clicks > json.total ||
-  json.cpc > balko ||
+  balko < json.cpc ||
   json.status == "Disabled 🚫"
 ) {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
@@ -93,7 +93,6 @@ add.list[any] = {
 }
 Bot.setProperty("all_in_ads", add, "json")
 Bot.runCommand("/visit")
-
 if (!params) {
   return
 }
@@ -106,15 +105,15 @@ var sec = User.getProperty("User-" + any)
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
 if (!balance.value()) {
-  var balko = payout.value() + 0.0005
+  var balko = payout.value() + 0.00025
   var green = payout.add(-json.cpc)
 } else {
-  if (json.cpc > balance.value() + 0.0005) {
-    var balko = payout.value() + 0.0005
+  if (json.cpc > balance.value() + 0.00025) {
+    var balko = payout.value() + 0.00025
     var green = payout.add(-json.cpc)
   } else {
     var green = balance.add(-json.cpc)
-    var balko = balance.value() + 0.0005
+    var balko = balance.value() + 0.00025
   }
 }
 if (
@@ -134,6 +133,7 @@ Api.deleteMessage({
   message_id: id + 1
 })
 Bot.sendMessage("✅* Task Completed*!\nYou earned: " + json.cpc + " " + cur)
+Bot.runCommand("/visit")
 //referral
 var referrer = Libs.ReferralLib.getAttractedBy()
 if (referrer) {
@@ -177,5 +177,4 @@ add.list[any] = {
   promotion: json.promotion
 }
 Bot.setProperty("all_in_ads", add, "json")
-Bot.runCommand("/visit")
 

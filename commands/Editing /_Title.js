@@ -59,27 +59,27 @@ var button = [
 ]
 if (see == "bot") {
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Bot 🤖\n\n*Title*: " +
+    "</b> - Bot 🤖\n\n<b>Title</b>: " +
     message +
-    "\n*Description*: " +
+    "\n<b>Description</b>: " +
     json.description +
-    "\n\n*Bot*: *@" +
+    "\n\n<b>Bot</b>: @" +
     json.name +
-    "\nURL*: *" +
+    "\n<b>URL</b>: " +
     json.link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     json.status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     json.cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     json.total +
     " total / " +
     json.clicks +
@@ -87,7 +87,7 @@ if (see == "bot") {
   Api.editMessageText({
     message_id: message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -114,25 +114,25 @@ if (see == "bot") {
 //visit
 if (see == "visit") {
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Link URL 🔗\n\n*Title*: " +
+    "</b> - Link URL 🔗\n\n<b>Title</b>: " +
     message +
-    "\n*Description*: " +
+    "\n<b>Description</b>: " +
     json.description +
-    "\n\n*URL*: *" +
+    "\n\n<b>URL</b>: " +
     json.link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     json.status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     json.cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     json.total +
     " total / " +
     json.clicks +
@@ -140,7 +140,7 @@ if (see == "visit") {
   Api.editMessageText({
     message_id: message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -166,27 +166,27 @@ if (see == "visit") {
 //join 
 if (see == "join") {
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Channel / Group 📣\n\n*Title*: " +
+    "</b> - Channel / Group 📣\n\n<b>Title</b>: " +
     message +
-    "\n*Description*: " +
+    "\n<b>Description</b>: " +
     json.description +
-    "\n\n*Channel*: *" +
+    "\n\n<b>Channel</b>: " +
     json.name +
-    "\nURL*: *" +
+    "\n<b>URL</b>: " +
     json.link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     json.status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     json.cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     json.total +
     " total / " +
     json.clicks +
@@ -194,7 +194,7 @@ if (see == "join") {
   Api.editMessageText({
     message_id: message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button

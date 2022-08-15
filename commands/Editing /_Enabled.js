@@ -36,18 +36,18 @@ if (node.includes(".")) {
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
 if (!balance.value()) {
-  var balko = payout.value() + 0.0001
+  var balko = payout.value()
 } else {
-  if (json.cpc > balance.value() + 0.0001) {
-    var balko = payout.value() + 0.0001
+  if (balance.value() < json.cpc) {
+    var balko = payout.value()
   } else {
-    var balko = balance.value() + 0.0001
+    var balko = balance.value()
   }
 }
 if (json.clicks > json.total) {
   var status = "Disabled 🚫"
 } else {
-  if (json.cpc > balko) {
+  if (balko < json.cpc) {
     var status = "⏸ *Paused*: budget reached or out of funds."
   } else {
     var status = "Enabled ✅"
@@ -61,33 +61,33 @@ if (same == "bot") {
     ]
   ]
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Bot 🤖\n\n*Title*: " +
+    "</b> - Bot 🤖\n\n<b>Title</b>: " +
     json.title +
-    "\n*Description*: " +
+    "\n<b>Description</b>: " +
     json.description +
-    "\n\n*Bot*: *@" +
+    "\n\n<b>Bot</b>: @" +
     json.name +
-    "\nURL*: *" +
+    "\n<b>URL</b>: " +
     json.link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     json.cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     total_click +
     " total / 0 today"
   Api.editMessageText({
     message_id: request.message.message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -120,31 +120,31 @@ if (same == "visit") {
     ]
   ]
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Link URL 🔗\n\n*Title*: " +
+    "</b> - Link URL 🔗\n\n<b>Title</b>: " +
     json.title +
-    "\n*Description*: " +
+    "\n<b>Description</b>: " +
     json.description +
-    "\n\n*URL*: *" +
+    "\n\n<b>URL</b>: " +
     json.link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     json.cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     total_click +
     " total / 0 today"
   Api.editMessageText({
     message_id: request.message.message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -176,33 +176,33 @@ if (same == "join") {
     ]
   ]
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Channel / Group 📣\n\n*Title*: " +
+    "</b> - Channel / Group 📣\n\n<b>Title</b>: " +
     json.title +
-    "\n*Description*: " +
+    "\n<b>Description</b>: " +
     json.description +
-    "\n\n*Channel*: *" +
+    "\n\n<b>Channel</b>: " +
     json.name +
-    "\nURL*: *" +
+    "\n<b>URL</b>: " +
     json.link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     json.cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     json.total +
     " total / 0 today"
   Api.editMessageText({
     message_id: request.message.message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -234,29 +234,29 @@ if (same == "view") {
     ]
   ]
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Post views 📃\n\n*Channel*: *" +
+    "</b> - Post views 📃\n\n<b>Channel</b>: " +
     json.name +
-    "\nURL*: *" +
+    "\n<b>URL</b>: " +
     json.link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     json.cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     json.total +
     " total / 0 today"
   Api.editMessageText({
     message_id: request.message.message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button

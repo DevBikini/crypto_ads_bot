@@ -17,7 +17,7 @@ if (status == "left") {
   return
 }
 var cur = Bot.getProperty("admin_currency")
-var min = 0.005
+var min = 0.03
 var balance = Libs.ResourcesLib.userRes("payout")
 if (balance.value() < min) {
   Bot.sendMessage(
@@ -29,5 +29,5 @@ if (balance.value() < min) {
   )
   return
 }
-Bot.sendKeyboard("LTC,DOGE,BCH\n🏠 Menu", "*Choose Payment Method*.")
+Bot.sendKeyboard("LTC,DGB,BCH\n🏠 Menu", "*Choose Payment Method*.")
 Bot.runCommand("/chooseq")

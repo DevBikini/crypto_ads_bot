@@ -23,22 +23,22 @@ var sec = User.getProperty("User-" + any)
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
 if (!balance.value()) {
-  var balko = payout.value() + 0.00025
+  var balko = payout.value()
   var green = payout.add(-json.cpc)
 } else {
-  if (json.cpc > balance.value() + 0.00025) {
-    var balko = payout.value() + 0.00025
+  if (balance.value() < json.cpc) {
+    var balko = payout.value()
     var green = payout.add(-json.cpc)
   } else {
     var green = balance.add(-json.cpc)
-    var balko = balance.value() + 0.00025
+    var balko = balance.value()
   }
 }
 if (
   !ads.list[any] ||
   sec ||
   json.clicks > json.total ||
-  json.cpc > balko ||
+  balko < json.cpc ||
   json.status == "Disabled 🚫"
 ) {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
@@ -90,3 +90,4 @@ add.list[any] = {
   promotion: json.promotion
 }
 Bot.setProperty("all_in_ads", add, "json")
+

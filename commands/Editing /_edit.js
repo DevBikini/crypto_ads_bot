@@ -72,27 +72,27 @@ if (know == "bot") {
     ]
   ]
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Bot 🤖\n\n*Title*: " +
+    "</b> - Bot 🤖\n\n<b>Title</b>: " +
     title +
-    "\n*Description*: " +
+    "\n<b>Description</b>: " +
     description +
-    "\n\n*Bot*: *@" +
+    "\n\n<b>Bot</b>: @" +
     name +
-    "\nURL*: *" +
+    "\n<b>URL</b>: " +
     link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     total +
     " total / " +
     clicks +
@@ -100,7 +100,7 @@ if (know == "bot") {
   Api.editMessageText({
     message_id: message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -149,25 +149,25 @@ if (know == "visit") {
     ]
   ]
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Link URL 🔗\n\n*Title*: " +
+    "</b> - Link URL 🔗\n\n<b>Title</b>: " +
     title +
-    "\n*Description*: " +
+    "\n<b>Description</b>: " +
     description +
-    "\n\n*URL*: *" +
+    "\n\n<b>URL</b>: " +
     link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     total +
     " total / " +
     clicks +
@@ -175,7 +175,7 @@ if (know == "visit") {
   Api.editMessageText({
     message_id: message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -224,27 +224,27 @@ if (know == "join") {
     ]
   ]
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Channel / Group 📣\n\n*Title*: " +
+    "</b> - Channel / Group 📣\n\n<b>Title</b>: " +
     title +
-    "\n*Description*: " +
+    "\n<b>Description</b>: " +
     description +
-    "\n\n*Channel*: *" +
+    "\n\n<b>Channel</b>: " +
     name +
-    "\nURL*: *" +
+    "\n<b>URL</b>: " +
     link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     total +
     " total / " +
     clicks +
@@ -252,7 +252,7 @@ if (know == "join") {
   Api.editMessageText({
     message_id: message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -301,25 +301,25 @@ if (know == "view") {
     ]
   ]
   var text =
-    "*Campaign #" +
+    "<b>Campaign #" +
     json.ads +
-    "* - Post views 📃\n\n*Title*: " +
+    "</b> - Post views 📃\n\n<b>Title</b>: " +
     title +
-    "\n*Channel*: *" +
+    "\n<b>Channel</b>: " +
     name +
-    "\nURL*: *" +
+    "\n<b>URL</b>: " +
     link +
-    "\nStatus*: " +
+    "\n<b>Status</b>: " +
     status +
-    "\n\n*Daily budget*: " +
+    "\n\n<b>Daily budget</b>: " +
     budget +
     " " +
     cur +
-    "\n*CPC*: " +
+    "\n<b>CPC</b>: " +
     cpc +
     " " +
     cur +
-    "\n*Clicks*: " +
+    "\n<b>Clicks</b>: " +
     total +
     " total / " +
     clicks +
@@ -327,7 +327,7 @@ if (know == "view") {
   Api.editMessageText({
     message_id: message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button

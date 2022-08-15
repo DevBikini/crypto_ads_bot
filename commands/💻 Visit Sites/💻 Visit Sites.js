@@ -53,12 +53,12 @@ for (var ind in ads.list) {
     var balance = Libs.ResourcesLib.anotherUserRes("balance", owner)
     var payout = Libs.ResourcesLib.anotherUserRes("payout", owner)
     if (!balance.value()) {
-      var balko = payout.value() + 0.0005
+      var balko = payout.value()
     } else {
-      if (cpc > balance.value() + 0.0005) {
+      if (balance.value() < cpc) {
         var balko = payout.value()
       } else {
-        var balko = balance.value() + 0.0005
+        var balko = balance.value()
       }
     }
     if (
@@ -73,7 +73,7 @@ for (var ind in ads.list) {
       //status enabled
       if (!sec) {
         //4
-        if (owner == user.telegramid || cpc > balko) {
+        if (owner == user.telegramid || balko < cpc) {
           //1. owner - owner cannot execute own task
           //2. cpc - owner dont have balance to pay the user
         } else {

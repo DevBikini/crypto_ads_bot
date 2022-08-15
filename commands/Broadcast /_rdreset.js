@@ -9,7 +9,7 @@
   aliases: 
 CMD*/
 
-/*Bot.setProperty("found", "0", "string")
+Bot.setProperty("found", "0", "string")
 Bot.sendMessage("reset done")
-*/
-GettingAd(28267, "Bot 🤖")
+
+

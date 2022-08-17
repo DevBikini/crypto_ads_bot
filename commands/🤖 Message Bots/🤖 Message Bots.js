@@ -69,13 +69,15 @@ for (var ind in ads.list) {
     if (status == "Enabled ✅") {
       //status enabled
       if (!sec) {
-        if (owner == user.telegramid || balko < cpc) {
+        if (owner == user.telegramid) {
           //1. owner - owner cannot execute own task
           //2. cpc - owner dont have balance to pay the user
         } else {
-          //user can go task and earn
-          GettingAd(number_ads, promotion)
-          return
+          if (cpc < balko) {
+            //user can go task and earn
+            GettingAd(number_ads, promotion)
+            return
+          }
         }
       }
     }

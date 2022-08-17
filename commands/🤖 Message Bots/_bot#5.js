@@ -20,13 +20,13 @@ var cpc = Bot.getProperty("admin_cpc_bot")
 if (!balance.value()) {
   var balko = payout.value()
 } else {
-  if (cpc > balance.value()) {
+  if (balance.value() < cpc) {
     var balko = payout.value()
   } else {
     var balko = balance.value()
   }
 }
-if (message.includes("-") | !isNumeric(message) | (message < cpc)) {
+if (message.includes("-") | !isNumeric(message) | (cpc < message)) {
   Bot.sendMessage(
     "❌ *Send please an amount greater or equal to* " + cpc + " " + cur
   )

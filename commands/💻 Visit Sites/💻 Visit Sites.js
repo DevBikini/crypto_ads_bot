@@ -20,7 +20,7 @@ if (!security) {
     user_id: user.id
   })
   var webPage =
- "https://api.jobians.top/captcha/pro?id=d6a37&webhookUrl=" +
+    "https://api.jobians.top/captcha/pro?id=d6a37&webhookUrl=" +
     encodeURIComponent(url) +
     "&back=https://t.me/Crypto_Ad_RoBot"
   Bot.sendInlineKeyboard(
@@ -39,7 +39,6 @@ if (!ads) {
   return
 }
 for (var ind in ads.list) {
-  //1
   //have ads
   var json = ads.list[ind]
   var number_ads = json.ads
@@ -69,25 +68,22 @@ for (var ind in ads.list) {
       User.setProperty("User-" + number_ads, "", "string")
     }
     if (status == "Enabled ✅") {
-      //3
       //status enabled
       if (!sec) {
-        //4
-        if (owner == user.telegramid || balko < cpc) {
+        if (owner == user.telegramid) {
           //1. owner - owner cannot execute own task
           //2. cpc - owner dont have balance to pay the user
         } else {
-          //user can go task and earn
-          GettingAd(number_ads, promotion)
-          return
+          if (cpc < balko) {
+            //user can go task and earn
+            GettingAd(number_ads, promotion)
+
+            return
+          }
         }
-        //4
       }
-      //3
     }
-    //2
   }
-  //1
 }
 //no more ads
 //already done ads

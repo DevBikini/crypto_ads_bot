@@ -38,56 +38,59 @@ if (
   !ads.list[any] ||
   sec ||
   json.clicks > json.total ||
-  balko < json.cpc ||
   json.status == "Disabled 🚫"
 ) {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
   return
 }
-var u_balance = Libs.ResourcesLib.userRes("payout")
-u_balance.add(+json.cpc)
-Bot.sendMessage("✅* Task Completed*!\nYou earned: " + json.cpc + " " + cur)
-//referral
-var referrer = Libs.ReferralLib.getAttractedBy()
-if (referrer) {
-  var referrerRes = Libs.ResourcesLib.anotherUserRes(
-    "payout",
-    referrer.telegramid
-  )
-  var amount = json.cpc * 0.15 // it is 15%
-  referrerRes.add(+amount)
-}
-User.setProperty("User-" + any, "done", "string")
-//owner remove balance
-green
-Bot.runCommand("/view")
-if (json.clicks + 2 > json.total) {
-  var status = "Disabled 🚫"
-} else {
-  if (json.cpc > balko) {
-    var status = "⏸ *Paused*: budget reached or out of funds."
+if (json.cpc < balko) {
+  var u_balance = Libs.ResourcesLib.userRes("payout")
+  u_balance.add(+json.cpc)
+  Bot.sendMessage("✅* Task Completed*!\nYou earned: " + json.cpc + " " + cur)
+  //referral
+  var referrer = Libs.ReferralLib.getAttractedBy()
+  if (referrer) {
+    var referrerRes = Libs.ResourcesLib.anotherUserRes(
+      "payout",
+      referrer.telegramid
+    )
+    var amount = json.cpc * 0.15 // it is 15%
+    referrerRes.add(+amount)
+  }
+  User.setProperty("User-" + any, "done", "string")
+  //owner remove balance
+  green
+  Bot.runCommand("/view")
+  if (json.clicks + 2 > json.total) {
+    var status = "Disabled 🚫"
   } else {
-    if (json.status == "Disabled 🚫") {
-      var status = "Disabled 🚫"
+    if (json.cpc > balko) {
+      var status = "⏸ *Paused*: budget reached or out of funds."
     } else {
-      var status = "Enabled ✅"
+      if (json.status == "Disabled 🚫") {
+        var status = "Disabled 🚫"
+      } else {
+        var status = "Enabled ✅"
+      }
     }
   }
+  var add = Bot.getProperty("all_in_ads", { list: {} })
+  add.list[any] = {
+    ads: any,
+    name: json.name,
+    link: json.link,
+    title: json.title,
+    description: json.description,
+    cpc: json.cpc,
+    clicks: json.clicks + 1,
+    budget: json.budget,
+    total: json.total,
+    status: status,
+    owner: json.owner,
+    promotion: json.promotion
+  }
+  Bot.setProperty("all_in_ads", add, "json")
+} else {
+  Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
 }
-var add = Bot.getProperty("all_in_ads", { list: {} })
-add.list[any] = {
-  ads: any,
-  name: json.name,
-  link: json.link,
-  title: json.title,
-  description: json.description,
-  cpc: json.cpc,
-  clicks: json.clicks + 1,
-  budget: json.budget,
-  total: json.total,
-  status: status,
-  owner: json.owner,
-  promotion: json.promotion
-}
-Bot.setProperty("all_in_ads", add, "json")
 

@@ -85,72 +85,73 @@ if (forward) {
     }
   }
   var sec = User.getProperty("User-" + json.ads)
-  if (
-    sec |
-    (json.clicks > json.total) |
-    (balko < json.cpc) |
-    (json.status == "Disabled 🚫")
-  ) {
+  if (sec | (json.clicks > json.total) | (json.status == "Disabled 🚫")) {
     //security ads
     Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
     return
   }
-  var botta = request.forward_from.username
-  if (botta == json.name) {
-    //complete task
-    var u_balance = Libs.ResourcesLib.userRes("payout")
-    u_balance.add(+json.cpc)
-    //owner remove balance
-    green
-    Api.deleteMessage({
-      message_id: dol
-    })
-    Bot.sendMessage("✅* Task Completed*!\nYou earned: " + json.cpc + " " + cur)
-    //referral
-    var referrer = Libs.ReferralLib.getAttractedBy()
-    if (referrer) {
-      var referrerRes = Libs.ResourcesLib.anotherUserRes(
-        "payout",
-        referrer.telegramid
+  if (json.cpc < balko) {
+    var botta = request.forward_from.username
+    if (botta == json.name) {
+      //complete task
+      var u_balance = Libs.ResourcesLib.userRes("payout")
+      u_balance.add(+json.cpc)
+      //owner remove balance
+      green
+      Api.deleteMessage({
+        message_id: dol
+      })
+      Bot.sendMessage(
+        "✅* Task Completed*!\nYou earned: " + json.cpc + " " + cur
       )
-      var amount = json.cpc * 0.15 // it is 15%
-      //referral earnings
-      referrerRes.add(+amount)
-    }
-    User.setProperty("User-" + json.ads, "done", "string")
-    Bot.runCommand("/bots")
-    if (json.clicks + 2 > json.total) {
-      var status = "Disabled 🚫"
-    } else {
-      if (json.cpc > balko) {
-        var status = "⏸ *Paused*: budget reached or out of funds."
+      //referral
+      var referrer = Libs.ReferralLib.getAttractedBy()
+      if (referrer) {
+        var referrerRes = Libs.ResourcesLib.anotherUserRes(
+          "payout",
+          referrer.telegramid
+        )
+        var amount = json.cpc * 0.15 // it is 15%
+        //referral earnings
+        referrerRes.add(+amount)
+      }
+      User.setProperty("User-" + json.ads, "done", "string")
+      Bot.runCommand("/bots")
+      if (json.clicks + 2 > json.total) {
+        var status = "Disabled 🚫"
       } else {
-        if (json.status == "Disabled 🚫") {
-          var status = "Disabled 🚫"
+        if (json.cpc > balko) {
+          var status = "⏸ *Paused*: budget reached or out of funds."
         } else {
-          var status = "Enabled ✅"
+          if (json.status == "Disabled 🚫") {
+            var status = "Disabled 🚫"
+          } else {
+            var status = "Enabled ✅"
+          }
         }
       }
+      var add = Bot.getProperty("all_in_ads", { list: {} })
+      add.list[forward_co] = {
+        ads: forward_co,
+        name: json.name,
+        link: json.link,
+        title: json.title,
+        description: json.description,
+        cpc: json.cpc,
+        clicks: json.clicks + 1,
+        budget: json.budget,
+        total: json.total,
+        status: status,
+        owner: json.owner,
+        promotion: json.promotion
+      }
+      Bot.setProperty("all_in_ads", add, "json")
+      User.setProperty("forward", "", "string")
+    } else {
+      Bot.sendMessage("‼️* This is not forward from bot message*")
     }
-    var add = Bot.getProperty("all_in_ads", { list: {} })
-    add.list[forward_co] = {
-      ads: forward_co,
-      name: json.name,
-      link: json.link,
-      title: json.title,
-      description: json.description,
-      cpc: json.cpc,
-      clicks: json.clicks + 1,
-      budget: json.budget,
-      total: json.total,
-      status: status,
-      owner: json.owner,
-      promotion: json.promotion
-    }
-    Bot.setProperty("all_in_ads", add, "json")
-    User.setProperty("forward", "", "string")
   } else {
-    Bot.sendMessage("‼️* This is not forward from bot message*")
+Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
   }
   return
 }

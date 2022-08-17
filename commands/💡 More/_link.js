@@ -9,6 +9,7 @@
   aliases: 
 CMD*/
 
+if(!params){return}
 if (params == 1) {
   function canRun() {
     var last_run_at = User.getProperty("last_run_at")
@@ -284,4 +285,3 @@ if (params == 4) {
   }
   return
 }
-

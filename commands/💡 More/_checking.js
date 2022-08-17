@@ -9,6 +9,7 @@
   aliases: 
 CMD*/
 
+if(!params){return}
 var payout = Libs.ResourcesLib.userRes("payout")
 if (params == 1) {
   var dudu = Libs.ResourcesLib.userRes("dudu")

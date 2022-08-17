@@ -12,6 +12,9 @@ CMD*/
 if (!content) {
   return
 }
+if (!params) {
+  return
+}
 var dudu = Libs.ResourcesLib.userRes("dudu")
 var data = Bot.getProperty("user")
 var json = data.list[user.telegramid]
@@ -215,3 +218,4 @@ if (params == 4) {
   }
   return
 }
+

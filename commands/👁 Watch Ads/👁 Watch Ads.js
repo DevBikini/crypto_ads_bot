@@ -39,7 +39,6 @@ if (!ads) {
   return
 }
 for (var ind in ads.list) {
-  //1
   //have ads
   var json = ads.list[ind]
   var number_ads = json.ads
@@ -48,7 +47,6 @@ for (var ind in ads.list) {
   var sec = User.getProperty("User-" + number_ads)
   var promotion = json.promotion
   if (promotion == "Post views 📃") {
-    //2
     var owner = json.owner
     var balance = Libs.ResourcesLib.anotherUserRes("balance", owner)
     var payout = Libs.ResourcesLib.anotherUserRes("payout", owner)
@@ -69,26 +67,23 @@ for (var ind in ads.list) {
       User.setProperty("User-" + number_ads, "", "string")
     }
     if (status == "Enabled ✅") {
-      //3
       //status enabled
       if (!sec) {
-        //4
-        if (owner == user.telegramid || balko < cpc) {
+        if (owner == user.telegramid) {
           //1. owner - owner cannot execute own task
           //2. cpc - owner dont have balance to pay the user
         } else {
-          //user can go task and earn
-          GettingAd(number_ads, promotion)
-          return
+          if (cpc < balko) {
+            //user can go task and earn
+            GettingAd(number_ads, promotion)
+            return
+          }
         }
-        //4
       }
-      //3
     }
-    //2
   }
-  //1
 }
 //no more ads
 //already done ads
 No_More_Ads()
+

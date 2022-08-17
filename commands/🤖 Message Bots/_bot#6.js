@@ -123,10 +123,18 @@ add.list[ads] = {
 Bot.setProperty("all_in_ads", add, "json")
 var myads = Libs.ResourcesLib.userRes("myads")
 myads.add(1)
-var kris = Bot.getProperty("found")
-if (!kris) {
-  Bot.setProperty("found", 0, "string")
-} else {
-  Bot.setProperty("found", parseFloat(kris) + 1, "string")
-}
+Api.sendMessage({
+  chat_id: "@CryptoAdAlert",
+  text:
+    "✅<b> New Ad Created</b>\n\nTask : 🤖 Message Bots\nCPC : <b>" +
+    options.cpc +
+    " " +
+    cur +
+    "</b>\nAvailable Submissions : <b>" +
+    total_click +
+    "</b>\n\nBot : @" +
+    bot.name +
+    "",
+  parse_mode: "html"
+})
 

@@ -32,4 +32,3 @@ Api.editMessageText({
   parse_mode: "Markdown"
 })
 Bot.run({ command: "/started", options: { data: params, id: message_id } })
-

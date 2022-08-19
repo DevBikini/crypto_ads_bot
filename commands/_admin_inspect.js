@@ -16,4 +16,3 @@ if (admin == user.telegramid) {
   GettingAd(id, promotion)
   return
 }
-

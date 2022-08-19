@@ -39,4 +39,3 @@ Api.sendMessage({
   disable_web_page_preview: true,
   parse_mode: "Markdown"
 })
-

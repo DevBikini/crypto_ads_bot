@@ -11,4 +11,3 @@ CMD*/
 
 Bot.sendMessage("*Enter a description for your ad:*")
 Bot.run({ command: "/link#3", options: { url: options.url, title: message } })
-

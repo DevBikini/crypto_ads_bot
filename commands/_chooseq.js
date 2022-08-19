@@ -42,4 +42,3 @@ if (message == "BCH") {
   Bot.sendMessage("*Soon.. choose another method*")
   return
 }
-

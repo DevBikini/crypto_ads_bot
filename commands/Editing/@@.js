@@ -3,7 +3,7 @@
   help: 
   need_reply: false
   auto_retry_time: 
-  folder: Editing 
+  folder: Editing
   answer: 
   keyboard: 
   aliases: 
@@ -342,4 +342,3 @@ function EditingAd(number_ads, promotion) {
     return
   }
 }
-

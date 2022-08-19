@@ -30,4 +30,3 @@ HTTP.get({
     "",
   success: "/channel_group_check " + na+" "+chan
 })
-

@@ -24,4 +24,3 @@ if (!json) {
   return
 }
 Bot.runCommand("/menu")
-

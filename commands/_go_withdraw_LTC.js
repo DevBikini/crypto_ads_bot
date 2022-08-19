@@ -40,4 +40,3 @@ Bot.run({
   command: "/go_withdrawProgress_LTC",
   options: { amount: ltc.toFixed(10), amo: amount }
 })
-

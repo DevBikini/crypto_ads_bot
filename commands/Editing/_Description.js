@@ -1,9 +1,9 @@
 /*CMD
-  command: /Budget
+  command: /Description
   help: 
   need_reply: true
   auto_retry_time: 
-  folder: Editing 
+  folder: Editing
   answer: 
   keyboard: 
   aliases: 
@@ -16,26 +16,8 @@ var cur = Bot.getProperty("admin_currency")
 var message_id = options.message_id
 var see = options.data
 var number_ads = options.ads
-var budgets = Bot.getProperty("admin_budget_" + see)
-var cpc = Bot.getProperty("admin_cpc_" + see)
-if (message.includes("-") | !isNumeric(message) | (message < cpc)) {
-  Bot.sendMessage(
-    "❌ *Send please an amount greater or equal to* " + cpc + " " + cur
-  )
-  return
-}
-var kol = TotalClick(budgets, budgets.length)
-var number_click = kol * message
-//kol x bot_buget = 1
-//10000 x 0.0001 = 1
-var node = number_click.toFixed(2)
-if (node.includes(".")) {
-  var total_click = node.split(".")[0]
-} else {
-  var total_click = number_click
-}
-Bot.sendMessage("Your ad has been updated.")
 var ads = Bot.getProperty("all_in_ads")
+Bot.sendMessage("Your ad has been updated.")
 var json = ads.list[number_ads]
 var button = [
   [
@@ -77,12 +59,12 @@ var button = [
 ]
 if (see == "bot") {
   var text =
-    "<b>Campaign #" +
+    "<b>⚙️ Campaign #" +
     json.ads +
     "</b> - Bot 🤖\n\n<b>Title</b>: " +
     json.title +
     "\n<b>Description</b>: " +
-    json.description +
+    message +
     "\n\n<b>Bot</b>: @" +
     json.name +
     "\n<b>URL</b>: " +
@@ -90,7 +72,7 @@ if (see == "bot") {
     "\n<b>Status</b>: " +
     json.status +
     "\n\n<b>Daily budget</b>: " +
-    message +
+    json.budget +
     " " +
     cur +
     "\n<b>CPC</b>: " +
@@ -98,7 +80,7 @@ if (see == "bot") {
     " " +
     cur +
     "\n<b>Clicks</b>: " +
-    total_click +
+    json.total +
     " total / " +
     json.clicks +
     " today"
@@ -117,11 +99,11 @@ if (see == "bot") {
     name: json.name,
     link: json.link,
     title: json.title,
-    description: json.description,
+    description: message,
     cpc: json.cpc,
-    budget: message,
+    budget: json.budget,
     clicks: json.clicks,
-    total: total_click,
+    total: json.total,
     status: json.status,
     owner: json.owner,
     promotion: json.promotion
@@ -131,18 +113,18 @@ if (see == "bot") {
 }
 if (see == "visit") {
   var text =
-    "<b>Campaign #" +
+    "<b>⚙️ Campaign #" +
     json.ads +
     "</b> - Link URL 🔗\n\n<b>Title</b>: " +
     json.title +
     "\n<b>Description</b>: " +
-    json.description +
+    message +
     "\n\n<b>URL</b>: " +
     json.link +
     "\n<b>Status</b>: " +
     json.status +
     "\n\n<b>Daily budget</b>: " +
-    message +
+    json.budget +
     " " +
     cur +
     "\n<b>CPC</b>: " +
@@ -150,7 +132,7 @@ if (see == "visit") {
     " " +
     cur +
     "\n<b>Clicks</b>: " +
-    total_click +
+    json.total +
     " total / " +
     json.clicks +
     " today"
@@ -166,18 +148,20 @@ if (see == "visit") {
   var add = Bot.getProperty("all_in_ads", { list: {} })
   add.list[number_ads] = {
     ads: json.ads,
+    name: json.name,
     link: json.link,
     title: json.title,
-    description: json.description,
+    description: message,
     cpc: json.cpc,
-    budget: message,
+    budget: json.budget,
     clicks: json.clicks,
-    total: total_click,
+    total: json.total,
     status: json.status,
     owner: json.owner,
     promotion: json.promotion
   }
   Bot.setProperty("all_in_ads", add, "json")
+  return
 }
 if (see == "join") {
   var text =
@@ -186,7 +170,7 @@ if (see == "join") {
     "</b> - Channel / Group 📣\n\n<b>Title</b>: " +
     json.title +
     "\n<b>Description</b>: " +
-    json.description +
+    message +
     "\n\n<b>Channel</b>: " +
     json.name +
     "\n<b>URL</b>: " +
@@ -194,7 +178,7 @@ if (see == "join") {
     "\n<b>Status</b>: " +
     json.status +
     "\n\n<b>Daily budget</b>: " +
-    message +
+    json.budget +
     " " +
     cur +
     "\n<b>CPC</b>: " +
@@ -202,7 +186,7 @@ if (see == "join") {
     " " +
     cur +
     "\n<b>Clicks</b>: " +
-    total_click +
+    json.total +
     " total / " +
     json.clicks +
     " today"
@@ -221,61 +205,11 @@ if (see == "join") {
     name: json.name,
     link: json.link,
     title: json.title,
-    description: json.description,
+    description: message,
     cpc: json.cpc,
-    budget: message,
+    budget: json.budget,
     clicks: json.clicks,
-    total: total_click,
-    status: json.status,
-    owner: json.owner,
-    promotion: json.promotion
-  }
-  Bot.setProperty("all_in_ads", add, "json")
-  return
-}
-if (see == "view") {
-  var text =
-    "<b>Campaign #" +
-    json.ads +
-    "</b> - Post views 📃\n\n<b>Channel</b>: " +
-    json.name +
-    "\n<b>URL</b>: " +
-    json.link +
-    "\n<b>Status</b>: " +
-    json.status +
-    "\n\n<b>Daily budget</b>: " +
-    message +
-    " " +
-    cur +
-    "\n<b>CPC</b>: " +
-    json.cpc +
-    " " +
-    cur +
-    "\n<b>Clicks</b>: " +
-    total_click +
-    " total / " +
-    json.clicks +
-    " today"
-  Api.editMessageText({
-    message_id: message_id,
-    text: text,
-    parse_mode: "html",
-    disable_web_page_preview: true,
-    reply_markup: {
-      inline_keyboard: button
-    }
-  })
-  var add = Bot.getProperty("all_in_ads", { list: {} })
-  add.list[number_ads] = {
-    ads: json.ads,
-    name: json.name,
-    link: json.link,
-    title: json.title,
-    description: json.description,
-    cpc: json.cpc,
-    budget: message,
-    clicks: json.clicks,
-    total: total_click,
+    total: json.total,
     status: json.status,
     owner: json.owner,
     promotion: json.promotion

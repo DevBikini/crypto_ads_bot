@@ -73,4 +73,3 @@ if (amount) {
     User.setProperty("history", toal, "string")
   }
 }
-

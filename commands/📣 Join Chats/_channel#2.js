@@ -14,4 +14,3 @@ Bot.run({
   command: "/channel#3",
   options: { url: options.url, name: options.name, title: message }
 })
-

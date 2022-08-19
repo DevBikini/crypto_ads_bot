@@ -1,9 +1,9 @@
 /*CMD
-  command: /Cpc
+  command: /Budget
   help: 
   need_reply: true
   auto_retry_time: 
-  folder: Editing 
+  folder: Editing
   answer: 
   keyboard: 
   aliases: 
@@ -16,12 +16,23 @@ var cur = Bot.getProperty("admin_currency")
 var message_id = options.message_id
 var see = options.data
 var number_ads = options.ads
-var cpc =  Bot.getProperty("admin_cpc_"+see)
+var budgets = Bot.getProperty("admin_budget_" + see)
+var cpc = Bot.getProperty("admin_cpc_" + see)
 if (message.includes("-") | !isNumeric(message) | (message < cpc)) {
   Bot.sendMessage(
     "❌ *Send please an amount greater or equal to* " + cpc + " " + cur
   )
   return
+}
+var kol = TotalClick(budgets, budgets.length)
+var number_click = kol * message
+//kol x bot_buget = 1
+//10000 x 0.0001 = 1
+var node = number_click.toFixed(2)
+if (node.includes(".")) {
+  var total_click = node.split(".")[0]
+} else {
+  var total_click = number_click
 }
 Bot.sendMessage("Your ad has been updated.")
 var ads = Bot.getProperty("all_in_ads")
@@ -79,22 +90,22 @@ if (see == "bot") {
     "\n<b>Status</b>: " +
     json.status +
     "\n\n<b>Daily budget</b>: " +
-    json.budget +
-    " " +
-    cur +
-    "\n<b>CPC</b>: " +
     message +
     " " +
     cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
     "\n<b>Clicks</b>: " +
-    json.total +
+    total_click +
     " total / " +
     json.clicks +
     " today"
   Api.editMessageText({
     message_id: message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -107,10 +118,10 @@ if (see == "bot") {
     link: json.link,
     title: json.title,
     description: json.description,
-    cpc: message,
-    budget: json.budget,
+    cpc: json.cpc,
+    budget: message,
     clicks: json.clicks,
-    total: json.total,
+    total: total_click,
     status: json.status,
     owner: json.owner,
     promotion: json.promotion
@@ -131,15 +142,15 @@ if (see == "visit") {
     "\n<b>Status</b>: " +
     json.status +
     "\n\n<b>Daily budget</b>: " +
-    json.budget +
-    " " +
-    cur +
-    "\n<b>CPC</b>: " +
     message +
     " " +
     cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
     "\n<b>Clicks</b>: " +
-    json.total +
+    total_click +
     " total / " +
     json.clicks +
     " today"
@@ -158,10 +169,10 @@ if (see == "visit") {
     link: json.link,
     title: json.title,
     description: json.description,
-    cpc: message,
-    budget: json.budget,
+    cpc: json.cpc,
+    budget: message,
     clicks: json.clicks,
-    total: json.total,
+    total: total_click,
     status: json.status,
     owner: json.owner,
     promotion: json.promotion
@@ -183,15 +194,15 @@ if (see == "join") {
     "\n<b>Status</b>: " +
     json.status +
     "\n\n<b>Daily budget</b>: " +
-    json.budget +
-    " " +
-    cur +
-    "\n<b>CPC</b>: " +
     message +
     " " +
     cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
     "\n<b>Clicks</b>: " +
-    json.total +
+    total_click +
     " total / " +
     json.clicks +
     " today"
@@ -211,10 +222,10 @@ if (see == "join") {
     link: json.link,
     title: json.title,
     description: json.description,
-    cpc: message,
-    budget: json.budget,
+    cpc: json.cpc,
+    budget: message,
     clicks: json.clicks,
-    total: json.total,
+    total: total_click,
     status: json.status,
     owner: json.owner,
     promotion: json.promotion
@@ -233,15 +244,15 @@ if (see == "view") {
     "\n<b>Status</b>: " +
     json.status +
     "\n\n<b>Daily budget</b>: " +
-    json.budget +
-    " " +
-    cur +
-    "\n<b>CPC</b>: " +
     message +
     " " +
     cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
     "\n<b>Clicks</b>: " +
-    json.total +
+    total_click +
     " total / " +
     json.clicks +
     " today"
@@ -261,10 +272,10 @@ if (see == "view") {
     link: json.link,
     title: json.title,
     description: json.description,
-    cpc: message,
-    budget: json.budget,
+    cpc: json.cpc,
+    budget: message,
     clicks: json.clicks,
-    total: json.total,
+    total: total_click,
     status: json.status,
     owner: json.owner,
     promotion: json.promotion
@@ -272,4 +283,3 @@ if (see == "view") {
   Bot.setProperty("all_in_ads", add, "json")
   return
 }
-

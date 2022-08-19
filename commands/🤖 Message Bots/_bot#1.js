@@ -19,4 +19,3 @@ Bot.sendMessage(
   "*➕ Promotion\nCreation\n\nSend now this information*: `link`\n\n*🔎 Now send the link to the bot that you want to promote*.\n(All the traffic will be sent to that link)"
 )
 Bot.run({ command: "/bot#2", options: { name: bot_name } })
-

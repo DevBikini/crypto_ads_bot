@@ -17,4 +17,3 @@ Api.getChatMember({
   user_id: options.user,
   on_result: "/On_chk_joinUser " + options.ad
 })
-

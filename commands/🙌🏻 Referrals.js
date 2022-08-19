@@ -18,6 +18,5 @@ Bot.sendKeyboard(
     refcount +
     " referrals.\n\nTo refer people to the bot, send them this link\n" +
     reflink +
-    "*\n\n💵 You will earn *15% of your friends earnings from tasks*, and *1% if your friend creates a new ad*\n\nYou can withdraw affiliate income or spend it on ADS!"
+    "*\n\n💵 You will earn *15% of your friends earnings from tasks*, and *5% if your friend deposits*\n\nYou can withdraw affiliate income or spend it on ADS!"
 )
-

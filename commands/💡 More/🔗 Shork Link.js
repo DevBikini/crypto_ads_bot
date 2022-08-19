@@ -4,10 +4,7 @@
   need_reply: false
   auto_retry_time: 
   folder: 💡 More
-
-  <<ANSWER
-
-  ANSWER
+  answer: 
   keyboard: 
   aliases: /short
 CMD*/

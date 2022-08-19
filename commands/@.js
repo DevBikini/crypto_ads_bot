@@ -82,4 +82,3 @@ function No_More_Ads() {
     "*‼️Aw snap! There are no more ads available*.\n\nPress /newad to create a new task\n\n🌐 [News](https://t.me/Crypto_Ad_Channel) [Group](https://t.me/Crypto_Ad_GroupChat)"
   )
 }
-

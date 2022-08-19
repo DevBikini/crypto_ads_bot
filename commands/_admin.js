@@ -80,4 +80,3 @@ function button() {
     [{ text: "Currency", callback_data: "/setB set currency" }]
   ]
 }
-

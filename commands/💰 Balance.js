@@ -44,4 +44,3 @@ Bot.sendKeyboard(
     cur +
     "\n*________________________________*\nClick《Deposit》to generate a unique wallet address.\n\n💱 *Top-up Methods*\n• Crypto currency"
 )
-

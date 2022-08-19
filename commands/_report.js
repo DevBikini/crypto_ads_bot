@@ -19,4 +19,3 @@ Bot.sendKeyboard(
   "Please tell us why you are reporting this advertisement."
 )
 Bot.run({ command: "/kind_report", options: { id: id, promotion: pr } })
-

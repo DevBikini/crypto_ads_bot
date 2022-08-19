@@ -56,4 +56,3 @@ Bot.run({
     cpc: message
   }
 })
-

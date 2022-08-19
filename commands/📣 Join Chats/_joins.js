@@ -20,4 +20,3 @@ Api.getChatMember({
   user_id: user.telegramid,
   on_result: "/joincheck " + params
 })
-

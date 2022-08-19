@@ -60,4 +60,3 @@ if (name == "view" && center == "budget") {
   Bot.run({ command: "/setA", options: { name: "view budget" } })
   return
 }
-

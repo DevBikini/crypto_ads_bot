@@ -24,4 +24,3 @@ Bot.run({
   command: "/link#4",
   options: { url: options.url, title: options.title, description: message }
 })
-

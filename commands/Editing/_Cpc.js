@@ -1,65 +1,70 @@
 /*CMD
-  command: /Enabled
+  command: /Cpc
   help: 
-  need_reply: 
+  need_reply: true
   auto_retry_time: 
-  folder: Editing 
+  folder: Editing
   answer: 
   keyboard: 
   aliases: 
 CMD*/
 
-if (!params) {
+if (!options) {
   return
 }
-Api.answerCallbackQuery({
-  callback_query_id: request.id,
-  text: "Enabled ✅",
-  show_alert: false
-})
-var ads = Bot.getProperty("all_in_ads")
 var cur = Bot.getProperty("admin_currency")
-var number_ads = params.split(" ")[1]
-var same = params.split(" ")[0]
+var message_id = options.message_id
+var see = options.data
+var number_ads = options.ads
+var cpc =  Bot.getProperty("admin_cpc_"+see)
+if (message.includes("-") | !isNumeric(message) | (message < cpc)) {
+  Bot.sendMessage(
+    "❌ *Send please an amount greater or equal to* " + cpc + " " + cur
+  )
+  return
+}
+Bot.sendMessage("Your ad has been updated.")
+var ads = Bot.getProperty("all_in_ads")
 var json = ads.list[number_ads]
-var budgets = Bot.getProperty("admin_budget_" + same)
-var kol = TotalClick(budgets, budgets.length)
-var number_click = kol * json.budget
-//kol x bot_buget = 1
-//10000 x 0.0001 = 1
-var node = number_click.toFixed(2)
-if (node.includes(".")) {
-  var total_click = node.split(".")[0]
-} else {
-  var total_click = number_click
-}
-var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
-var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
-if (!balance.value()) {
-  var balko = payout.value()
-} else {
-  if (balance.value() < json.cpc) {
-    var balko = payout.value()
-  } else {
-    var balko = balance.value()
-  }
-}
-if (json.clicks > json.total) {
-  var status = "Disabled 🚫"
-} else {
-  if (balko < json.cpc) {
-    var status = "⏸ *Paused*: budget reached or out of funds."
-  } else {
-    var status = "Enabled ✅"
-  }
-}
-if (same == "bot") {
-  var button = [
-    [
-      { text: "✏️ Edit", callback_data: "/edit bot " + json.ads },
-      { text: "Disable 🚫", callback_data: "/Disabled bot " + json.ads }
-    ]
+var button = [
+  [
+    {
+      text: "Edit title",
+      callback_data: "/edits title " + number_ads + " " + see
+    },
+    {
+      text: "Edit description",
+      callback_data: "/edits description " + number_ads + " " + see
+    }
+  ],
+  [
+    {
+      text: "Edit URL",
+      callback_data: "/edits url " + number_ads + " " + see
+    },
+    {
+      text: "Edit CPC",
+      callback_data: "/edits cpc " + number_ads + " " + see
+    }
+  ],
+  [
+    {
+      text: "Edit budget",
+      callback_data: "/edits budget " + number_ads + " " + see
+    },
+    {
+      text: "🗑 Delete",
+      callback_data: "/edits delete " + number_ads + " " + see
+    }
+  ],
+  [
+    {
+      text: "⬅️ Back",
+      callback_data: "/edits back " + number_ads + " " + see
+    }
   ]
+]
+if (see == "bot") {
   var text =
     "<b>Campaign #" +
     json.ads +
@@ -72,22 +77,24 @@ if (same == "bot") {
     "\n<b>URL</b>: " +
     json.link +
     "\n<b>Status</b>: " +
-    status +
+    json.status +
     "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
     "\n<b>CPC</b>: " +
-    json.cpc +
+    message +
     " " +
     cur +
     "\n<b>Clicks</b>: " +
-    total_click +
-    " total / 0 today"
+    json.total +
+    " total / " +
+    json.clicks +
+    " today"
   Api.editMessageText({
-    message_id: request.message.message_id,
+    message_id: message_id,
     text: text,
-    parse_mode: "html",
+    parse_mode: "Markdown",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button
@@ -100,25 +107,18 @@ if (same == "bot") {
     link: json.link,
     title: json.title,
     description: json.description,
-    cpc: json.cpc,
+    cpc: message,
     budget: json.budget,
-    clicks: 0,
-    total: total_click,
-    status: status,
+    clicks: json.clicks,
+    total: json.total,
+    status: json.status,
     owner: json.owner,
     promotion: json.promotion
   }
   Bot.setProperty("all_in_ads", add, "json")
   return
 }
-//visit
-if (same == "visit") {
-  var button = [
-    [
-      { text: "✏️ Edit", callback_data: "/edit visit " + json.ads },
-      { text: "Disable 🚫", callback_data: "/Disabled visit " + json.ads }
-    ]
-  ]
+if (see == "visit") {
   var text =
     "<b>Campaign #" +
     json.ads +
@@ -129,20 +129,22 @@ if (same == "visit") {
     "\n\n<b>URL</b>: " +
     json.link +
     "\n<b>Status</b>: " +
-    status +
+    json.status +
     "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
     "\n<b>CPC</b>: " +
-    json.cpc +
+    message +
     " " +
     cur +
     "\n<b>Clicks</b>: " +
-    total_click +
-    " total / 0 today"
+    json.total +
+    " total / " +
+    json.clicks +
+    " today"
   Api.editMessageText({
-    message_id: request.message.message_id,
+    message_id: message_id,
     text: text,
     parse_mode: "html",
     disable_web_page_preview: true,
@@ -156,25 +158,17 @@ if (same == "visit") {
     link: json.link,
     title: json.title,
     description: json.description,
-    cpc: json.cpc,
+    cpc: message,
     budget: json.budget,
-    clicks: 0,
-    total: total_click,
-    status: status,
+    clicks: json.clicks,
+    total: json.total,
+    status: json.status,
     owner: json.owner,
     promotion: json.promotion
   }
   Bot.setProperty("all_in_ads", add, "json")
-  return
 }
-//chat join
-if (same == "join") {
-  var button = [
-    [
-      { text: "✏️ Edit", callback_data: "/edit join " + json.ads },
-      { text: "Disable 🚫", callback_data: "/Disabled join " + json.ads }
-    ]
-  ]
+if (see == "join") {
   var text =
     "<b>Campaign #" +
     json.ads +
@@ -187,20 +181,22 @@ if (same == "join") {
     "\n<b>URL</b>: " +
     json.link +
     "\n<b>Status</b>: " +
-    status +
+    json.status +
     "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
     "\n<b>CPC</b>: " +
-    json.cpc +
+    message +
     " " +
     cur +
     "\n<b>Clicks</b>: " +
     json.total +
-    " total / 0 today"
+    " total / " +
+    json.clicks +
+    " today"
   Api.editMessageText({
-    message_id: request.message.message_id,
+    message_id: message_id,
     text: text,
     parse_mode: "html",
     disable_web_page_preview: true,
@@ -215,24 +211,18 @@ if (same == "join") {
     link: json.link,
     title: json.title,
     description: json.description,
-    cpc: json.cpc,
+    cpc: message,
     budget: json.budget,
-    clicks: 0,
-    total: total_click,
-    status: status,
+    clicks: json.clicks,
+    total: json.total,
+    status: json.status,
     owner: json.owner,
     promotion: json.promotion
   }
   Bot.setProperty("all_in_ads", add, "json")
+  return
 }
-//view
-if (same == "view") {
-  var button = [
-    [
-      { text: "✏️ Edit", callback_data: "/edit view " + json.ads },
-      { text: "Disable 🚫", callback_data: "/Disabled view " + json.ads }
-    ]
-  ]
+if (see == "view") {
   var text =
     "<b>Campaign #" +
     json.ads +
@@ -241,20 +231,22 @@ if (same == "view") {
     "\n<b>URL</b>: " +
     json.link +
     "\n<b>Status</b>: " +
-    status +
+    json.status +
     "\n\n<b>Daily budget</b>: " +
     json.budget +
     " " +
     cur +
     "\n<b>CPC</b>: " +
-    json.cpc +
+    message +
     " " +
     cur +
     "\n<b>Clicks</b>: " +
     json.total +
-    " total / 0 today"
+    " total / " +
+    json.clicks +
+    " today"
   Api.editMessageText({
-    message_id: request.message.message_id,
+    message_id: message_id,
     text: text,
     parse_mode: "html",
     disable_web_page_preview: true,
@@ -269,14 +261,14 @@ if (same == "view") {
     link: json.link,
     title: json.title,
     description: json.description,
-    cpc: json.cpc,
+    cpc: message,
     budget: json.budget,
-    clicks: 0,
-    total: total_click,
-    status: status,
+    clicks: json.clicks,
+    total: json.total,
+    status: json.status,
     owner: json.owner,
     promotion: json.promotion
   }
   Bot.setProperty("all_in_ads", add, "json")
+  return
 }
-

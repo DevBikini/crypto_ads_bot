@@ -15,4 +15,3 @@
 CMD*/
 
 User.setProperty("forward", "forward-bot", "string")
-

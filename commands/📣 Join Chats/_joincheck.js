@@ -145,4 +145,3 @@ if (json.cpc < balko) {
     parse_mode: "Markdown"
   })
 }
-

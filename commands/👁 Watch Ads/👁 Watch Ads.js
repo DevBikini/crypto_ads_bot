@@ -86,4 +86,3 @@ for (var ind in ads.list) {
 //no more ads
 //already done ads
 No_More_Ads()
-

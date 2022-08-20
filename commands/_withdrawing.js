@@ -17,7 +17,7 @@ if (status == "left") {
   return
 }
 var cur = Bot.getProperty("admin_currency")
-var min = 0.03
+var min = 0.06
 var balance = Libs.ResourcesLib.userRes("payout")
 if (balance.value() < min) {
   Bot.sendMessage(

@@ -14,7 +14,7 @@ if (!options) {
 }
 var cur = Bot.getProperty("admin_currency")
 var amount = message
-var min = 0.005
+var min = 0.06
 var balance = Libs.ResourcesLib.userRes("payout")
 if (amount < min) {
   Bot.sendMessage("_❌ Minimum withdraw " + min + "_")

@@ -9,10 +9,8 @@
   aliases: 
 CMD*/
 
-if (!content) {
-  return
-}
-if (!params) {
+var keys = params || content
+if (!keys) {
   return
 }
 var dudu = Libs.ResourcesLib.userRes("dudu")

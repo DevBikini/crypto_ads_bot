@@ -119,4 +119,3 @@ if (message > balko) {
       cur
   )
 }
-

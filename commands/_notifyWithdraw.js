@@ -9,28 +9,22 @@
   aliases: 
 CMD*/
 
-if (!content) {
+if (!options) {
   return
 }
-var data = JSON.parse(content)
-var error = data.result.Error
-if (error) {
-  Bot.inspect(content)
-  return
-}
-var status = data.result.status
+var status = options.result.status
 if (status) {
   Bot.sendMessage(
-    "🤑* Your Withdrawal Request Submitted Successfully\n\nIt May Take Upto 24-48 Hours To Process Your Withdrawal Request*"
+    "🤑* Your Withdrawal Request Submitted Successfully\n\nIt May Take Upto 1-5 minutes To Process Your Withdrawal Request*"
   )
   return
 }
-var amount = data.result.amount
+var amount = options.result.amount
 if (amount) {
-  var wallet = data.result.to
-  var cur = data.result.currency
-  //var transaction = data.result.transaction
-  var txid = data.result.blockchair
+  var wallet = options.result.to
+  var cur = options.result.currency
+  var txid = options.result.hash
+  var txidd = "https://tx.botdev.me/" + cur + "/" + txid
   Bot.sendMessage(
     "➖ *Withdrawal Received*: " + amount + " " + cur + "\n\n*TXN_ID*: " + txid
   )
@@ -47,7 +41,7 @@ if (amount) {
       "\nDate: " +
       time +
       "\nStatus: *Sent* ✅\nTransaction: [view here](" +
-      txid +
+      txidd +
       ")"
     User.setProperty("history", newh, "string")
   } else {
@@ -61,7 +55,7 @@ if (amount) {
       "\nDate: " +
       time +
       "\nStatus: *Sent* ✅\nTransaction: [view here](" +
-      txid +
+      txidd +
       ")"
     var toal = nwh + "\n\n" + history
     User.setProperty("history", toal, "string")

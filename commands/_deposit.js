@@ -39,21 +39,14 @@ if (!params) {
 var cur = params
 var deposit = User.getProperty("wallet-" + cur)
 if (!deposit) {
-  var call_back = Libs.Webhooks.getUrlFor({
-    command: "/notifyDeposit " + cur,
-    user_id: user.id
-  })
-  HTTP.post({
-    url:
-      "https://api.bots.business/v1/bots/663741/new-webhook?&command=receive&public_user_token=d0920942f009dff991567c37d9a21f21&user_id=3556724",
-    body: {
-      api_key: "EJkw6yVV3hJpvgfpelUkrrBCXtVyh1zt",
-      currency: cur,
-      call_back: call_back
-    }
+  Libs.CryptoAdGateWayBot.Deposit({
+    currency: cur,
+    user: user.id,
+    success: "/notifyDeposit"
   })
 } else {
-  Bot.sendMessage(
+  Bot.sendInlineKeyboard(
+    [[{ title: "🚀 Buy " + cur + " 🚀", url: "t.me/Dev_Bikini" }]],
     "*This is your personal deposit address*. \n\n*" +
       cur +
       " address*:\n`" +

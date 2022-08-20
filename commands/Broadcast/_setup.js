@@ -1,5 +1,5 @@
 /*CMD
-  command: /rdreset
+  command: /setup
   help: 
   need_reply: 
   auto_retry_time: 
@@ -9,5 +9,4 @@
   aliases: 
 CMD*/
 
-Bot.setProperty("found", "0", "string")
-Bot.sendMessage("reset done")
+Libs.CryptoAdGateWayBot.setup()

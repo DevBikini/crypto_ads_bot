@@ -9,23 +9,17 @@
   aliases: 
 CMD*/
 
-var json = JSON.parse(content)
-var amount = json.result.amount
-var cur = json.result.currency
-//var transaction = json.result.transaction
-var txid = json.result.blockchair
-var address = json.result.address
-var error = json.result.Error
-if (error) {
-  Bot.inspect(content)
-  return
-}
+var amount = options.result.amount
+var cur = options.result.currency
+var txid = options.result.hash
+var txidd = "https://tx.botdev.me/" + cur + "/" + txid
+var address = options.result.address
 if (address) {
-  User.setProperty("wallet-" + params, address, "string")
-  //3
-  Bot.sendMessage(
+  User.setProperty("wallets-" + cur, address, "string")
+  Bot.sendInlineKeyboard(
+    [[{ title: "🚀 Buy " + cur + " 🚀", url: "t.me/Dev_Bikini" }]],
     "*This is your personal deposit address*. \n\n*" +
-      params +
+      cur +
       " address*:\n`" +
       address +
       "`\n\n🕝 Transaction will be credited after 10 network confirmations."
@@ -55,7 +49,7 @@ if (amount) {
       "*\nDate: " +
       time +
       "\nStatus: *Sent* ✅\nTransaction: [view here](" +
-      txid +
+      txidd +
       ")"
     User.setProperty("history", newh, "string")
   } else {
@@ -67,7 +61,7 @@ if (amount) {
       "*\nDate: " +
       time +
       "\nStatus: *Sent* ✅\nTransaction: [view here](" +
-      txid +
+      txidd +
       ")"
     var toal = nwh + "\n\n" + history
     User.setProperty("history", toal, "string")

@@ -12,4 +12,3 @@ CMD*/
 Bot.runAll({
   command: "/broadc"
 })
-

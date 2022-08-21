@@ -12,22 +12,22 @@ CMD*/
 var cur = Bot.getProperty("admin_currency")
 var min = 0.06
 var balance = Libs.ResourcesLib.userRes("payout")
+Bot.sendKeyboard(
+  "🏠 Menu",
+  "📤 *How many " +
+    cur +
+    " you want to withdraw?*\n\n " +
+    "   *Minimum*: " +
+    min +
+    " " +
+    cur +
+    "\n    *Maximum*: " +
+    balance.value().toFixed(10) +
+    " " +
+    cur +
+    "\n    Maximum amount corresponds to your balance\n\n    ➡ *Send now the amount of  you want to withdraw*"
+)
 if (message == "LTC") {
-  Bot.sendKeyboard(
-    "🏠 Menu",
-    "📤 *How many " +
-      cur +
-      " you want to withdraw?*\n\n " +
-      "   *Minimum*: " +
-      min +
-      " " +
-      cur +
-      "\n    *Maximum*: " +
-      balance.value().toFixed(10) +
-      " " +
-      cur +
-      "\n    Maximum amount corresponds to your balance\n\n    ➡ *Send now the amount of  you want to withdraw*"
-  )
   Bot.run({
     command: "/go_withdraw_LTC",
     options: { me: "ok" }
@@ -35,10 +35,17 @@ if (message == "LTC") {
   return
 }
 if (message == "DGB") {
-  Bot.sendMessage("*Soon.. choose another method*")
+  Bot.run({
+    command: "/go_withdraw_DGB",
+    options: { me: "ok" }
+  })
   return
 }
 if (message == "BCH") {
-  Bot.sendMessage("*Soon.. choose another method*")
+  Bot.run({
+    command: "/go_withdraw_BCH",
+    options: { me: "ok" }
+  })
   return
 }
+

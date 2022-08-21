@@ -9,29 +9,33 @@
   aliases: 
 CMD*/
 
-var amount = options.result.amount
-var cur = options.result.currency
-var txid = options.result.hash
-var txidd = "https://tx.botdev.me/" + cur + "/" + txid
 var address = options.result.address
 if (address) {
-  User.setProperty("wallets-" + cur, address, "string")
+  User.setProperty("wallets-" + params, address, "string")
   Bot.sendInlineKeyboard(
-    [[{ title: "🚀 Buy " + cur + " 🚀", url: "t.me/Dev_Bikini" }]],
+    [[{ title: "🚀 Buy " + params + " 🚀", url: "t.me/Dev_Bikini" }]],
     "*This is your personal deposit address*. \n\n*" +
-      cur +
+      params +
       " address*:\n`" +
       address +
       "`\n\n🕝 Transaction will be credited after 10 network confirmations."
   )
   return
 }
+var amount = options.result.amount
+var cur = options.result.currency
+var txid = options.result.hash
+var txidd = "https://tx.botdev.me/" + cur + "/" + txid
 if (amount) {
-  var usd = CurrencyQuote.convert({
-    amount: parseFloat(amount),
-    from: cur,
-    to: "USD"
-  })
+  if (cur == "DGB") {
+    var usd = 0.0105 * parseFloat(amount)
+  } else {
+    var usd = CurrencyQuote.convert({
+      amount: parseFloat(amount),
+      from: cur,
+      to: "USD"
+    })
+  }
   var balance = Libs.ResourcesLib.userRes("balance")
   balance.add(+usd)
   var orig = Bot.getProperty("admin_currency")
@@ -66,4 +70,5 @@ if (amount) {
     var toal = nwh + "\n\n" + history
     User.setProperty("history", toal, "string")
   }
+  return
 }

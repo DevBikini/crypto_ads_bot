@@ -93,4 +93,3 @@ if (json.cpc < balko) {
 } else {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
 }
-

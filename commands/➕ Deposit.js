@@ -23,11 +23,19 @@ Api.sendMessage({
         {
           text: "BCH",
           callback_data: "/deposit BCH"
-        },{
+        }
+      ],
+      [
+        {
           text: "DGB",
           callback_data: "/deposit DGB"
+        },
+        {
+          text: "TRX",
+          callback_data: "/deposit TRX"
         }
       ]
     ]
   }
 })
+

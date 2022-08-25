@@ -15,3 +15,4 @@ var msg =
   number +
   " *new promotions* available for you today!\n\nUse /notification to disable this notification"
 Bot.sendMessage(msg)
+

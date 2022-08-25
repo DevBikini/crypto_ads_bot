@@ -18,6 +18,7 @@ var cur = Bot.getProperty("admin_currency")
 var ads = Bot.getProperty("all_in_ads")
 var json = ads.list[any]
 var sec = User.getProperty("User-" + any)
+var fee = json.cpc * 0.6
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
 if (!balance.value()) {
@@ -44,12 +45,12 @@ if (
 if (json.cpc < balko) {
   var u_balance = Libs.ResourcesLib.userRes("payout")
   //user add balance
-  u_balance.add(+json.cpc)
+  u_balance.add(+fee)
   Api.deleteMessage({
     message_id: id + 1
   })
-  Bot.sendMessage("✅* Task Completed*!\nYou earned: " + json.cpc + " " + cur)
-  Bot.runCommand("/visit")
+  Bot.sendMessage("✅* Task Completed*!\nYou earned: " + fee + " " + cur)
+  
   //referral
   var referrer = Libs.ReferralLib.getAttractedBy()
   if (referrer) {
@@ -57,7 +58,7 @@ if (json.cpc < balko) {
       "payout",
       referrer.telegramid
     )
-    var amount = json.cpc * 0.15 // it is 15%
+    var amount = fee * 0.15 // it is 15%
     //referral balance add
     referrerRes.add(+amount)
   }
@@ -96,3 +97,4 @@ if (json.cpc < balko) {
 } else {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
 }
+

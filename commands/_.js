@@ -85,6 +85,7 @@ if (forward) {
     }
   }
   var sec = User.getProperty("User-" + json.ads)
+  var fee = json.cpc * 0.6
   if (sec | (json.clicks > json.total) | (json.status == "Disabled 🚫")) {
     //security ads
     Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
@@ -95,15 +96,13 @@ if (forward) {
     if (botta == json.name) {
       //complete task
       var u_balance = Libs.ResourcesLib.userRes("payout")
-      u_balance.add(+json.cpc)
+      u_balance.add(+fee)
       //owner remove balance
       green
       Api.deleteMessage({
         message_id: dol
       })
-      Bot.sendMessage(
-        "✅* Task Completed*!\nYou earned: " + json.cpc + " " + cur
-      )
+      Bot.sendMessage("✅* Task Completed*!\nYou earned: " + fee + " " + cur)
       //referral
       var referrer = Libs.ReferralLib.getAttractedBy()
       if (referrer) {
@@ -111,7 +110,7 @@ if (forward) {
           "payout",
           referrer.telegramid
         )
-        var amount = json.cpc * 0.15 // it is 15%
+        var amount = fee * 0.15 // it is 15%
         //referral earnings
         referrerRes.add(+amount)
       }
@@ -151,7 +150,7 @@ if (forward) {
       Bot.sendMessage("‼️* This is not forward from bot message*")
     }
   } else {
-Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
+    Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
   }
   return
 }

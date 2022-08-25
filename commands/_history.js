@@ -21,8 +21,9 @@ if (!history) {
       var all = all + add + "\n\n"
     }
   }
-}
-Bot.sendMessage("*Here are your latest transactions*:\n\n" + all,{disable_web_page_preview:true})
 
-//User.setProperty("history", "hello1\n\nhi1\n\nhello2\n\nhi2\n\nhello3\n\nhi3\n\nhello4\n\nhi4\n\nhello5\n\nhi5", "string")
-//User.setProperty("history","","string")
+  Bot.sendMessage("*Here are your latest transactions*:\n\n" + all, {
+    disable_web_page_preview: true
+  })
+}
+

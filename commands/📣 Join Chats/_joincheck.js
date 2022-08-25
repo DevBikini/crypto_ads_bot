@@ -21,6 +21,7 @@ var json = ads.list[params]
 var sec = User.getProperty("User-" + json.ads)
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
+var fee = json.cpc * 0.60
 if (!balance.value()) {
   var balko = payout.value()
   var green = payout.add(-json.cpc)
@@ -50,12 +51,12 @@ if (json.cpc < balko) {
     (checking == "creator")
   ) {
     var u_balance = Libs.ResourcesLib.userRes("payout")
-    u_balance.add(+json.cpc)
+    u_balance.add(+fee)
     Api.editMessageText({
       message_id: message_id,
       text:
         "✅* Task Completed*!\nYou earned: " +
-        json.cpc +
+        fee +
         " " +
         cur +
         "\n\nIf you leave the channel, you will loose what you earned!",
@@ -73,7 +74,7 @@ if (json.cpc < balko) {
         "payout",
         referrer.telegramid
       )
-      var amount = json.cpc * 0.15 // it is 15%
+      var amount = fee * 0.15 // it is 15%
       referrerRes.add(+amount)
     }
     User.setProperty("User-" + params + "", "done", "string")

@@ -29,5 +29,5 @@ if (balance.value() < min) {
   )
   return
 }
-Bot.sendKeyboard("LTC,DGB,BCH\n🏠 Menu", "*Choose Payment Method*.")
+Bot.sendKeyboard("LTC,DGB,BCH,TRX\n🏠 Menu", "*Choose Payment Method*.")
 Bot.runCommand("/chooseq")

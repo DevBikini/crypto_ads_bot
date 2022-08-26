@@ -9,7 +9,7 @@
   aliases: 
 CMD*/
 
-let bot_name = options.name
+var bot_name = options.name
 if (message.includes("https://t.me/")) {
   if (!message.split("?")[1]) {
     Bot.sendMessage(
@@ -35,4 +35,12 @@ if (message.includes("https://t.me/")) {
     )
     Bot.run({ command: "/bot#2", options: { name: bot_name } })
   }
+} else {
+  Bot.sendMessage(
+    "❌ Your bot url has to start like this: *https://t.me/" +
+      bot_name +
+      "?start=yourref*"
+  )
+  Bot.run({ command: "/bot#2", options: { name: bot_name } })
 }
+

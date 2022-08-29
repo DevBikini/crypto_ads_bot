@@ -31,7 +31,7 @@ var node = number_click.toFixed(2)
 var total_click = GetClicks()
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
-var status = GetStatus()
+var status = GetStatus(json)
 if (same == "bot") {
   var button = [
     [
@@ -276,7 +276,7 @@ function GetClicks() {
   return number_click
 }
 //get status
-function GetStatus() {
+function GetStatus(json) {
   if (json.clicks > json.total) {
     return "Disabled 🚫"
   }

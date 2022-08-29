@@ -103,7 +103,7 @@ if (request) {
       }
       User.setProperty("User-" + json.ads, "done", "string")
       Bot.runCommand("/bots")
-      var status = Getstatus()
+      var status = Getstatus(json)
       var add = Bot.getProperty("all_in_ads", { list: {} })
       add.list[forward_co] = {
         ads: forward_co,
@@ -149,7 +149,7 @@ function GetChatName() {
   }
 }
 //get status
-function Getstatus() {
+function Getstatus(json) {
   if (json.clicks + 2 > json.total) {
     return "Disabled 🚫"
   }

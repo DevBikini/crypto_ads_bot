@@ -53,7 +53,7 @@ if (json.cpc < Getbalance().value()) {
   User.setProperty("User-" + any + "", "done", "string")
   //owner balance remove
   Getbalance().add(-json.cpc)
-  var status = GetStatus()
+  var status = GetStatus(json)
   var add = Bot.getProperty("all_in_ads", { list: {} })
   add.list[any] = {
     ads: any,
@@ -75,7 +75,7 @@ if (json.cpc < Getbalance().value()) {
 }
 //function
 //status
-function GetStatus() {
+function GetStatus(json) {
   if (json.clicks + 2 > json.total) {
     return "Disabled 🚫"
   }

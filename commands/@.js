@@ -28,7 +28,6 @@ function TotalClick(data, length) {
   var d_data = data.split(".")[0].slice(0, length - d_fol)
   if (d_data.includes("0")) {
     var l_data = data.split(".")[1]
-    var ohn = ""
     for (var i = 0; i < l_data.length + 1; i++) {
       var l_gud = l_data.slice(0, i)
       if (

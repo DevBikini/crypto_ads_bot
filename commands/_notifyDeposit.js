@@ -27,15 +27,7 @@ var cur = options.result.currency
 var txid = options.result.hash
 var txidd = "https://tx.botdev.me/" + cur + "/" + txid
 if (amount) {
-  if (cur == "DGB") {
-    var usd = 0.0105 * parseFloat(amount)
-  } else {
-    var usd = CurrencyQuote.convert({
-      amount: parseFloat(amount),
-      from: cur,
-      to: "USD"
-    })
-  }
+  var usd = GetPrice()
   var balance = Libs.ResourcesLib.userRes("balance")
   balance.add(+usd)
   var orig = Bot.getProperty("admin_currency")
@@ -72,3 +64,15 @@ if (amount) {
   }
   return
 }
+//price
+function GetPrice() {
+  if (cur == "DGB") {
+    return 0.0105 * parseFloat(amount)
+  }
+  return CurrencyQuote.convert({
+    amount: parseFloat(amount),
+    from: cur,
+    to: "USD"
+  })
+}
+

@@ -192,16 +192,8 @@ if (see == "visit") {
 //join
 if (see == "join") {
   if (message.includes("@") | message.includes("https://t.me/")) {
-    if (message.includes("@")) {
-      var na = "https://t.me/" + message.slice(1)
-    } else {
-      var na = message
-    }
-    if (message.includes("https://t.me/")) {
-      var chan = "@" + message.split("https://t.me/")[1]
-    } else {
-      var chan = message
-    }
+    var channel_link = GetChannelLink()
+    var channel_name = GetChannelName()
     var text =
       "<b>Campaign #" +
       json.ads +
@@ -210,9 +202,9 @@ if (see == "join") {
       "\n<b>Description</b>: " +
       json.description +
       "\n\n<b>Channel</b>: " +
-      chan +
+      channel_name +
       "\n<b>URL</b>: " +
-      na +
+      channel_link +
       "\n<b>Status</b>: " +
       json.status +
       "\n\n<b>Daily budget</b>: " +
@@ -240,8 +232,8 @@ if (see == "join") {
     var add = Bot.getProperty("all_in_ads", { list: {} })
     add.list[number_ads] = {
       ads: json.ads,
-      name: chan,
-      link: na,
+      name: channel_name,
+      link: channel_link,
       title: json.title,
       description: json.description,
       cpc: json.cpc,
@@ -269,3 +261,18 @@ if (see == "join") {
   }
 }
 Bot.sendMessage("Your ad has been updated.")
+//function
+function GetChannelLink() {
+  if (message.includes("@")) {
+    return "https://t.me/" + message.slice(1)
+  }
+  return message
+}
+//channel name
+function GetChannelName() {
+  if (message.includes("https://t.me/")) {
+    return "@" + message.split("https://t.me/")[1]
+  }
+  return message
+}
+

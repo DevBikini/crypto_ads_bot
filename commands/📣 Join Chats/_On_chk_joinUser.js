@@ -15,12 +15,12 @@ if (!params) {
 var ads = Bot.getProperty("all_in_ads")
 var json = ads.list[params]
 var cur = Bot.getProperty("admin_currency")
-var status = options.result.status
-if (
-  (status == "member") |
-  (status == "administrator") |
-  (status == "creator")
-) {
+var status =
+  (options.result.status == "member") |
+  (options.result.status == "administrator") |
+  (options.result.status == "creator")
+
+if (status) {
   return
 }
 var balance = Libs.ResourcesLib.userRes("payout")
@@ -44,3 +44,4 @@ Bot.sendMessage(
 )
 //user remove balance and also her referral balance
 //owner add balance from user leave a channel
+

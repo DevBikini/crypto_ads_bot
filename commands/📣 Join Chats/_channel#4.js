@@ -13,16 +13,8 @@ var balance = Libs.ResourcesLib.userRes("balance")
 var payout = Libs.ResourcesLib.userRes("payout")
 var cur = Bot.getProperty("admin_currency")
 var cpc = Bot.getProperty("admin_cpc_join")
-if (!balance.value()) {
-  var balko = payout.value()
-} else {
-  if (cpc > balance.value()) {
-    var balko = payout.value()
-  } else {
-    var balko = balance.value()
-  }
-}
-if (message.includes("-") | (message < cpc) | !isNumeric(message)) {
+var include = message.includes("-") | (message < cpc) | !isNumeric(message)
+if (include) {
   Bot.sendMessage(
     "❌ *Send please an amount greater or equal to* " + cpc + " " + cur
   )
@@ -39,7 +31,7 @@ if (message.includes("-") | (message < cpc) | !isNumeric(message)) {
 }
 Bot.sendMessage(
   "*How much do you want to spend on this campaign?*\n\nAvailable balance: *" +
-    balko.toFixed(10) +
+    Getbalance().toFixed(10) +
     " " +
     cur +
     "\n\n➡️ Enter a value in " +
@@ -56,3 +48,14 @@ Bot.run({
     cpc: message
   }
 })
+//function
+function Getbalance() {
+  if (!balance.value()) {
+    return payout.value()
+  }
+  if (cpc > balance.value()) {
+    return payout.value()
+  }
+  return balance.value()
+}
+

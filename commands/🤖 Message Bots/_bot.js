@@ -19,7 +19,6 @@ var ads = Bot.getProperty("all_in_ads")
 var data = ads.list[params]
 var bot = data.name
 var bot1 = data.link
-
 Api.editMessageText({
   message_id: message_id,
   text:

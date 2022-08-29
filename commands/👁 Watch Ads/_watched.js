@@ -20,31 +20,19 @@ var cur = Bot.getProperty("admin_currency")
 var ads = Bot.getProperty("all_in_ads")
 var json = ads.list[any]
 var sec = User.getProperty("User-" + any)
-var fee = json.cpc * 0.60
+var fee = json.cpc * 0.6
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
-if (!balance.value()) {
-  var balko = payout.value()
-  var green = payout.add(-json.cpc)
-} else {
-  if (balance.value() < json.cpc) {
-    var balko = payout.value()
-    var green = payout.add(-json.cpc)
-  } else {
-    var green = balance.add(-json.cpc)
-    var balko = balance.value()
-  }
-}
-if (
+var include =
   !ads.list[any] ||
   sec ||
   json.clicks > json.total ||
   json.status == "Disabled 🚫"
-) {
+if (include) {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
   return
 }
-if (json.cpc < balko) {
+if (json.cpc < Getbalance().value()) {
   var u_balance = Libs.ResourcesLib.userRes("payout")
   u_balance.add(+fee)
   Bot.sendMessage("✅* Task Completed*!\nYou earned: " + fee + " " + cur)
@@ -60,21 +48,9 @@ if (json.cpc < balko) {
   }
   User.setProperty("User-" + any, "done", "string")
   //owner remove balance
-  green
+  Getbalance().add(-json.cpc)
   Bot.runCommand("/view")
-  if (json.clicks + 2 > json.total) {
-    var status = "Disabled 🚫"
-  } else {
-    if (json.cpc > balko) {
-      var status = "⏸ *Paused*: budget reached or out of funds."
-    } else {
-      if (json.status == "Disabled 🚫") {
-        var status = "Disabled 🚫"
-      } else {
-        var status = "Enabled ✅"
-      }
-    }
-  }
+  var status = Get_status()
   var add = Bot.getProperty("all_in_ads", { list: {} })
   add.list[any] = {
     ads: any,
@@ -94,4 +70,26 @@ if (json.cpc < balko) {
 } else {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
 }
-
+//function
+function Getbalance() {
+  if (!balance.value()) {
+    return payout
+  }
+  if (balance.value() < json.cpc) {
+    return payout
+  }
+  return balance
+}
+//status
+function Get_status() {
+  if (json.clicks + 2 > json.total) {
+    return "Disabled 🚫"
+  }
+  if (json.cpc > Getbalance().value()) {
+    return "⏸ *Paused*: budget reached or out of funds."
+  }
+  if (json.status == "Disabled 🚫") {
+    return "Disabled 🚫"
+  }
+  return "Enabled ✅"
+}

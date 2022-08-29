@@ -29,13 +29,8 @@ if (request) {
   if (forward == "forward-view") {
     var cur = Bot.getProperty("admin_currency")
     var cpc = Bot.getProperty("admin_cpc_view")
-    if (!request.forward_from_chat) {
-      var chat = request.chat.username
-      var message_id = request.message_id
-    } else {
-      var message_id = request.forward_from_message_id
-      var chat = request.forward_from_chat.username
-    }
+    var chat = GetChatName().chat
+    var message_id = GetChatName().message_id
     Api.forwardMessage({
       from_chat_id: user.telegramid,
       message_id: request.message_id
@@ -73,18 +68,6 @@ if (request) {
     var cur = Bot.getProperty("admin_currency")
     var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
     var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
-    if (!balance.value()) {
-      var balko = payout.value()
-      var green = payout.add(-json.cpc)
-    } else {
-      if (balance.value() < json.cpc) {
-        var balko = payout.value()
-        var green = payout.add(-json.cpc)
-      } else {
-        var green = balance.add(-json.cpc)
-        var balko = balance.value()
-      }
-    }
     var sec = User.getProperty("User-" + json.ads)
     var fee = json.cpc * 0.6
     if (sec | (json.clicks > json.total) | (json.status == "Disabled 🚫")) {
@@ -92,67 +75,91 @@ if (request) {
       Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
       return
     }
-    if (json.cpc < balko) {
+    if (json.cpc < Getbalance().value()) {
       var botta = request.forward_from.username
-      if (botta == json.name) {
-        //complete task
-        var u_balance = Libs.ResourcesLib.userRes("payout")
-        u_balance.add(+fee)
-        //owner remove balance
-        green
-        Api.deleteMessage({
-          message_id: dol
-        })
-        Bot.sendMessage("✅* Task Completed*!\nYou earned: " + fee + " " + cur)
-        //referral
-        var referrer = Libs.ReferralLib.getAttractedBy()
-        if (referrer) {
-          var referrerRes = Libs.ResourcesLib.anotherUserRes(
-            "payout",
-            referrer.telegramid
-          )
-          var amount = fee * 0.15 // it is 15%
-          //referral earnings
-          referrerRes.add(+amount)
-        }
-        User.setProperty("User-" + json.ads, "done", "string")
-        Bot.runCommand("/bots")
-        if (json.clicks + 2 > json.total) {
-          var status = "Disabled 🚫"
-        } else {
-          if (json.cpc > balko) {
-            var status = "⏸ *Paused*: budget reached or out of funds."
-          } else {
-            if (json.status == "Disabled 🚫") {
-              var status = "Disabled 🚫"
-            } else {
-              var status = "Enabled ✅"
-            }
-          }
-        }
-        var add = Bot.getProperty("all_in_ads", { list: {} })
-        add.list[forward_co] = {
-          ads: forward_co,
-          name: json.name,
-          link: json.link,
-          title: json.title,
-          description: json.description,
-          cpc: json.cpc,
-          clicks: json.clicks + 1,
-          budget: json.budget,
-          total: json.total,
-          status: status,
-          owner: json.owner,
-          promotion: json.promotion
-        }
-        Bot.setProperty("all_in_ads", add, "json")
-        User.setProperty("forward", "", "string")
-      } else {
+      if (botta !== json.name) {
         Bot.sendMessage("‼️* This is not forward from bot message*")
+        return
       }
+      //complete task
+      var u_balance = Libs.ResourcesLib.userRes("payout")
+      u_balance.add(+fee)
+      //owner remove balance
+      Getbalance().add(-json.cpc)
+      Api.deleteMessage({
+        message_id: dol
+      })
+      Bot.sendMessage("✅* Task Completed*!\nYou earned: " + fee + " " + cur)
+      //referral
+      var referrer = Libs.ReferralLib.getAttractedBy()
+      if (referrer) {
+        var referrerRes = Libs.ResourcesLib.anotherUserRes(
+          "payout",
+          referrer.telegramid
+        )
+        var amount = fee * 0.15 // it is 15%
+        //referral earnings
+        referrerRes.add(+amount)
+      }
+      User.setProperty("User-" + json.ads, "done", "string")
+      Bot.runCommand("/bots")
+      var status = Getstatus()
+      var add = Bot.getProperty("all_in_ads", { list: {} })
+      add.list[forward_co] = {
+        ads: forward_co,
+        name: json.name,
+        link: json.link,
+        title: json.title,
+        description: json.description,
+        cpc: json.cpc,
+        clicks: json.clicks + 1,
+        budget: json.budget,
+        total: json.total,
+        status: status,
+        owner: json.owner,
+        promotion: json.promotion
+      }
+      Bot.setProperty("all_in_ads", add, "json")
+      User.setProperty("forward", "", "string")
     } else {
       Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
     }
     return
   }
 }
+//function
+function Getbalance() {
+  if (!balance.value()) {
+    return payout
+  }
+  if (balance.value() < json.cpc) {
+    return payout
+  }
+
+  return balance
+}
+//chatname && message_id
+function GetChatName() {
+  if (!request.forward_from_chat) {
+    return { chat: request.chat.username, message_id: request.message_id }
+  }
+  return {
+    chat: request.forward_from_chat.username,
+    message_id: request.forward_from_message_id
+  }
+}
+//get status
+function Getstatus() {
+  if (json.clicks + 2 > json.total) {
+    return "Disabled 🚫"
+  }
+  if (json.cpc > Getbalance().value()) {
+    return "⏸ *Paused*: budget reached or out of funds."
+  }
+  if (json.status == "Disabled 🚫") {
+    return "Disabled 🚫"
+
+    return "Enabled ✅"
+  }
+}
+

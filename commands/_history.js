@@ -15,7 +15,7 @@ if (!history) {
   Bot.sendMessage("You don't have any transactions yet.")
 } else {
   var all = ""
-  for (var ind = 0; ind < list + 1; ind++) {
+  for (var ind = 0; ind < list; ind++) {
     var add = history.split("\n\n")[ind]
     if (add) {
       var all = all + add + "\n\n"

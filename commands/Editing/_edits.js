@@ -201,13 +201,8 @@ if (same == "title" && see == "view") {
 }
 //back edit main
 if (same == "back" && see == "bot") {
-  if (json.status == "Enabled ✅") {
-    var sts = "Disable 🚫"
-    var cdm = "/Disabled bot " + json.ads
-  } else {
-    var sts = "Enable ✅"
-    var cdm = "/Enabled bot " + json.ads
-  }
+  var sts = GetStatus().sts
+  var cdm = GetStatus().cdm
   var button = [
     [
       { text: "✏️ Edit", callback_data: "/edit bot " + json.ads },
@@ -258,13 +253,8 @@ if (same == "back" && see == "bot") {
 }
 //back edit main join
 if (same == "back" && see == "join") {
-  if (json.status == "Enabled ✅") {
-    var sts = "Disable 🚫"
-    var cdm = "/Disabled join " + json.ads
-  } else {
-    var sts = "Enable ✅"
-    var cdm = "/Enabled join " + json.ads
-  }
+  var sts = GetStatus().sts
+  var cdm = GetStatus().cdm
   var button = [
     [
       { text: "✏️ Edit", callback_data: "/edit join " + json.ads },
@@ -315,13 +305,8 @@ if (same == "back" && see == "join") {
 }
 //back visit main
 if (same == "back" && see == "visit") {
-  if (json.status == "Enabled ✅") {
-    var sts = "Disable 🚫"
-    var cdm = "/Disabled visit " + json.ads
-  } else {
-    var sts = "Enable ✅"
-    var cdm = "/Enabled visit " + json.ads
-  }
+  var sts = GetStatus().sts
+  var cdm = GetStatus().cdm
   var button = [
     [
       { text: "✏️ Edit", callback_data: "/edit visit " + json.ads },
@@ -370,13 +355,8 @@ if (same == "back" && see == "visit") {
 }
 //back view main
 if (same == "back" && see == "view") {
-  if (json.status == "Enabled ✅") {
-    var sts = "Disable 🚫"
-    var cdm = "/Disabled view " + json.ads
-  } else {
-    var sts = "Enable ✅"
-    var cdm = "/Enabled view " + json.ads
-  }
+  var sts = GetStatus().sts
+  var cdm = GetStatus().cdm
   var button = [
     [
       { text: "✏️ Edit", callback_data: "/edit view " + json.ads },
@@ -493,3 +473,11 @@ if (same == "delete" && see == "view") {
   })
   return
 }
+//function
+function GetStatus() {
+  if (json.status == "Enabled ✅") {
+    return { sts: "Disable 🚫", cdm: "/Disabled bot " + json.ads }
+  }
+  return { sts: "Enable ✅", cdm: "/Enabled bot " + json.ads }
+}
+

@@ -47,19 +47,9 @@ for (var ind in ads.list) {
   var sec = User.getProperty("User-" + number_ads)
   var promotion = json.promotion
   if (promotion == "Link URL 🔗") {
-    //2
     var owner = json.owner
     var balance = Libs.ResourcesLib.anotherUserRes("balance", owner)
     var payout = Libs.ResourcesLib.anotherUserRes("payout", owner)
-    if (!balance.value()) {
-      var balko = payout.value()
-    } else {
-      if (balance.value() < cpc) {
-        var balko = payout.value()
-      } else {
-        var balko = balance.value()
-      }
-    }
     if (
       (status == "Disabled 🚫") |
       (status == "⏸ Paused: budget reached or out of funds.")
@@ -70,16 +60,8 @@ for (var ind in ads.list) {
     if (status == "Enabled ✅") {
       //status enabled
       if (!sec) {
-        if (owner == user.telegramid) {
-          //1. owner - owner cannot execute own task
-          //2. cpc - owner dont have balance to pay the user
-        } else {
-          if (cpc < balko) {
-            //user can go task and earn
-            GettingAd(number_ads, promotion)
-
-            return
-          }
+        if (Checking()) {
+          return GettingAd(number_ads, promotion)
         }
       }
     }
@@ -88,3 +70,27 @@ for (var ind in ads.list) {
 //no more ads
 //already done ads
 No_More_Ads()
+//function area
+//balance #1
+function Mybalance() {
+  if (!balance.value()) {
+    return payout.value()
+  }
+  if (balance.value() < cpc) {
+    return payout.value()
+  }
+  return balance.value()
+}
+//check #2
+function Checking() {
+  if (owner == user.telegramid) {
+    return false
+    //1. owner - owner cannot execute own task
+    //2. cpc - owner dont have balance to pay the user
+  }
+  if (cpc < Mybalance()) {
+    return true
+    //user can go task and earn
+  }
+}
+

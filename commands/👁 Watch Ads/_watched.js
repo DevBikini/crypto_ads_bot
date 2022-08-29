@@ -50,7 +50,7 @@ if (json.cpc < Getbalance().value()) {
   //owner remove balance
   Getbalance().add(-json.cpc)
   Bot.runCommand("/view")
-  var status = Get_status()
+  var status = Get_status(json)
   var add = Bot.getProperty("all_in_ads", { list: {} })
   add.list[any] = {
     ads: any,
@@ -81,7 +81,7 @@ function Getbalance() {
   return balance
 }
 //status
-function Get_status() {
+function Get_status(json) {
   if (json.clicks + 2 > json.total) {
     return "Disabled 🚫"
   }

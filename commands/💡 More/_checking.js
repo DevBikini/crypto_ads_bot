@@ -9,7 +9,9 @@
   aliases: 
 CMD*/
 
-if(!params){return}
+if (!params) {
+  return
+}
 var payout = Libs.ResourcesLib.userRes("payout")
 if (params == 1) {
   var dudu = Libs.ResourcesLib.userRes("dudu")
@@ -42,32 +44,6 @@ if (params == 2) {
   return
 }
 if (params == 3) {
-  function canRun() {
-    var last_run_at = User.getProperty("last_run_at_daily")
-    if (!last_run_at) {
-      return true
-    }
-
-    var minutes = (Date.now() - last_run_at) / 1000 / 60
-
-    var minutes_in_day = 24 * 60
-    var next = minutes_in_day - minutes
-    var wait_hours = Math.floor(next / 60)
-    next -= wait_hours * 60
-    var wait_minutes = Math.floor(next)
-    var seconds = Math.floor((next - wait_minutes) * 60)
-    if (minutes < minutes_in_day) {
-      Api.answerCallbackQuery({
-        callback_query_id: request.id,
-        text: "come back tomorrow!",
-        show_alert: false
-      })
-      //come
-      return
-    }
-    return true
-  }
-
   if (!canRun()) {
     return
   }
@@ -76,4 +52,28 @@ if (params == 3) {
   payout.add(+0.0005)
   Bot.sendMessage("You earned *0.0005 USD* for task earn!")
   return
+}
+//function
+function canRun() {
+  var last_run_at = User.getProperty("last_run_at_daily")
+  if (!last_run_at) {
+    return true
+  }
+
+  var minutes = (Date.now() - last_run_at) / 1000 / 60
+
+  var minutes_in_day = 24 * 60
+  var next = minutes_in_day - minutes
+  var wait_hours = Math.floor(next / 60)
+  next -= wait_hours * 60
+  if (minutes < minutes_in_day) {
+    Api.answerCallbackQuery({
+      callback_query_id: request.id,
+      text: "come back tomorrow!",
+      show_alert: false
+    })
+    //come
+    return
+  }
+  return true
 }

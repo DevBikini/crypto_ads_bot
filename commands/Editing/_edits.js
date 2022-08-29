@@ -201,8 +201,8 @@ if (same == "title" && see == "view") {
 }
 //back edit main
 if (same == "back" && see == "bot") {
-  var sts = GetStatus().sts
-  var cdm = GetStatus().cdm
+  var sts = GetStatus(json).sts
+  var cdm = GetStatus(json).cdm
   var button = [
     [
       { text: "✏️ Edit", callback_data: "/edit bot " + json.ads },
@@ -253,8 +253,8 @@ if (same == "back" && see == "bot") {
 }
 //back edit main join
 if (same == "back" && see == "join") {
-  var sts = GetStatus().sts
-  var cdm = GetStatus().cdm
+  var sts = GetStatus(json).sts
+  var cdm = GetStatus(json).cdm
   var button = [
     [
       { text: "✏️ Edit", callback_data: "/edit join " + json.ads },
@@ -305,8 +305,8 @@ if (same == "back" && see == "join") {
 }
 //back visit main
 if (same == "back" && see == "visit") {
-  var sts = GetStatus().sts
-  var cdm = GetStatus().cdm
+  var sts = GetStatus(json).sts
+  var cdm = GetStatus(json).cdm
   var button = [
     [
       { text: "✏️ Edit", callback_data: "/edit visit " + json.ads },
@@ -355,8 +355,8 @@ if (same == "back" && see == "visit") {
 }
 //back view main
 if (same == "back" && see == "view") {
-  var sts = GetStatus().sts
-  var cdm = GetStatus().cdm
+  var sts = GetStatus(json).sts
+  var cdm = GetStatus(json).cdm
   var button = [
     [
       { text: "✏️ Edit", callback_data: "/edit view " + json.ads },
@@ -474,7 +474,7 @@ if (same == "delete" && see == "view") {
   return
 }
 //function
-function GetStatus() {
+function GetStatus(json) {
   if (json.status == "Enabled ✅") {
     return { sts: "Disable 🚫", cdm: "/Disabled bot " + json.ads }
   }

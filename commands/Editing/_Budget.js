@@ -29,11 +29,8 @@ var number_click = kol * message
 //kol x bot_buget = 1
 //10000 x 0.0001 = 1
 var node = number_click.toFixed(2)
-if (node.includes(".")) {
-  var total_click = node.split(".")[0]
-} else {
-  var total_click = number_click
-}
+var total_click = GetClicks()
+
 Bot.sendMessage("Your ad has been updated.")
 var ads = Bot.getProperty("all_in_ads")
 var json = ads.list[number_ads]
@@ -283,3 +280,11 @@ if (see == "view") {
   Bot.setProperty("all_in_ads", add, "json")
   return
 }
+//function
+function GetClicks() {
+  if (node.includes(".")) {
+    return node.split(".")[0]
+  }
+  return number_click
+}
+

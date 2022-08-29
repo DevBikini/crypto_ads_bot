@@ -14,7 +14,7 @@ if (!content) {
 }
 var ads = Bot.getProperty("all_in_ads")
 var json = ads.list[params]
-var df = [
+var button = [
   [
     {
       text: "🚀 Go to Website 🚀",
@@ -35,7 +35,8 @@ Api.sendMessage({
     "\n\n" +
     json.description +
     "\n\n------------------------------------------------\n⚠️_ You will be redirected to a third party website._",
-  reply_markup: { inline_keyboard: df },
+  reply_markup: { inline_keyboard: button },
   disable_web_page_preview: true,
   parse_mode: "Markdown"
 })
+

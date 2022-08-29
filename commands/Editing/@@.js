@@ -83,26 +83,6 @@ function GettingAd(number_ads, promotion) {
   }
   if (promotion == "Post views 📃") {
     var cur = Bot.getProperty("admin_currency")
-    function canRun() {
-      var last_run_at = User.getProperty("last_run_at" + number_ads)
-      if (!last_run_at) {
-        return true
-      }
-
-      var minutes = (Date.now() - last_run_at) / 100 / 10
-
-      var minutes_in_day = 3 * 3
-      var next = minutes_in_day - minutes
-      var wait_hours = Math.floor(next / 3)
-      next -= wait_hours * 3
-      var wait_minutes = Math.floor(next)
-      var seconds = Math.floor((next - wait_minutes) * 3)
-      if (minutes < minutes_in_day) {
-        return
-      }
-      return true
-    }
-
     if (!canRun()) {
       return
     }
@@ -148,13 +128,8 @@ function EditingAd(number_ads, promotion) {
   var json = ads.list[number_ads]
   var cur = Bot.getProperty("admin_currency")
   if (promotion == "Bot 🤖") {
-    if (json.status == "Enabled ✅") {
-      var sts = "Disable 🚫"
-      var cdm = "/Disabled bot " + json.ads
-    } else {
-      var sts = "Enable ✅"
-      var cdm = "/Enabled bot " + json.ads
-    }
+    var sts = GetStatus(json).sts
+    var cdm = GetStatus(json).cdm
     var button = [
       [
         { text: "✏️ Edit", callback_data: "/edit bot " + json.ads },
@@ -198,17 +173,12 @@ function EditingAd(number_ads, promotion) {
     return
   }
   if (promotion == "Link URL 🔗") {
-    if (json.status == "Enabled ✅") {
-      var sts = "Disable 🚫"
-      var cdm = "/Disabled visit " + json.ads
-    } else {
-      var sts = "Enable ✅"
-      var cdm = "/Enabled visit " + json.ads
-    }
+    var sts1 = GetStatus(json).sts
+    var cdm1 = GetStatus(json).cdm
     var button1 = [
       [
         { text: "✏️ Edit", callback_data: "/edit visit " + json.ads },
-        { text: sts, callback_data: cdm }
+        { text: sts1, callback_data: cdm1 }
       ]
     ]
     var text1 =
@@ -246,17 +216,12 @@ function EditingAd(number_ads, promotion) {
     return
   }
   if (promotion == "Channel / Group 📣") {
-    if (json.status == "Enabled ✅") {
-      var sts = "Disable 🚫"
-      var cdm = "/Disabled join " + json.ads
-    } else {
-      var sts = "Enable ✅"
-      var cdm = "/Enabled join " + json.ads
-    }
+    var sts2 = GetStatus(json).sts
+    var cdm2 = GetStatus(json).cdm
     var button2 = [
       [
         { text: "✏️ Edit", callback_data: "/edit join " + json.ads },
-        { text: sts, callback_data: cdm }
+        { text: sts2, callback_data: cdm2 }
       ]
     ]
     var text2 =
@@ -296,17 +261,12 @@ function EditingAd(number_ads, promotion) {
     return
   }
   if (promotion == "Post views 📃") {
-    if (json.status == "Enabled ✅") {
-      var sts = "Disable 🚫"
-      var cdm = "/Disabled view " + json.ads
-    } else {
-      var sts = "Enable ✅"
-      var cdm = "/Enabled view " + json.ads
-    }
+    var sts3 = GetStatus(json).sts
+    var cdm3 = GetStatus(json).cdm
     var button3 = [
       [
         { text: "✏️ Edit", callback_data: "/edit view " + json.ads },
-        { text: sts, callback_data: cdm }
+        { text: sts3, callback_data: cdm3 }
       ]
     ]
     var text3 =
@@ -342,3 +302,29 @@ function EditingAd(number_ads, promotion) {
     return
   }
 }
+//function
+function canRun() {
+  var last_run_at = User.getProperty("last_run_at" + number_ads)
+  if (!last_run_at) {
+    return true
+  }
+
+  var minutes = (Date.now() - last_run_at) / 100 / 10
+
+  var minutes_in_day = 3 * 3
+  var next = minutes_in_day - minutes
+  var wait_hours = Math.floor(next / 3)
+  next -= wait_hours * 3
+  if (minutes < minutes_in_day) {
+    return
+  }
+  return true
+}
+//get status
+function GetStatus(json) {
+  if (json.status == "Enabled ✅") {
+    return { sts: "Disable 🚫", cdm: "/Disabled bot " + json.ads }
+  }
+  return { sts: "Enable ✅", cdm: "/Enabled bot " + json.ads }
+}
+

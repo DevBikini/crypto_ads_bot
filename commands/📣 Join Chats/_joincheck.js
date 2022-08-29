@@ -21,19 +21,7 @@ var json = ads.list[params]
 var sec = User.getProperty("User-" + json.ads)
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
-var fee = json.cpc * 0.60
-if (!balance.value()) {
-  var balko = payout.value()
-  var green = payout.add(-json.cpc)
-} else {
-  if (balance.value() < json.cpc) {
-    var balko = payout.value()
-    var green = payout.add(-json.cpc)
-  } else {
-    var green = balance.add(-json.cpc)
-    var balko = balance.value()
-  }
-}
+var fee = json.cpc * 0.6
 if (sec | (json.clicks > json.total) | (json.status == "Disabled 🚫")) {
   //security ads
   Api.editMessageText({
@@ -43,7 +31,7 @@ if (sec | (json.clicks > json.total) | (json.status == "Disabled 🚫")) {
   })
   return
 }
-if (json.cpc < balko) {
+if (json.cpc < Getbalance().value()) {
   var checking = options.result.status
   if (
     (checking == "member") |
@@ -79,21 +67,9 @@ if (json.cpc < balko) {
     }
     User.setProperty("User-" + params + "", "done", "string")
     //owner remove balance
-    green
+    Getbalance().add(-json.cpc)
     Bot.runCommand("/join")
-    if (json.clicks + 2 > json.total) {
-      var status = "Disabled 🚫"
-    } else {
-      if (json.cpc > balko) {
-        var status = "⏸ *Paused*: budget reached or out of funds."
-      } else {
-        if (json.status == "Disabled 🚫") {
-          var status = "Disabled 🚫"
-        } else {
-          var status = "Enabled ✅"
-        }
-      }
-    }
+    var status = Get_status()
     var add = Bot.getProperty("all_in_ads", { list: {} })
     add.list[params] = {
       ads: params,
@@ -146,3 +122,27 @@ if (json.cpc < balko) {
     parse_mode: "Markdown"
   })
 }
+//function
+function Getbalance() {
+  if (!balance.value()) {
+    return payout
+  }
+  if (balance.value() < json.cpc) {
+    return payout
+  }
+  return balance
+}
+//status
+function Get_status() {
+  if (json.clicks + 2 > json.total) {
+    return "Disabled 🚫"
+  }
+  if (json.cpc > Getbalance().value()) {
+    return "⏸ *Paused*: budget reached or out of funds."
+  }
+  if (json.status == "Disabled 🚫") {
+    return "Disabled 🚫"
+  }
+  return "Enabled ✅"
+}
+

@@ -18,16 +18,9 @@ var balance = Libs.ResourcesLib.userRes("balance")
 var payout = Libs.ResourcesLib.userRes("payout")
 var cur = Bot.getProperty("admin_currency")
 var min_budgets = Bot.getProperty("admin_budget_bot")
-if (!balance.value()) {
-  var balko = payout.value()
-} else {
-  if (balance.value() < min_budgets) {
-    var balko = payout.value()
-  } else {
-    var balko = balance.value()
-  }
-}
-if (message.includes("-") | !isNumeric(message) | (message < min_budgets)) {
+var include =
+  message.includes("-") | !isNumeric(message) | (message < min_budgets)
+if (include) {
   Bot.sendMessage(
     "❌ *Send please an amount greater or equal to* " + min_budgets + " " + cur
   )
@@ -43,13 +36,13 @@ if (message.includes("-") | !isNumeric(message) | (message < min_budgets)) {
   })
   return
 }
-if (message > balko+0.002) {
+if (message > Getbalance() + min_budgets) {
   Bot.sendKeyboard(
     "➕ Deposit,🏠 Menu",
     "❌ You do not own enough " +
       cur +
       " for this!\n*You own*: " +
-      balko.toFixed(10) +
+      Getbalance().toFixed(10) +
       " " +
       cur
   )
@@ -59,11 +52,7 @@ var ads = Generate(5)
 var kol = TotalClick(min_budgets, min_budgets.length)
 var number_click = kol * message
 var node = number_click.toFixed(2)
-if (node.includes(".")) {
-  var total_click = node.split(".")[0]
-} else {
-  var total_click = number_click
-}
+var total_click = validation()
 Bot.sendInlineKeyboard(
   [
     [
@@ -127,3 +116,20 @@ Api.sendMessage({
     "",
   parse_mode: "html"
 })
+//function
+function Getbalance() {
+  if (!balance.value()) {
+    return payout.value()
+  }
+  if (balance.value() < min_budgets) {
+    return payout.value()
+  }
+  return balance.value()
+}
+//validation.
+function validation() {
+  if (node.includes(".")) {
+    return node.split(".")[0]
+  }
+  return number_click
+}

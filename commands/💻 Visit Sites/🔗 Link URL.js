@@ -18,7 +18,8 @@
   aliases: 
 CMD*/
 
-if (message.includes("https://")) {
+var message_include = message.includes("https://")
+if (message_include) {
   Bot.sendInlineKeyboard(
     [{ title: "Click Here", url: "" + message }],
     "⬇️ Your ref. link ⬇️"
@@ -29,3 +30,4 @@ if (message.includes("https://")) {
   Bot.sendMessage("*You enter Wrong URL please enter valid URL*")
   Bot.runCommand("/link#1")
 }
+

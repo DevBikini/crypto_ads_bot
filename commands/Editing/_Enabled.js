@@ -28,31 +28,10 @@ var number_click = kol * json.budget
 //kol x bot_buget = 1
 //10000 x 0.0001 = 1
 var node = number_click.toFixed(2)
-if (node.includes(".")) {
-  var total_click = node.split(".")[0]
-} else {
-  var total_click = number_click
-}
+var total_click = GetClicks()
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
-if (!balance.value()) {
-  var balko = payout.value()
-} else {
-  if (balance.value() < json.cpc) {
-    var balko = payout.value()
-  } else {
-    var balko = balance.value()
-  }
-}
-if (json.clicks > json.total) {
-  var status = "Disabled 🚫"
-} else {
-  if (balko < json.cpc) {
-    var status = "⏸ *Paused*: budget reached or out of funds."
-  } else {
-    var status = "Enabled ✅"
-  }
-}
+var status = GetStatus()
 if (same == "bot") {
   var button = [
     [
@@ -279,3 +258,31 @@ if (same == "view") {
   }
   Bot.setProperty("all_in_ads", add, "json")
 }
+//function
+function Getbalance() {
+  if (!balance.value()) {
+    return payout.value()
+  }
+  if (balance.value() < json.cpc) {
+    return payout.value()
+  }
+  return balance.value()
+}
+//clicks
+function GetClicks() {
+  if (node.includes(".")) {
+    return node.split(".")[0]
+  }
+  return number_click
+}
+//get status
+function GetStatus() {
+  if (json.clicks > json.total) {
+    return "Disabled 🚫"
+  }
+  if (Getbalance() < json.cpc) {
+    return "⏸ *Paused*: budget reached or out of funds."
+  }
+  return "Enabled ✅"
+}
+

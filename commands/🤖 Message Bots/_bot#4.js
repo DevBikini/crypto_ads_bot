@@ -9,10 +9,10 @@
   aliases: 
 CMD*/
 
-let bot_name = options.name
-let bot_url = options.url
-let bot_title = options.title
-let min_cpc = Bot.getProperty("admin_cpc_bot")
+var bot_name = options.name
+var bot_url = options.url
+var bot_title = options.title
+var min_cpc = Bot.getProperty("admin_cpc_bot")
 var cur = Bot.getProperty("admin_currency")
 Bot.sendMessage(
   "*What is the most you want to pay per click?*\n\nMinimum Cost Per Click (CPC): *" +

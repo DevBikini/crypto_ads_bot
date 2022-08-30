@@ -4,7 +4,10 @@
   need_reply: true
   auto_retry_time: 
   folder: 👁 Watch Ads
-  answer: 
+
+  <<ANSWER
+
+  ANSWER
   keyboard: 
   aliases: 
 CMD*/

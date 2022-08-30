@@ -30,7 +30,7 @@ if (task) {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
   return
 }
-if (json.cpc < Getbalance().value()) {
+if (json.cpc < Getbalance(json).value()) {
   var u_balance = Libs.ResourcesLib.userRes("payout")
   //user add balance
   u_balance.add(+fee)
@@ -52,7 +52,7 @@ if (json.cpc < Getbalance().value()) {
   }
   User.setProperty("User-" + any + "", "done", "string")
   //owner balance remove
-  Getbalance().add(-json.cpc)
+  Getbalance(json).add(-json.cpc)
   var status = GetStatus(json)
   var add = Bot.getProperty("all_in_ads", { list: {} })
   add.list[any] = {
@@ -79,7 +79,7 @@ function GetStatus(json) {
   if (json.clicks + 2 > json.total) {
     return "Disabled 🚫"
   }
-  if (json.cpc > Getbalance().value()) {
+  if (json.cpc > Getbalance(json).value()) {
     return "⏸ *Paused*: budget reached or out of funds."
   }
   if (json.status == "Disabled 🚫") {
@@ -88,7 +88,7 @@ function GetStatus(json) {
   return "Enabled ✅"
 }
 //balance
-function Getbalance() {
+function Getbalance(json) {
   if (!balance.value()) {
     return payout
   }

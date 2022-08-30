@@ -83,7 +83,7 @@ function GettingAd(number_ads, promotion) {
   }
   if (promotion == "Post views 📃") {
     var cur = Bot.getProperty("admin_currency")
-    if (!canRun()) {
+    if (!canRunMe()) {
       return
     }
     User.setProperty("last_run_at" + number_ads, Date.now(), "integer")
@@ -128,12 +128,12 @@ function EditingAd(number_ads, promotion) {
   var json = ads.list[number_ads]
   var cur = Bot.getProperty("admin_currency")
   if (promotion == "Bot 🤖") {
-    var sts = GetStatus(json).sts
-    var cdm = GetStatus(json).cdm
+    var sts = GetStatus_ko(json,"bot")
+    var cdm = GetStatus_ko(json,"bot")
     var button = [
       [
         { text: "✏️ Edit", callback_data: "/edit bot " + json.ads },
-        { text: sts, callback_data: cdm }
+        { text: sts.sts, callback_data: cdm.cdm }
       ]
     ]
     var text =
@@ -173,8 +173,8 @@ function EditingAd(number_ads, promotion) {
     return
   }
   if (promotion == "Link URL 🔗") {
-    var sts1 = GetStatus(json).sts
-    var cdm1 = GetStatus(json).cdm
+    var sts1 = GetStatus_ko(json,"visit").sts
+    var cdm1 = GetStatus_ko(json,"visit").cdm
     var button1 = [
       [
         { text: "✏️ Edit", callback_data: "/edit visit " + json.ads },
@@ -216,8 +216,8 @@ function EditingAd(number_ads, promotion) {
     return
   }
   if (promotion == "Channel / Group 📣") {
-    var sts2 = GetStatus(json).sts
-    var cdm2 = GetStatus(json).cdm
+    var sts2 = GetStatus_ko(json,"join").sts
+    var cdm2 = GetStatus_ko(json,"join").cdm
     var button2 = [
       [
         { text: "✏️ Edit", callback_data: "/edit join " + json.ads },
@@ -261,8 +261,8 @@ function EditingAd(number_ads, promotion) {
     return
   }
   if (promotion == "Post views 📃") {
-    var sts3 = GetStatus(json).sts
-    var cdm3 = GetStatus(json).cdm
+    var sts3 = GetStatus_ko(json, "view").sts
+    var cdm3 = GetStatus_ko(json, "view").cdm
     var button3 = [
       [
         { text: "✏️ Edit", callback_data: "/edit view " + json.ads },
@@ -303,7 +303,7 @@ function EditingAd(number_ads, promotion) {
   }
 }
 //function
-function canRun() {
+function canRunMe() {
   var last_run_at = User.getProperty("last_run_at" + number_ads)
   if (!last_run_at) {
     return true
@@ -321,10 +321,10 @@ function canRun() {
   return true
 }
 //get status
-function GetStatus(json) {
+function GetStatus_ko(json, name) {
   if (json.status == "Enabled ✅") {
-    return { sts: "Disable 🚫", cdm: "/Disabled bot " + json.ads }
+    return { sts: "Disable 🚫", cdm: "/Disabled " + name + " " + json.ads }
   }
-  return { sts: "Enable ✅", cdm: "/Enabled bot " + json.ads }
+  return { sts: "Enable ✅", cdm: "/Enabled " + name + " " + json.ads }
 }
 

@@ -9,7 +9,7 @@
   aliases: 
 CMD*/
 
-if (!params | !options) {
+if (!params && !options) {
   return
 }
 if (request.data) {
@@ -31,7 +31,7 @@ if (sec | (json.clicks > json.total) | (json.status == "Disabled 🚫")) {
   })
   return
 }
-if (json.cpc < Getbalance().value()) {
+if (json.cpc < Getbalance(json).value()) {
   var checking = options.result.status
   if (
     (checking == "member") |
@@ -67,7 +67,7 @@ if (json.cpc < Getbalance().value()) {
     }
     User.setProperty("User-" + params + "", "done", "string")
     //owner remove balance
-    Getbalance().add(-json.cpc)
+    Getbalance(json).add(-json.cpc)
     Bot.runCommand("/join")
     var status = Get_status(json)
     var add = Bot.getProperty("all_in_ads", { list: {} })
@@ -123,7 +123,7 @@ if (json.cpc < Getbalance().value()) {
   })
 }
 //function
-function Getbalance() {
+function Getbalance(json) {
   if (!balance.value()) {
     return payout
   }
@@ -137,7 +137,7 @@ function Get_status(json) {
   if (json.clicks + 2 > json.total) {
     return "Disabled 🚫"
   }
-  if (json.cpc > Getbalance().value()) {
+  if (json.cpc > Getbalance(json).value()) {
     return "⏸ *Paused*: budget reached or out of funds."
   }
   if (json.status == "Disabled 🚫") {

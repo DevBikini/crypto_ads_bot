@@ -10,7 +10,25 @@
 CMD*/
 
 if (request) {
+  if (message.split("_@")[0] == "/post") {
+    var channel = Bot.getProperty("ad_channel", { list: {} })
+    var chn = "@" + message.split("_@")[1]
+    var min_price = channel.list[chn].price
+    var balance = Libs.ResourcesLib.userRes("balance")
+    var payout = Libs.ResourcesLib.userRes("payout")
+    var bal = Getbalance(payout, balance, min_price)
+    if (bal.value() < min_price) {
+      Bot.sendMessage("You dont have balance")
+      return
+    }
+    return
+  }
+  if (message.split("_@")[0] == "/report") {
+    Bot.sendMessage("Report send to the administration.")
+    return
+  }
   var forward = User.getProperty("forward")
+  //forward bot
   if (forward == "forward-bot") {
     if (!request.forward_from || request.forward_from.is_bot == "false") {
       Bot.sendMessage("‼️* This is not forward from bot message*")
@@ -75,7 +93,7 @@ if (request) {
       Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
       return
     }
-    if (json.cpc < Getbalance().value()) {
+    if (json.cpc < Getbalance(payout, balance, json.cpc).value()) {
       var botta = request.forward_from.username
       if (botta !== json.name) {
         Bot.sendMessage("‼️* This is not forward from bot message*")
@@ -85,7 +103,7 @@ if (request) {
       var u_balance = Libs.ResourcesLib.userRes("payout")
       u_balance.add(+fee)
       //owner remove balance
-      Getbalance().add(-json.cpc)
+      Getbalance(payout, balance, json.cpc).add(-json.cpc)
       Api.deleteMessage({
         message_id: dol
       })
@@ -128,11 +146,11 @@ if (request) {
   }
 }
 //function
-function Getbalance() {
+function Getbalance(payout, balance, cpc) {
   if (!balance.value()) {
     return payout
   }
-  if (balance.value() < json.cpc) {
+  if (balance.value() < cpc) {
     return payout
   }
 
@@ -153,7 +171,7 @@ function Getstatus(json) {
   if (json.clicks + 2 > json.total) {
     return "Disabled 🚫"
   }
-  if (json.cpc > Getbalance().value()) {
+  if (json.cpc > Getbalance(payout, balance, cpc).value()) {
     return "⏸ *Paused*: budget reached or out of funds."
   }
   if (json.status == "Disabled 🚫") {
@@ -162,4 +180,3 @@ function Getstatus(json) {
     return "Enabled ✅"
   }
 }
-

@@ -4,7 +4,10 @@
   need_reply: true
   auto_retry_time: 
   folder: 👁 Watch Ads
-  answer: 
+
+  <<ANSWER
+
+  ANSWER
   keyboard: 
   aliases: 
 CMD*/
@@ -29,7 +32,7 @@ if (message.includes("-") | !isNumeric(message) | (message < budgets)) {
   })
   return
 }
-if (message > Getbalance() + budgets) {
+if (message > Getbalance() + 0.001) {
   Bot.sendKeyboard(
     "➕ Deposit,🏠 Menu",
     "❌ You do not own enough " +

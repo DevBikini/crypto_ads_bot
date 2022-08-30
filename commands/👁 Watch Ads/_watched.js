@@ -10,9 +10,6 @@
 CMD*/
 
 if (!options) {
-  Bot.sendMessage(
-    "That is not a recognized command.\n\nUse the /help command to see all my commands."
-  )
   return
 }
 var any = options.ad
@@ -32,7 +29,7 @@ if (include) {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
   return
 }
-if (json.cpc < Getbalance().value()) {
+if (json.cpc < Getbalance(json).value()) {
   var u_balance = Libs.ResourcesLib.userRes("payout")
   u_balance.add(+fee)
   Bot.sendMessage("✅* Task Completed*!\nYou earned: " + fee + " " + cur)
@@ -48,7 +45,7 @@ if (json.cpc < Getbalance().value()) {
   }
   User.setProperty("User-" + any, "done", "string")
   //owner remove balance
-  Getbalance().add(-json.cpc)
+  Getbalance(json).add(-json.cpc)
   Bot.runCommand("/view")
   var status = Get_status(json)
   var add = Bot.getProperty("all_in_ads", { list: {} })
@@ -71,7 +68,7 @@ if (json.cpc < Getbalance().value()) {
   Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
 }
 //function
-function Getbalance() {
+function Getbalance(json) {
   if (!balance.value()) {
     return payout
   }
@@ -85,7 +82,7 @@ function Get_status(json) {
   if (json.clicks + 2 > json.total) {
     return "Disabled 🚫"
   }
-  if (json.cpc > Getbalance().value()) {
+  if (json.cpc > Getbalance(json).value()) {
     return "⏸ *Paused*: budget reached or out of funds."
   }
   if (json.status == "Disabled 🚫") {

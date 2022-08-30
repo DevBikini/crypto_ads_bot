@@ -44,16 +44,6 @@ if (params == 2) {
   return
 }
 if (params == 3) {
-  if (!canRun()) {
-    return
-  }
-  User.setProperty("last_run_at_daily", Date.now(), "integer")
-
-  payout.add(+0.0005)
-  Bot.sendMessage("You earned *0.0005 USD* for task earn!")
-  return
-}
-//function
 function canRun() {
   var last_run_at = User.getProperty("last_run_at_daily")
   if (!last_run_at) {
@@ -76,4 +66,13 @@ function canRun() {
     return
   }
   return true
+}
+  if (!canRun(request.id)) {
+    return
+  }
+  User.setProperty("last_run_at_daily", Date.now(), "integer")
+
+  payout.add(+0.0005)
+  Bot.sendMessage("You earned *0.0005 USD* for task earn!")
+  return
 }

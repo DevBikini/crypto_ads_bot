@@ -29,7 +29,7 @@ if (include) {
   })
   return
 }
-if (message > Getbalance() + budgets) {
+if (message > Getbalance() + 0.001) {
   Bot.sendKeyboard(
     "➕ Deposit,🏠 Menu",
     "❌ You do not own enough " +

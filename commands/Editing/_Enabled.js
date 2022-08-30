@@ -31,7 +31,7 @@ var node = number_click.toFixed(2)
 var total_click = GetClicks()
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
-var status = GetStatus(json)
+var status = Getstatus(json)
 if (same == "bot") {
   var button = [
     [
@@ -259,7 +259,7 @@ if (same == "view") {
   Bot.setProperty("all_in_ads", add, "json")
 }
 //function
-function Getbalance() {
+function Getbalance(json) {
   if (!balance.value()) {
     return payout.value()
   }
@@ -276,11 +276,11 @@ function GetClicks() {
   return number_click
 }
 //get status
-function GetStatus(json) {
+function Getstatus(json) {
   if (json.clicks > json.total) {
     return "Disabled 🚫"
   }
-  if (Getbalance() < json.cpc) {
+  if (Getbalance(json) < json.cpc) {
     return "⏸ *Paused*: budget reached or out of funds."
   }
   return "Enabled ✅"

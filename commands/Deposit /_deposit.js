@@ -3,7 +3,7 @@
   help: 
   need_reply: 
   auto_retry_time: 
-  folder: 
+  folder: Deposit 
   answer: 
   keyboard: 
   aliases: 
@@ -17,7 +17,7 @@ if (!params) {
     reply_markup: {
       inline_keyboard: [
         [
-          {
+          /*{
             text: "LTC",
             callback_data: "/deposit LTC"
           },
@@ -30,7 +30,7 @@ if (!params) {
           {
             text: "DGB",
             callback_data: "/deposit DGB"
-          },
+          },*/
           {
             text: "TRX",
             callback_data: "/deposit TRX"

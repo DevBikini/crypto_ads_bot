@@ -12,7 +12,7 @@ CMD*/
 var channel = Bot.getProperty("ad_channel", { list: {} })
 if (!channel) {
   Bot.sendKeyboard(
-    "❇️ Advertise Channel\n➕ Add Channel,📊 My channel\n🏠 Menu",
+    "❇️ Advertise Channel\n➕ Add Channel,➕ Add Text Post\n📊 My channel,📊 My Text Post\n🏠 Menu",
     "🔔 *Advertise your ad in a channel*\n\n*Not found*!"
   )
   return
@@ -42,7 +42,7 @@ if (channel_list.split("\n\n")[11]) {
   var button = [[{ text: "Next", callback_data: "/nextt 11 20" }]]
 }
 Bot.sendKeyboard(
-  "❇️ Advertise Channel\n➕ Add Channel,📊 My channel\n🏠 Menu",
+  "❇️ Advertise Channel\n➕ Add Channel,➕ Add Text Post\n📊 My channel,📊 My Text Post\n🏠 Menu",
   "*🔔 Advertise your ad in a channel*"
 )
 Api.sendMessage({

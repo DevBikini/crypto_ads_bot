@@ -10,27 +10,47 @@
 CMD*/
 
 if (request) {
-  if (message.split("_@")[0] == "/post") {
+  if (message && message.split("_@")[0] == "/post") {
     var channel = Bot.getProperty("ad_channel", { list: {} })
     var chn = "@" + message.split("_@")[1]
     var min_price = channel.list[chn].price
     var balance = Libs.ResourcesLib.userRes("balance")
     var payout = Libs.ResourcesLib.userRes("payout")
     var bal = Getbalance(payout, balance, min_price)
-    if (bal.value() < min_price) {
-      Bot.sendMessage("You dont have balance")
+    var my_text = User.getProperty("my_text")
+    if (!my_text) {
+Bot.sendMessage("❌ Set Your Text Post")
       return
     }
+    if (bal.value() < min_price) {
+      Bot.sendMessage("You dont have balance to pay the amount")
+      return
+    }
+    HTTP.get({
+      url:
+        "https://api.telegram.org/bot" +
+        bot.token +
+        "/getChatMember?chat_id=" +
+        chn +
+        "&user_id=" +
+        bot.token,
+      success: "/checkAC " + message.split("_@")[1]
+    })
+    //post here
     return
   }
-  if (message.split("_@")[0] == "/report") {
+  if (message && message.split("_@")[0] == "/report") {
     Bot.sendMessage("Report send to the administration.")
+    Bot.sendMessageToChatWithId(
+      2110220740,
+      "Report! *@" + message.split("_@")[1] + "*"
+    )
     return
   }
   var forward = User.getProperty("forward")
   //forward bot
   if (forward == "forward-bot") {
-    if (!request.forward_from || request.forward_from.is_bot == "false") {
+    if (!request.forward_from && request.forward_from.is_bot == "false") {
       Bot.sendMessage("‼️* This is not forward from bot message*")
       return
     }
@@ -75,7 +95,7 @@ if (request) {
   }
   //second
   if (forward) {
-    if (!request.forward_from || request.forward_from.is_bot == "false") {
+    if (!request.forward_from && request.forward_from.is_bot == "false") {
       Bot.sendMessage("‼️* This is not forward from bot message*")
       return
     }

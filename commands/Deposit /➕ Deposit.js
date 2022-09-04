@@ -3,7 +3,7 @@
   help: 
   need_reply: 
   auto_retry_time: 
-  folder: 
+  folder: Deposit 
   answer: 
   keyboard: 
   aliases: /deposit
@@ -16,7 +16,7 @@ Api.sendMessage({
   reply_markup: {
     inline_keyboard: [
       [
-        {
+        /*{
           text: "LTC",
           callback_data: "/deposit LTC"
         },
@@ -29,7 +29,7 @@ Api.sendMessage({
         {
           text: "DGB",
           callback_data: "/deposit DGB"
-        },
+        },*/
         {
           text: "TRX",
           callback_data: "/deposit TRX"

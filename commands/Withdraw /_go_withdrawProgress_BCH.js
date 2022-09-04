@@ -1,9 +1,9 @@
 /*CMD
-  command: /go_withdrawProgress_DGB
+  command: /go_withdrawProgress_BCH
   help: 
   need_reply: true
   auto_retry_time: 
-  folder: 
+  folder: Withdraw 
   answer: 
   keyboard: 
   aliases: 
@@ -16,7 +16,7 @@ var balance = Libs.ResourcesLib.userRes("payout")
 var amount = options.amount
 balance.add(-options.amo)
 Libs.CryptoAdGateWayBot.Withdraw({
-  currency: "DGB",
+  currency: "BCH",
   amount: amount,
   address: message,
   user: user.id,

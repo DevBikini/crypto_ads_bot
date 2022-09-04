@@ -3,7 +3,7 @@
   help: 
   need_reply: true
   auto_retry_time: 
-  folder: 
+  folder: Withdraw 
   answer: 
   keyboard: 
   aliases: 
@@ -14,7 +14,7 @@ if (!options) {
 }
 var cur = Bot.getProperty("admin_currency")
 var amount = message
-var min = 0.06
+var min = 0.33
 var balance = Libs.ResourcesLib.userRes("payout")
 if (amount < min) {
   Bot.sendMessage("_❌ Minimum withdraw " + min + "_")

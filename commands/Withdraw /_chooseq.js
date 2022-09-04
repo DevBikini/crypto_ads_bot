@@ -3,14 +3,14 @@
   help: 
   need_reply: true
   auto_retry_time: 
-  folder: 
+  folder: Withdraw 
   answer: 
   keyboard: 
   aliases: 
 CMD*/
 
 var cur = Bot.getProperty("admin_currency")
-var min = 0.06
+var min = 0.33
 var balance = Libs.ResourcesLib.userRes("payout")
 function Message() {
   Bot.sendKeyboard(

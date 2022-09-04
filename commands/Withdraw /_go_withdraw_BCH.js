@@ -1,9 +1,9 @@
 /*CMD
-  command: /go_withdraw_LTC
+  command: /go_withdraw_BCH
   help: 
   need_reply: true
   auto_retry_time: 
-  folder: 
+  folder: Withdraw 
   answer: 
   keyboard: 
   aliases: 
@@ -29,14 +29,15 @@ if (amount > balance.value()) {
 var ltc = CurrencyQuote.convert({
   amount: parseFloat(amount),
   from: "USD",
-  to: "LTC"
+  to: "BCH"
 })
 Bot.sendMessage(
   "💰 Amount to receive: *" +
     ltc.toFixed(10) +
-    " LTC*\n\n➡ Send now your *LTC address to withdraw*:"
+    " BCH*\n\n➡ Send now your *BCH address to withdraw*:"
 )
 Bot.run({
-  command: "/go_withdrawProgress_LTC",
+  command: "/go_withdrawProgress_BCH",
   options: { amount: ltc.toFixed(10), amo: amount }
 })
+

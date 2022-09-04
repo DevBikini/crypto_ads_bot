@@ -1,9 +1,9 @@
 /*CMD
-  command: /go_withdrawProgress_BCH
+  command: /go_withdrawProgress_TRX
   help: 
   need_reply: true
   auto_retry_time: 
-  folder: 
+  folder: Withdraw 
   answer: 
   keyboard: 
   aliases: 
@@ -16,10 +16,9 @@ var balance = Libs.ResourcesLib.userRes("payout")
 var amount = options.amount
 balance.add(-options.amo)
 Libs.CryptoAdGateWayBot.Withdraw({
-  currency: "BCH",
+  currency: "TRX",
   amount: amount,
   address: message,
   user: user.id,
   success: "/notifyWithdraw"
 })
-

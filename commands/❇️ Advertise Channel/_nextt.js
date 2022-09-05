@@ -10,9 +10,9 @@
 CMD*/
 
 var mps = params.split(" ")
-var no1 = mps[0]
-var no2 = mps[1]
-var hk = no1 + 0
+var number1 = mps[0]
+var number2 = mps[1]
+var add_number = number1 + 0
 var channel = Bot.getProperty("ad_channel", { list: {} })
 var channel_list = ""
 for (var index in channel.list) {
@@ -28,15 +28,15 @@ for (var index in channel.list) {
     channel.list[index].channel +
     "\n\n"
   var all = ""
-  for (var ind = no1; ind < no2; ind++) {
+  for (var ind = number1; ind < number2; ind++) {
     var add = channel_list.split("\n\n")[ind]
     if (add) {
       var all = all + add + "\n\n"
     }
   }
 }
-if (channel_list.split("\n\n")[no2]) {
-  var button = [[{ text: "Next", callback_data: "/nextt " + hk + " " + no2 }]]
+if (channel_list.split("\n\n")[number2]) {
+  var button = [[{ text: "Next", callback_data: "/nextt " + add_number + " " + number2 }]]
 } else {
   var button = [[{ text: "Back", callback_data: "/nextt 1 10" }]]
 }

@@ -12,7 +12,8 @@ CMD*/
 var mps = params.split(" ")
 var number1 = mps[0]
 var number2 = mps[1]
-var add_number = number1 + 0
+var nx1 = number1 + 9
+var nx2 = number2 + 10
 var channel = Bot.getProperty("ad_channel", { list: {} })
 var channel_list = ""
 for (var index in channel.list) {
@@ -36,13 +37,13 @@ for (var index in channel.list) {
   }
 }
 if (channel_list.split("\n\n")[number2]) {
-  var button = [[{ text: "Next", callback_data: "/nextt " + add_number + " " + number2 }]]
+  var button = [[{ text: "Next", callback_data: "/nextt " + nx1 + " " + nx2 }]]
 } else {
   var button = [[{ text: "Back", callback_data: "/nextt 1 10" }]]
 }
-Api.sendMessage({
+Api.editMessageText({
+  message_id: request.message.message_id,
   text: "• List of channel\n\n" + [all],
   parse_mode: "html",
   reply_markup: { inline_keyboard: button }
 })
-

@@ -23,9 +23,9 @@ if (params == 1) {
     })
     return
   }
-  payout.add(+0.005)
+  payout.add(+0.007)
   dudu.add(-10)
-  Bot.sendMessage("You earned *0.005 USD* for task earn!")
+  Bot.sendMessage("You earned *0.007 USD* for task earn!")
   return
 }
 if (params == 2) {
@@ -38,9 +38,9 @@ if (params == 2) {
     })
     return
   }
-  payout.add(+0.001)
+  payout.add(+0.0014)
   dede.add(-5)
-  Bot.sendMessage("You earned *0.001 USD* for task earn!")
+  Bot.sendMessage("You earned *0.0014 USD* for task earn!")
   return
 }
 if (params == 3) {
@@ -72,7 +72,7 @@ function canRun() {
   }
   User.setProperty("last_run_at_daily", Date.now(), "integer")
 
-  payout.add(+0.0005)
-  Bot.sendMessage("You earned *0.0005 USD* for task earn!")
+  payout.add(+0.0007)
+  Bot.sendMessage("You earned *0.0007 USD* for task earn!")
   return
 }

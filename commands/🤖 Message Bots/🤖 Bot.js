@@ -10,7 +10,7 @@
 -> Open the bot that you want to promote.
 -> Select any messages from the bot and forward it here.
   ANSWER
-  keyboard: 🏠 Menu
+  keyboard: 🔙 back
   aliases: 
 CMD*/
 

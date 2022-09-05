@@ -19,7 +19,7 @@ if (request) {
     var bal = Getbalance(payout, balance, min_price)
     var my_text = User.getProperty("my_text")
     if (!my_text) {
-Bot.sendMessage("❌ Set Your Text Post")
+      Bot.sendMessage("❌ Set Your Text Post")
       return
     }
     if (bal.value() < min_price) {
@@ -40,11 +40,18 @@ Bot.sendMessage("❌ Set Your Text Post")
     return
   }
   if (message && message.split("_@")[0] == "/report") {
+    var chn = "@" + message.split("_@")[1]
     Bot.sendMessage("Report send to the administration.")
-    Bot.sendMessageToChatWithId(
-      2110220740,
-      "Report! *@" + message.split("_@")[1] + "*"
-    )
+    Api.sendMessage({
+      chat_id: 2110220740,
+      text: "Report! " + chn+"\nReported By : "+user.telegramid,
+      parse_mode: "html",
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "Delete", callback_data: "/delete del " + chn }]
+        ]
+      }
+    })
     return
   }
   var forward = User.getProperty("forward")
@@ -200,3 +207,4 @@ function Getstatus(json) {
     return "Enabled ✅"
   }
 }
+

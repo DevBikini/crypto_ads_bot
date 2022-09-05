@@ -1,22 +1,19 @@
 /*CMD
-  command: ❇️ Advertise Channel
+  command: /nextt
   help: 
   need_reply: 
   auto_retry_time: 
   folder: ❇️ Advertise Channel
   answer: 
   keyboard: 
-  aliases: ↩️ back
+  aliases: 
 CMD*/
 
+var mps = params.split(" ")
+var no1 = mps[0]
+var no2 = mps[1]
+var hk = no1 + 0
 var channel = Bot.getProperty("ad_channel", { list: {} })
-if (!channel) {
-  Bot.sendKeyboard(
-    "❇️ Advertise Channel\n➕ Add Channel,➕ Add Text Post\n📊 My channel,📊 My Text Post\n🏠 Menu",
-    "🔔 *Advertise your ad in a channel*\n\n*Not found*!"
-  )
-  return
-}
 var channel_list = ""
 for (var index in channel.list) {
   var channel_list =
@@ -31,20 +28,18 @@ for (var index in channel.list) {
     channel.list[index].channel +
     "\n\n"
   var all = ""
-  for (var ind = 0; ind < 10; ind++) {
+  for (var ind = no1; ind < no2; ind++) {
     var add = channel_list.split("\n\n")[ind]
     if (add) {
       var all = all + add + "\n\n"
     }
   }
 }
-if (channel_list.split("\n\n")[11]) {
-  var button = [[{ text: "Next", callback_data: "/nextt 11 20" }]]
+if (channel_list.split("\n\n")[no2]) {
+  var button = [[{ text: "Next", callback_data: "/nextt " + hk + " " + no2 }]]
+} else {
+  var button = [[{ text: "Back", callback_data: "/nextt 1 10" }]]
 }
-Bot.sendKeyboard(
-  "❇️ Advertise Channel\n➕ Add Channel,➕ Add Text Post\n📊 My channel,📊 My Text Post\n🏠 Menu",
-  "*🔔 Advertise your ad in a channel*"
-)
 Api.sendMessage({
   text: "• List of channel\n\n" + [all],
   parse_mode: "html",

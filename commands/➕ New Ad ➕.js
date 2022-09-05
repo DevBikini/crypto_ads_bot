@@ -11,6 +11,6 @@
 Choose an option below...👇🏻
   ANSWER
   keyboard: 📣 Channel / Group,🤖 Bot\n📃 Post views,🔗 Link URL\n🏠 Menu
-  aliases: /newad
+  aliases: /newad, 🔙 back
 CMD*/
 

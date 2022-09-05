@@ -11,7 +11,7 @@ Please, add this bot to the channel administrators first. The bot needs "Invite 
 
 The bot will start sending members to your channel.
   ANSWER
-  keyboard: 🏠 Menu
+  keyboard: 🔙 back
   aliases: 
 CMD*/
 

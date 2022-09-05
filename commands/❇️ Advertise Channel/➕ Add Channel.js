@@ -11,7 +11,7 @@ Please, add this bot to the channel administrators first. The bot needs "Post me
 
 The bot will start sending post to your channel.
   ANSWER
-  keyboard: 🏠 Menu
+  keyboard: ↩️ Back
   aliases: 
 CMD*/
 

@@ -6,12 +6,19 @@
   folder: ❇️ Advertise Channel
 
   <<ANSWER
-➡️ *Enter Your Text Message*
-[Markdown](https://t.me/Crypto_Ad_Channel/25)
+➡️ *Forward Your Message Or Enter Your Text Message*
+
+This is use for broadcasting a channel.
   ANSWER
-  keyboard: 
+  keyboard: ↩️ Back
   aliases: 
 CMD*/
 
-User.setProperty("my_text", message, "string")
-Bot.sendKeyboard("🏠 Menu","Successfully Setuped Text Post.")
+var data = {
+  chat_id: request.chat.id,
+  from_chat_id: user.telegramid,
+  message_id: request.message_id
+}
+User.setProperty("my_text", data, "json")
+Bot.sendMessage("Successfully Setuped Text Post.")
+

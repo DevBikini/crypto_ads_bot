@@ -13,5 +13,15 @@ var my_text = User.getProperty("my_text")
 if (!my_text) {
   Bot.sendMessage("❌ Set Text Post")
 }
-Api.sendMessage({ text: my_text, parse_mode: "markdown" })
+HTTP.get({
+  url:
+    "https://api.telegram.org/bot" +
+    bot.token +
+    "/copyMessage?chat_id=" +
+    my_text.chat_id +
+    "&from_chat_id=" +
+    my_text.from_chat_id +
+    "&message_id=" +
+    my_text.message_id
+})
 

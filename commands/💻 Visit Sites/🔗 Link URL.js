@@ -14,7 +14,7 @@
 
 ➕ *Link Example*: https://yourwebsite?ref=12345
   ANSWER
-  keyboard: 🏠 Menu
+  keyboard: 🔙 back
   aliases: 
 CMD*/
 

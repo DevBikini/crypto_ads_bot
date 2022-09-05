@@ -9,7 +9,7 @@
 🔎* Send or forward now here the message you want to promote*.
 Users will be paid to watch the message for at least 15 seconds
   ANSWER
-  keyboard: 🏠 Menu
+  keyboard: 🔙 back
   aliases: 
 CMD*/
 

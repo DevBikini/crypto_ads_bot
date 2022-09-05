@@ -19,10 +19,10 @@ Bot.sendInlineKeyboard(
     ],
     [{ title: "3. Check", command: "/checking 3" }]
   ],
-  "🤑 *Task Earn* 🤑\n\n1️⃣ Earn *0.005 USD* by doing ShortLink Do 10 Task\n✅ *Complete*: " +
+  "🤑 *Task Earn* 🤑\n\n1️⃣ Earn *0.007 USD* by doing ShortLink Do 10 Task\n✅ *Complete*: " +
     dudu.value() +
-    "/10\n*_______________________________*\n2️⃣ Earn *0.001 USD* by doing Inviting friends family do task 5 referral.\n✅ *Complete*: " +
+    "/10\n*_______________________________*\n2️⃣ Earn *0.0014 USD* by doing Inviting friends family do task 5 referral.\n✅ *Complete*: " +
     dede.value() +
-    "/5\n*_______________________________*\n3️⃣ Earn *0.0005 USD* daily\n✅ *Complete*: 1/1\n*_______________________________*"
+    "/5\n*_______________________________*\n3️⃣ Earn *0.0007 USD* daily\n✅ *Complete*: 1/1\n*_______________________________*"
 )
 //0.003

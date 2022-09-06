@@ -42,8 +42,9 @@ if (request) {
   if (message && message.split("_@")[0] == "/report") {
     var chn = "@" + message.split("_@")[1]
     Bot.sendMessage("Report send to the administration.")
+var admin = Bot.getProperty("admin_admin")
     Api.sendMessage({
-      chat_id: 2110220740,
+      chat_id: admin,
       text: "Report! " + chn+"\nReported By : "+user.telegramid,
       parse_mode: "html",
       reply_markup: {

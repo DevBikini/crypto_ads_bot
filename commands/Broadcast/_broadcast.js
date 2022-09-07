@@ -13,11 +13,7 @@ var admin = Bot.getProperty("admin_admin")
 var data = Bot.getProperty("user")
 var msg = "[Test broadcast](https://t.me/Crypto_Ad_GroupChat)!"
 var no_broad = Bot.getProperty("broadcast#no")
-if (no_broad) {
-  var number1 = no_broad
-} else {
-  var number1 = 10
-}
+var number1 = Broadcast_number(no_broad)
 var number = 0
 if (admin == user.telegramid) {
   for (var index in data.list) {
@@ -62,3 +58,10 @@ if (number1 < number) {
 }
 Bot.setProperty("broadcast#no", 10, "string")
 Bot.sendMessage("Total : " + number1 + "/" + number)
+//function
+function Broadcast_number(no_broad) {
+  if (no_broad) {
+    return no_broad
+  }
+  return 10
+}

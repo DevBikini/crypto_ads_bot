@@ -14,22 +14,40 @@ var can_post = json.can_post_messages
 var admin = json.status
 var ch = params
 var data = Bot.getProperty("ad_channel", { list: {} })
+var my_text = User.getProperty("my_text")
 var gs = "@" + ch
 var owner = data.list[gs].owner
 var payout = Libs.ResourcesLib.anotherUserRes("payout", owner)
+var payouts = Libs.ResourcesLib.userRes("payout")
+var balance = Libs.ResourcesLib.userRes("balance")
 if (Getbalance(data).value() < data.list[gs].price) {
   Bot.sendMessage("You dont have balance to pay the amount")
   return
 }
-var payouts = Libs.ResourcesLib.userRes("payout")
-var balance = Libs.ResourcesLib.userRes("balance")
-var new_price = data.list[gs].price * 0.95
+var new_price = parseFloat(data.list[gs].price) * 0.9
 payout.add(+new_price)
-var price = data.list[gs].price + new_price
-GetBalance(data).add(-data.list[gs].price)
-var my_text = User.getProperty("my_text")
+var price = parseFloat(data.list[gs].earnings) + new_price
+Getbalance(data).add(-parseFloat(data.list[gs].price))
 if (can_post == true && admin == "administrator") {
-  Api.sendMessage({ chat_id: "@" + ch, text: my_text })
+  //set
+  data.list[gs] = {
+    channel: gs,
+    price: parseFloat(data.list[gs].price),
+    owner: owner,
+    earnings: price
+  }
+  Bot.setProperty("ad_channel", data, "json")
+  HTTP.get({
+    url:
+      "https://api.telegram.org/bot" +
+      bot.token +
+      "/copyMessage?chat_id=" +
+      gs +
+      "&from_chat_id=" +
+      my_text.from_chat_id +
+      "&message_id=" +
+      my_text.message_id
+  })
   Bot.sendMessage("*Successfully Broadcast* [Channel](t.me/" + ch + ")")
   return
 }
@@ -46,12 +64,4 @@ function Getbalance(data) {
   }
   return balance
 }
-//set
-data.list[gs] = {
-  channel: gs,
-  price: data.list[gs].price,
-  owner: owner,
-  earnings: price
-}
-Bot.setProperty("ad_channel", data, "json")
 

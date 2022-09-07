@@ -18,11 +18,11 @@ if (request.data) {
 var cur = Bot.getProperty("admin_currency")
 var ads = Bot.getProperty("all_in_ads")
 var json = ads.list[params]
-var sec = User.getProperty("User-" + json.ads)
+var sec = User.getProperty("User-" + params)
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
 var fee = json.cpc * 0.6
-if (sec | (json.clicks > json.total) | (json.status == "Disabled 🚫")) {
+if (sec || (json.clicks > json.total) || (json.status == "Disabled 🚫")) {
   //security ads
   Api.editMessageText({
     message_id: message_id,
@@ -68,7 +68,6 @@ if (json.cpc < Getbalance(json).value()) {
     User.setProperty("User-" + params + "", "done", "string")
     //owner remove balance
     Getbalance(json).add(-json.cpc)
-    Bot.runCommand("/join")
     var status = Get_status(json)
     var add = Bot.getProperty("all_in_ads", { list: {} })
     add.list[params] = {
@@ -145,4 +144,3 @@ function Get_status(json) {
   }
   return "Enabled ✅"
 }
-

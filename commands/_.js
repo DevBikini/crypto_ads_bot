@@ -42,10 +42,10 @@ if (request) {
   if (message && message.split("_@")[0] == "/report") {
     var chn = "@" + message.split("_@")[1]
     Bot.sendMessage("Report send to the administration.")
-var admin = Bot.getProperty("admin_admin")
+    var admin = Bot.getProperty("admin_admin")
     Api.sendMessage({
       chat_id: admin,
-      text: "Report! " + chn+"\nReported By : "+user.telegramid,
+      text: "Report! " + chn + "\nReported By : " + user.telegramid,
       parse_mode: "html",
       reply_markup: {
         inline_keyboard: [
@@ -116,7 +116,7 @@ var admin = Bot.getProperty("admin_admin")
     var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
     var sec = User.getProperty("User-" + json.ads)
     var fee = json.cpc * 0.6
-    if (sec | (json.clicks > json.total) | (json.status == "Disabled 🚫")) {
+    if (sec || json.clicks > json.total || json.status == "Disabled 🚫") {
       //security ads
       Bot.sendMessage("Sorry, That Task Is No Longer Valid. 😟")
       return
@@ -148,7 +148,6 @@ var admin = Bot.getProperty("admin_admin")
         referrerRes.add(+amount)
       }
       User.setProperty("User-" + json.ads, "done", "string")
-      Bot.runCommand("/bots")
       var status = Getstatus(json)
       var add = Bot.getProperty("all_in_ads", { list: {} })
       add.list[forward_co] = {

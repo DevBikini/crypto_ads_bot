@@ -9,13 +9,6 @@
   aliases: 
 CMD*/
 
-var json = JSON.parse(content)
-if (json.result.status == "left") {
-  Bot.sendMessage(
-    "❌ Make the bot *ADMIN* of your channel, with the rights to send Messages!"
-  )
-  return
-}
 if (options) {
   var status = options.result.status
   if (status == "creator") {
@@ -26,6 +19,13 @@ if (options) {
   } else {
     Bot.sendMessage("You must the creator of the channel!")
   }
+  return
+}
+var json = JSON.parse(content)
+if (json.result.status == "left") {
+  Bot.sendMessage(
+    "❌ Make the bot *ADMIN* of your channel, with the rights to send Messages!"
+  )
   return
 }
 var prms = params.split(" ")

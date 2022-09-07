@@ -46,7 +46,6 @@ if (json.cpc < Getbalance(json).value()) {
   User.setProperty("User-" + any, "done", "string")
   //owner remove balance
   Getbalance(json).add(-json.cpc)
-  Bot.runCommand("/view")
   var status = Get_status(json)
   var add = Bot.getProperty("all_in_ads", { list: {} })
   add.list[any] = {

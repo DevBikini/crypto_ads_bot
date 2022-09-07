@@ -50,7 +50,7 @@ if (json.cpc < Getbalance(json).value()) {
     //referral balance add
     referrerRes.add(+amount)
   }
-  User.setProperty("User-" + any + "", "done", "string")
+  User.setProperty("User-" + any, "done", "string")
   //owner balance remove
   Getbalance(json).add(-json.cpc)
   var status = GetStatus(json)

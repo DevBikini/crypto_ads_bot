@@ -13,7 +13,7 @@ if (!params) {
   return
 }
 var id = params.split("&")[0]
-var pr = params.split("&")[1]
+var promotion = params.split("&")[1]
 var nwh = params.split("&")[2]
 var include = id && pr && nwh
 if (!include) {
@@ -25,6 +25,6 @@ Bot.sendKeyboard(
 )
 Bot.run({
   command: "/kind_report",
-  options: { id: id, promotion: pr, nwh: nwh }
+  options: { id: id, promotion: promotion, nwh: nwh }
 })
 

@@ -16,9 +16,10 @@ if (options) {
       "➡️ *Enter the Price of your Channel per Post (Minimum 0.001 USD)*"
     )
     Bot.run({ command: "/add_channel_price", options: { channel: params } })
-  } else {
-    Bot.sendMessage("You must the creator of the channel!")
+    return
   }
+  Bot.sendMessage("You must the creator of the channel!")
+
   return
 }
 var json = JSON.parse(content)
@@ -34,3 +35,4 @@ Api.getChatMember({
   user_id: prms[2],
   on_result: "/add_channel_check " + prms[1]
 })
+

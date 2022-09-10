@@ -13,8 +13,8 @@ if (chat.chat_type != "private") {
   return
 }
 function doAtractedByUser(refUser) {
-  var dede = Libs.ResourcesLib.anotherUserRes("dede", refUser.telegramid)
-  dede.add(+1)
+  var have_new_ref_dede = Libs.ResourcesLib.anotherUserRes("dede", refUser.telegramid)
+  have_new_ref_dede.add(+1)
 }
 var trackOptions = {
   onAtractedByUser: doAtractedByUser

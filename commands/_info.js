@@ -20,3 +20,16 @@ var users = user.telegramid
 var data = Bot.getProperty("user")
 var json = data.list[users]
 Bot.inspect(json)
+
+if (params) {
+  var users = params
+  var data = Bot.getProperty("user")
+  var json = data.list[users]
+  Bot.inspect(json)
+  return
+}
+var users = user.telegramid
+var data = Bot.getProperty("user")
+var json = data.list[users]
+Bot.inspect(json)
+

@@ -19,7 +19,7 @@ if (admin == user.telegramid) {
   return
 }
 function adminLogin() {
-  var cur = Bot.getProperty("admin_currency")
+  var currency = Bot.getProperty("admin_currency")
   var cpc_bot = Bot.getProperty("admin_cpc_bot")
   var budget_bot = Bot.getProperty("admin_budget_bot")
   var cpc_visit = Bot.getProperty("admin_cpc_visit")
@@ -35,7 +35,7 @@ function adminLogin() {
       " " +
       [user.last_name] +
       "* Setup your admin panel\n\n\n⚙️ Your current Setup\n*_______________________*\n ▪️ Currency:\n*" +
-      cur +
+      currency +
       "\n_______________________*\n🤖 Message Bots\n\n▪️ Mini. CPC per Click in Bot ad\n*" +
       cpc_bot +
       "*\n▪️ Mini. Budget in Bot ad\n*" +

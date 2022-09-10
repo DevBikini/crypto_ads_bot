@@ -34,7 +34,7 @@ Bot.sendKeyboard(
     myads.value() +
     " / 50)"
 )
-let ads = Bot.getProperty("all_in_ads")
+var ads = Bot.getProperty("all_in_ads")
 if (!ads) {
   //no ads
   return

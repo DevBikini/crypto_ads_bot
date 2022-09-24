@@ -42,20 +42,20 @@ if (!params) {
 
   return
 }
-var currency = params
-var deposit = User.getProperty("wallets-" + currency)
+var cur = params
+var deposit = User.getProperty("wallets-" + cur)
 if (!deposit) {
   Libs.CryptoAdGateWayBot.Deposit({
-    currency: currency,
+    currency: cur,
     user: user.id,
-    success: "/notifyDeposit " + currency
+    success: "/notifyDeposit " + cur
   })
 } else {
-  var deposits = User.getProperty("wallets-" + currency)
+  var deposits = User.getProperty("wallets-" + cur)
   Bot.sendInlineKeyboard(
-    [[{ title: "🚀 Buy " + currency + " 🚀", url: "t.me/Dev_Bikini" }]],
+    [[{ title: "🚀 Buy " + cur + " 🚀", url: "t.me/Dev_Bikini" }]],
     "*This is your personal deposit address*. \n\n*" +
-      currency +
+      cur +
       " address*:\n`" +
       deposits +
       "`\n\n🕝 Transaction will be credited after 10 network confirmations."

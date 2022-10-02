@@ -34,7 +34,7 @@ var ads = Bot.getProperty("all_in_ads")
 if (!ads) {
   //no ads
   Bot.sendMessage(
-    "*‼️Aw snap! There are no more ads available*.\n\nPress /newad to create a new task\n\n🌐 [News](https://t.me/Crypto_Ad_Channel) [Group](https://t.me/Crypto_Ad_GroupChat)"
+    "*‼️Aw snap! There are no more ads available*.\n\nPress /newad to create a new task\n\n▶️ [Telegram News](https://t.me/Crypto_Ad_Channel) | [Telegram Group](https://t.me/Crypto_Ad_GroupChat)"
   )
   return
 }
@@ -93,3 +93,4 @@ function Checking() {
     //user can go task and earn
   }
 }
+

@@ -93,3 +93,4 @@ function Checking() {
     //user can go task and earn
   }
 }
+

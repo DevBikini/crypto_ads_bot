@@ -12,6 +12,9 @@ CMD*/
 if (request) {
   if (message && message.split("_@")[0] == "/post") {
     var channel = Bot.getProperty("ad_channel", { list: {} })
+    if (!channel.list[chn]) {
+      return
+    }
     var chn = "@" + message.split("_@")[1]
     var min_price = channel.list[chn].price
     var balance = Libs.ResourcesLib.userRes("balance")
@@ -207,3 +210,4 @@ function Getstatus(json) {
     return "Enabled ✅"
   }
 }
+

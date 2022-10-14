@@ -12,19 +12,15 @@ CMD*/
 if (!options) {
   return
 }
+var buttong =
+  "🤖 Message Bots,💻 Visit Sites,📣 Join Chats,👁 Watch Ads\n🔗 Shork Link,🤑 Task Earn,❇️ Advertise Channel\n💰 Balance,🙌🏻 Referrals,⚙️ Settings\n📊 My ads"
 var id = options.id
 var promotion = options.promotion
 if (message == "❌ Cancel") {
-  Bot.sendKeyboard(
-    "🤖 Message Bots,💻 Visit Sites,📣 Join Chats,💡 More\n💰 Balance,🙌🏻 Referrals,⚙️ Settings\n📊 My ads",
-    "Your report has been canceled."
-  )
+  Bot.sendKeyboard(buttong, "Your report has been canceled.")
   return
 }
-Bot.sendKeyboard(
-  "🤖 Message Bots,💻 Visit Sites,📣 Join Chats,💡 More\n💰 Balance,🙌🏻 Referrals,⚙️ Settings\n📊 My ads",
-  "Your report has been sent to the administration."
-)
+Bot.sendKeyboard(buttong, "Your report has been sent to the administration.")
 var json = {
   report: { message: message, task_id: id, user: user.telegramid },
   administration: { command: "/admin_inspect " + id + "&" + promotion }
@@ -49,7 +45,7 @@ if (admin) {
         [
           {
             text: "View Ads",
-            callback_data: "/admin_inspect " + id + "&" + promotion
+            callback_data: "/admin_inspect " + id
           }
         ],
         [

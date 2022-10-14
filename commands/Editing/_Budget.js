@@ -18,7 +18,15 @@ var see = options.data
 var number_ads = options.ads
 var budgets = Bot.getProperty("admin_budget_" + see)
 var cpc = Bot.getProperty("admin_cpc_" + see)
-if (message.includes("-") | !isNumeric(message) | (message < cpc)) {
+var payout = Libs.ResourcesLib.userRes("payout")
+var balance = Libs.ResourcesLib.userRes("balance")
+if (message > Getbalance()) {
+  Bot.sendMessage(
+    "❌ *Send please an amount greater or equal to* " + cpc + " " + cur
+  )
+  return
+}
+if (message.includes("-") || !isNumeric(message) || message < cpc) {
   Bot.sendMessage(
     "❌ *Send please an amount greater or equal to* " + cpc + " " + cur
   )
@@ -286,5 +294,14 @@ function GetClicks() {
     return node.split(".")[0]
   }
   return number_click
+}
+function Getbalance() {
+  if (!balance.value()) {
+    return payout.value()
+  }
+  if (balance.value() < budgets) {
+    return payout.value()
+  }
+  return balance.value()
 }
 

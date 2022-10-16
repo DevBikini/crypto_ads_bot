@@ -17,8 +17,10 @@ if (!channel) {
   )
   return
 }
+var number = 0
 var channel_list = ""
 for (var index in channel.list) {
+var number = number +1
   var channel_list =
     channel_list +
     "• Channel : " +
@@ -38,7 +40,9 @@ for (var index in channel.list) {
     }
   }
 }
-if (channel_list.split("\n\n")[11]) {
+if (number < 11) {
+  var button = []
+} else {
   var button = [[{ text: "Next", callback_data: "/nextt 11 20" }]]
 }
 Bot.sendKeyboard(
@@ -50,4 +54,3 @@ Api.sendMessage({
   parse_mode: "html",
   reply_markup: { inline_keyboard: button }
 })
-

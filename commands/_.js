@@ -206,8 +206,7 @@ function Getstatus(json) {
   }
   if (json.status == "Disabled 🚫") {
     return "Disabled 🚫"
-
-    return "Enabled ✅"
   }
+  return "Enabled ✅"
 }
 

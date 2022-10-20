@@ -124,7 +124,7 @@ function Getbalance() {
   if (balance.value() < min_budgets) {
     return payout.value()
   }
-  return balance.value()
+  return balance.value()+payout.value()
 }
 //validation.
 function validation() {

@@ -39,7 +39,9 @@ for (var index in channel.list) {
 if (channel_list.split("\n\n")[number2]) {
   var button = [[{ text: "Next", callback_data: "/nextt " + nx1 + " " + nx2 }]]
 } else {
-  var button = [[{ text: "Back", callback_data: "/nextt 1 10" }]]
+  var button = [
+    [{ text: "Back", callback_data: "/nextt " + number1 + " " + number2 }]
+  ]
 }
 Api.editMessageText({
   message_id: request.message.message_id,
@@ -47,4 +49,3 @@ Api.editMessageText({
   parse_mode: "html",
   reply_markup: { inline_keyboard: button }
 })
-

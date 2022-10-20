@@ -79,7 +79,7 @@ function Mybalance() {
   if (balance.value() < cpc) {
     return payout.value()
   }
-  return balance.value()+payout.value()
+  return balance.value()
 }
 //check #2
 function Checking() {

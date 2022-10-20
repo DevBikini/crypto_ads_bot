@@ -18,4 +18,3 @@ if (admin == user.telegramid) {
   GettingAd(json.ads, json.promotion)
   return
 }
-

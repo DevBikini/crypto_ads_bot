@@ -63,4 +63,3 @@ if (amount) {
   return
 }
 Bot.inspect(options)
-

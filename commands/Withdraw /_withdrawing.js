@@ -25,7 +25,7 @@ if (balance.value() < min) {
       min +
       " " +
       cur +
-      " in your available *balance* for payout!"
+      " in your *available balance* for payout!"
   )
   return
 }

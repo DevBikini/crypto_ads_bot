@@ -60,4 +60,7 @@ if (amount) {
     var toal = nwh + "\n\n" + history
     User.setProperty("history", toal, "string")
   }
+  return
 }
+Bot.inspect(options)
+

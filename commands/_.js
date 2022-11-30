@@ -202,11 +202,10 @@ function Getstatus(json) {
     return "Disabled 🚫"
   }
   if (json.cpc > Getbalance(payout, balance, cpc).value()) {
-    return "⏸ *Paused*: budget reached or out of funds."
+    return "⏸ <b>Paused</b>: budget reached or out of funds."
   }
   if (json.status == "Disabled 🚫") {
     return "Disabled 🚫"
   }
   return "Enabled ✅"
 }
-

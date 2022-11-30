@@ -64,9 +64,9 @@ if (params == 1) {
     var json = data.list[user.telegramid]
     var ip = json.user.Geotargeting.ip
     if (ip == "2nd") {
-      var amount = 0.00025
+      var amount = 0.0025
     } else {
-      var amount = 0.0005
+      var amount = 0.001
     }
     Bot.sendInlineKeyboard(
       [[{ title: "🚀 Go to short link 🚀", url: url }]],
@@ -133,9 +133,9 @@ if (params == 2) {
       User.setProperty("links2", link_true, "string")
       var ip = json.user.Geotargeting.ip
       if (ip == "2nd") {
-        var amount = 0.00025
+        var amount = 0.0025
       } else {
-        var amount = 0.0005
+        var amount = 0.001
       }
       Bot.sendInlineKeyboard(
         [[{ title: "🚀 Go to short link 🚀", url: link_true }]],
@@ -149,9 +149,9 @@ if (params == 2) {
   } else {
     var ip = json.user.Geotargeting.ip
     if (ip == "2nd") {
-      var amount = 0.00025
+      var amount = 0.0025
     } else {
-      var amount = 0.0005
+      var amount = 0.001
     }
     Bot.sendInlineKeyboard(
       [[{ title: "🚀 Go to short link 🚀", url: url }]],
@@ -212,9 +212,9 @@ if (params == 3) {
     var json = data.list[user.telegramid]
     var ip = json.user.Geotargeting.ip
     if (ip == "2nd") {
-      var amount = 0.00025
+      var amount = 0.0025
     } else {
-      var amount = 0.0005
+      var amount = 0.001
     }
     Bot.sendInlineKeyboard(
       [[{ title: "🚀 Go to short link 🚀", url: url }]],
@@ -276,9 +276,9 @@ if (params == 4) {
     var json = data.list[user.telegramid]
     var ip = json.user.Geotargeting.ip
     if (ip == "2nd") {
-      var amount = 0.00025
+      var amount = 0.0025
     } else {
-      var amount = 0.0005
+      var amount = 0.001
     }
     Bot.sendInlineKeyboard(
       [[{ title: "🚀 Go to short link 🚀", url: url }]],

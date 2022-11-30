@@ -47,7 +47,7 @@ if (ip == "2nd") {
       ]
     ],
     "💰 *Earn " +
-      0.00025 * 4 +
+      0.001 * 4 +
       " USD on short links*.\n\n*Short links list*. ⬇️"
   )
   return
@@ -63,5 +63,5 @@ Bot.sendInlineKeyboard(
       { title: "shrinkme", command: "/link 4" }
     ]
   ],
-  "💰 *Earn " + 0.0005 * 4 + " USD on short links*.\n\n*Short links list*. ⬇️"
+  "💰 *Earn " + 0.0025 * 4 + " USD on short links*.\n\n*Short links list*. ⬇️"
 )

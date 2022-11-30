@@ -94,7 +94,7 @@ if (see == "bot") {
   Api.editMessageText({
     message_id: message_id,
     text: text,
-    parse_mode: "Markdown",
+    parse_mode: "html",
     disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: button

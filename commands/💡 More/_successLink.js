@@ -27,8 +27,8 @@ if (http_status == "200") {
 //function
 function GetAmount() {
   if (ip == "2nd") {
-    return 0.00025
+    return 0.0025
   }
-  return 0.0005
+  return 0.001
 }
 

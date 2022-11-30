@@ -12,9 +12,9 @@ CMD*/
 var admin = Bot.getProperty("admin_admin")
 if (admin == user.telegramid) {
   var id = params
-  var index = Bot.getProperty("all_in_ads")
+  var index = Bot.getProperty("all_in_ads", { list: {} })
   var json = index.list[id]
-  //Bot.inspect(json)
-  GettingAd(json.ads, json.promotion)
+  Bot.inspect(json)
+  //GettingAd(json.ads, json.promotion)
   return
 }

@@ -9,16 +9,12 @@
   aliases: 
 CMD*/
 
-if (!options) {
-  return
-}
 var balance = Libs.ResourcesLib.userRes("payout")
 var amount = options.amount
 balance.add(-options.amo)
-Libs.CryptoAdGateWayBot.Withdraw({
-  currency: "TRX",
-  amount: amount,
-  address: message,
-  user: user.id,
-  success: "/notifyWithdraw"
+Bot.run({
+  command: "/GoProgress",
+  run_after: 1,
+  options: { amount: amount, address: message, currency: "TRX" }
 })
+

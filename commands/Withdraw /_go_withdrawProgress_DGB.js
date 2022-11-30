@@ -15,11 +15,8 @@ if (!options) {
 var balance = Libs.ResourcesLib.userRes("payout")
 var amount = options.amount
 balance.add(-options.amo)
-Libs.CryptoAdGateWayBot.Withdraw({
-  currency: "DGB",
-  amount: amount,
-  address: message,
-  user: user.id,
-  success: "/notifyWithdraw"
+Bot.run({
+  command: "/GoProgress",
+  run_after: 1,
+  options: { amount: amount, address: message, currency: "DGB" }
 })
-

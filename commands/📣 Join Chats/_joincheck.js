@@ -52,7 +52,7 @@ if (json.cpc < Getbalance(json).value()) {
     })
     Bot.run({
       command: "/chk_joinUser",
-      run_after: 1 * 60 * 60,
+      run_after: 24* 60 * 60,
       options: { ad: params, channel: json.name, user: user.telegramid }
     })
     //referral

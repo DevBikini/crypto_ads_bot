@@ -124,4 +124,3 @@ function validation() {
   }
   return number_click
 }
-

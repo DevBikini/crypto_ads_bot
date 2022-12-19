@@ -22,7 +22,7 @@ var sec = User.getProperty("User-" + params)
 var balance = Libs.ResourcesLib.anotherUserRes("balance", json.owner)
 var payout = Libs.ResourcesLib.anotherUserRes("payout", json.owner)
 var fee = json.cpc * 0.6
-if (sec || (json.clicks > json.total) || (json.status == "Disabled 🚫")) {
+if (sec || json.clicks > json.total || json.status == "Disabled 🚫") {
   //security ads
   Api.editMessageText({
     message_id: message_id,
@@ -52,7 +52,7 @@ if (json.cpc < Getbalance(json).value()) {
     })
     Bot.run({
       command: "/chk_joinUser",
-      run_after: 24* 60 * 60,
+      run_after: 24 * 60 * 60,
       options: { ad: params, channel: json.name, user: user.telegramid }
     })
     //referral

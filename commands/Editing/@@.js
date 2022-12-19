@@ -16,8 +16,8 @@ function GettingAd(number_ads, promotion) {
   if (promotion == "Bot 🤖") {
     Api.sendMessage({
       text:
-        json.title +
-        "\n\n" +
+        "<b>"+json.title +
+        "</b>\n\n" +
         json.description +
         "\n\n------------------------------------------------\n⚠️<i> You will be redirected to a third party telegram bot.</i>",
       disable_web_page_preview: true,
@@ -54,8 +54,8 @@ function GettingAd(number_ads, promotion) {
   if (promotion == "Channel / Group 📣") {
     Api.sendMessage({
       text:
-        json.title +
-        "\n\n" +
+        "<b>"+json.title +
+        "</b>\n\n" +
         json.description +
         "\n\n------------------------------------------------\n⚠️<i>You will be redirected to a third party telegram channel.</i>",
       disable_web_page_preview: true,

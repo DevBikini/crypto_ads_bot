@@ -44,4 +44,3 @@ Bot.sendMessage(
 )
 //user remove balance and also her referral balance
 //owner add balance from user leave a channel
-

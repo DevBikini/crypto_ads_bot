@@ -9,10 +9,11 @@
   aliases: 
 CMD*/
 
-if (request) {
-  if (message && message.split("_@")[0] == "/post") {
+if (request && message) {
+  if (message.split("_@")[0] == "/post") {
     var channel = Bot.getProperty("ad_channel", { list: {} })
-    if (!channel.list[chn]) {
+    var mmh = "@" + message.split("_@")[1]
+    if (!channel.list[mmh]) {
       return
     }
     var chn = "@" + message.split("_@")[1]
@@ -42,7 +43,7 @@ if (request) {
     //post here
     return
   }
-  if (message && message.split("_@")[0] == "/report") {
+  if (message.split("_@")[0] == "/report") {
     var chn = "@" + message.split("_@")[1]
     Bot.sendMessage("Report send to the administration.")
     var admin = Bot.getProperty("admin_admin")
@@ -52,7 +53,10 @@ if (request) {
       parse_mode: "html",
       reply_markup: {
         inline_keyboard: [
-          [{ text: "Delete", callback_data: "/delete del " + chn }]
+          [
+            { text: "Delete", callback_data: "/delete del " + chn },
+            { text: "Check", callback_data: "/checkerPr "+chn }
+          ]
         ]
       }
     })
@@ -209,3 +213,4 @@ function Getstatus(json) {
   }
   return "Enabled ✅"
 }
+

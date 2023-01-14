@@ -31,12 +31,12 @@ var button = [
 ]
 Api.sendMessage({
   text:
+    "<b>" +
     json.title +
-    "\n\n" +
+    "</b>\n\n" +
     json.description +
-    "\n\n------------------------------------------------\n⚠️_ You will be redirected to a third party website._",
+    "\n\n------------------------------------------------\n⚠️<i> You will be redirected to a third party website.</i>",
   reply_markup: { inline_keyboard: button },
   disable_web_page_preview: true,
-  parse_mode: "Markdown"
+  parse_mode: "html"
 })
-

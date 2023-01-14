@@ -48,7 +48,9 @@ if (can_post == true && admin == "administrator") {
       "&message_id=" +
       my_text.message_id
   })
-  Bot.sendMessage("*Successfully Broadcast* [Channel](t.me/" + ch + ")")
+  Bot.sendMessage("*Successfully Broadcast* [Channel](t.me/" + ch + ")", {
+    disable_web_page_preview: true
+  })
   return
 }
 Bot.sendMessage(

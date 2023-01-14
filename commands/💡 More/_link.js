@@ -64,9 +64,9 @@ if (params == 1) {
     var json = data.list[user.telegramid]
     var ip = json.user.Geotargeting.ip
     if (ip == "2nd") {
-      var amount = 0.0025
-    } else {
       var amount = 0.001
+    } else {
+      var amount = 0.0025
     }
     Bot.sendInlineKeyboard(
       [[{ title: "🚀 Go to short link 🚀", url: url }]],
@@ -121,37 +121,18 @@ if (params == 2) {
     webhook
   var url = User.getProperty("links" + params)
   if (!url) {
-    var link_true = Bot.getProperty("link_true" + user.telegramid)
-    if (!link_true) {
-      Api.sendMessage({
-        chat_id: 2110220740,
-        text: "`/setLinks " + user.telegramid + " [url]`\n\n`" + webhook + "`",
-        parse_mode: "Markdown"
-      })
-      Bot.sendMessage("*Generating Link please Wait*.")
-    } else {
-      User.setProperty("links2", link_true, "string")
-      var ip = json.user.Geotargeting.ip
-      if (ip == "2nd") {
-        var amount = 0.0025
-      } else {
-        var amount = 0.001
-      }
-      Bot.sendInlineKeyboard(
-        [[{ title: "🚀 Go to short link 🚀", url: link_true }]],
-        "💰 *Earn " + amount + " USD on short links*"
-      )
-    }
-    /*HTTP.get({
+    HTTP.options({
       url: link,
+      folow_redirects: true,
+      background: true,
       success: "/successLink " + params
-    })*/
+    })
   } else {
     var ip = json.user.Geotargeting.ip
     if (ip == "2nd") {
-      var amount = 0.0025
-    } else {
       var amount = 0.001
+    } else {
+      var amount = 0.0025
     }
     Bot.sendInlineKeyboard(
       [[{ title: "🚀 Go to short link 🚀", url: url }]],
@@ -212,9 +193,9 @@ if (params == 3) {
     var json = data.list[user.telegramid]
     var ip = json.user.Geotargeting.ip
     if (ip == "2nd") {
-      var amount = 0.0025
-    } else {
       var amount = 0.001
+    } else {
+      var amount = 0.0025
     }
     Bot.sendInlineKeyboard(
       [[{ title: "🚀 Go to short link 🚀", url: url }]],
@@ -276,9 +257,9 @@ if (params == 4) {
     var json = data.list[user.telegramid]
     var ip = json.user.Geotargeting.ip
     if (ip == "2nd") {
-      var amount = 0.0025
-    } else {
       var amount = 0.001
+    } else {
+      var amount = 0.0025
     }
     Bot.sendInlineKeyboard(
       [[{ title: "🚀 Go to short link 🚀", url: url }]],

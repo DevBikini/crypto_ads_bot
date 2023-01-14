@@ -18,9 +18,9 @@ var data = Bot.getProperty("user")
 var json = data.list[user.telegramid]
 var ip = json.user.Geotargeting.ip
 if (ip == "2nd") {
-  var amount = 0.0025
-} else {
   var amount = 0.001
+} else {
+  var amount = 0.0025
 }
 var daks = User.getProperty("links" + params)
 //1

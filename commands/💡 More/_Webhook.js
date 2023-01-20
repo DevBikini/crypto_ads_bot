@@ -47,6 +47,11 @@ add.list[user.telegramid] = {
   }
 }
 Bot.setProperty("user", add, "json")
-//set user notification 
-Bot.setProperty("notification_" + user.telegramid, "yes", "string")
-User.setProperty("notification_int", "", "string")
+//set user notification
+var notify = Libs.ResourcesLib.anotherChatRes("notify", "global")
+notify.add(+1)
+User.setProperty("MynumberN", notify.value(), "integers")
+var save_notify = Bot.getProperty("broadcast_notification", { list: {} })
+save_notify[notify.value()] = { notification: "true", user: user.telegramid }
+Bot.setProperty("broadcast_notification", save_notify, "json")
+

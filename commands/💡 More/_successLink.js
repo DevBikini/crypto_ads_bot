@@ -9,7 +9,7 @@
   aliases: 
 CMD*/
 
-/*if (http_status == "200") {
+if (http_status == "200") {
   var json = JSON.parse(content)
   var url = json.shortenedUrl
   var data = Bot.getProperty("user")
@@ -31,5 +31,3 @@ function GetAmount() {
   }
   return 0.0025
 }
-*/
-Bot.setProperty("76",content,"string")

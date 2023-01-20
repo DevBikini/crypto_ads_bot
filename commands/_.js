@@ -55,7 +55,7 @@ if (request && message) {
         inline_keyboard: [
           [
             { text: "Delete", callback_data: "/delete del " + chn },
-            { text: "Check", callback_data: "/checkerPr "+chn }
+            { text: "Check", callback_data: "/checkerPr " + chn }
           ]
         ]
       }
@@ -65,7 +65,7 @@ if (request && message) {
   var forward = User.getProperty("forward")
   //forward bot
   if (forward == "forward-bot") {
-    if (!request.forward_from && request.forward_from.is_bot == "false") {
+    if (!request.forward_from || request.forward_from.is_bot == "false") {
       Bot.sendMessage("‼️* This is not forward from bot message*")
       return
     }

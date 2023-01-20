@@ -1,7 +1,7 @@
 /*CMD
   command: ➕ Deposit
   help: 
-  need_reply: 
+  need_reply: false
   auto_retry_time: 
   folder: Deposit 
   answer: 
@@ -25,11 +25,11 @@ Api.sendMessage({
           callback_data: "/deposit BCH"
         }
       ],
-      [
+      [*/
         {
-          text: "DGB",
-          callback_data: "/deposit DGB"
-        },*/
+          text: "BTT",
+          callback_data: "/deposit BTT"
+        },
         {
           text: "TRX",
           callback_data: "/deposit TRX"

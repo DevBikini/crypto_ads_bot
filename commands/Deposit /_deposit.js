@@ -26,11 +26,11 @@ if (!params) {
             callback_data: "/deposit BCH"
           }
         ],
-        [
+        [*/
           {
-            text: "DGB",
-            callback_data: "/deposit DGB"
-          },*/
+            text: "BTT",
+            callback_data: "/deposit BTT"
+          },
           {
             text: "TRX",
             callback_data: "/deposit TRX"
@@ -61,3 +61,4 @@ if (!deposit) {
       "`\n\n🕝 Transaction will be credited after 10 network confirmations."
   )
 }
+

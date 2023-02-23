@@ -25,11 +25,9 @@ var number = number +1
     channel_list +
     "• Channel : " +
     channel.list[index].channel +
-    "\n• Price : <b>" +
+    "\n• Price per post : <code>" +
     channel.list[index].price +
-    " USD</b>\n• Post limit : <b>24 hours</b>\n• Post now : /post_" +
-    channel.list[index].channel +
-    "\n• Report : /report_" +
+    "</code> <b>USD</b>\n• Report : /report_" +
     channel.list[index].channel +
     "\n\n"
   var all = ""
@@ -50,7 +48,7 @@ Bot.sendKeyboard(
   "*🔔 Advertise your ad in a channel*"
 )
 Api.sendMessage({
-  text: "• List of channel\n\n" + [all],
+  text: "• <b>List of channel</b>\n\n" + [all],
   parse_mode: "html",
   reply_markup: { inline_keyboard: button }
 })

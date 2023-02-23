@@ -9,7 +9,7 @@
   aliases: 
 CMD*/
 
-var text = ""
+var text = "Hello test broadcast by admin\n\nTurn off notification /notification"
 var admin = Bot.getProperty("admin_admin")
 var notification = Bot.getProperty("broadcast_notification", { list: {} })
 //for admin only

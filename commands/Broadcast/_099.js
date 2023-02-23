@@ -22,4 +22,3 @@ Bot.sendMessage(
     "\nBGB done: " +
     no.value()
 )
-

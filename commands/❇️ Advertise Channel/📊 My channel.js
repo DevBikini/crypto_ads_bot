@@ -28,9 +28,9 @@ for (var index in channel.list) {
         num +
         "</b> - Advertise Channel ❇️\n\nChannel : " +
         channel.list[index].channel +
-        "\nPrice : <b>" +
+        "\nPrice per post: <b>" +
         channel.list[index].price +
-        " USD</b>\nPost limit : <b>24 hours</b>\nEarnings : <b>" +
+        " USD</b>\nEarnings : <b>" +
         channel.list[index].earnings +
         " USD</b>",
       reply_markup: {

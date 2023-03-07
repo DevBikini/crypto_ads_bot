@@ -62,7 +62,7 @@ if (json.cpc < Getbalance(json).value()) {
       "checking Twitter follower\nAds TW: " +
       json.link +
       "\nUser TW: " +
-      instagram,
+      twitter,
     reply_markup: {
       inline_keyboard: [
         [

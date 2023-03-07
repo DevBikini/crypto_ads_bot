@@ -9,12 +9,7 @@
   aliases: 
 CMD*/
 
-if (params) {
-//remove user notification 
-  Bot.setProperty("notification_" + params, "", "string")
-  return
-}
-//remove keyboard 
+//remove keyboard
 Api.sendMessage({
   text: "Keyboard Removed",
   reply_markup: { hide_keyboard: true }

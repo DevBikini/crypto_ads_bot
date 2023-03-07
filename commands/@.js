@@ -50,21 +50,23 @@ function TotalClick(data, length) {
   }
   return "1"
 }
-var myads = Libs.ResourcesLib.userRes("myads")
-var payout = Libs.ResourcesLib.userRes("payout")
-var balance = Libs.ResourcesLib.userRes("balance")
+var myads = GetResource("myads")
+var payout = GetResource("payout")
+var balance = GetResource("balance")
 var add = Bot.getProperty("user", { list: {} })
-if (add.list[user.telegramid]) {
-  var json = add.list[user.telegramid]
+var json = add.list[user.telegramid]
+if (json) {
+  var geotarget = json.user.Geotargeting.ip
+  var GeotargetcountryCode = json.user.Geotargeting.countryCode
   add.list[user.telegramid] = {
     user: {
-      name: json.user.username,
-      first_name: json.user.first_name,
-      last_name: json.user.last_name,
-      telegramid: json.user.telegramid,
+      name: user.username,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      telegramid: user.telegramid,
       Geotargeting: {
-        ip: json.user.Geotargeting.ip,
-        countryCode: json.user.Geotargeting.countryCode
+        ip: HaveData(geotarget),
+        countryCode: HaveData(GeotargetcountryCode)
       },
       info: {
         balance: balance.value() + payout.value(),
@@ -74,10 +76,20 @@ if (add.list[user.telegramid]) {
       }
     }
   }
-  Bot.setProperty("user", add, "json")
+ Bot.setProperty("user", add, "json")
+}
+function GetResource(name) {
+  return Libs.ResourcesLib.userRes(name)
+}
+function HaveData(data) {
+  if (data) {
+    return data
+  }
+  return "2nd"
 }
 function No_More_Ads() {
   return Bot.sendMessage(
     "*‼️Aw snap! There are no more ads available*.\n\nPress /newad to create a new task\n\n▶️ [Telegram News](https://t.me/Crypto_Ad_Channel) | [Telegram Group](https://t.me/Crypto_Ad_GroupChat)"
   )
 }
+

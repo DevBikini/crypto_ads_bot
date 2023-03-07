@@ -10,7 +10,7 @@
 
 Choose an option below...👇🏻
   ANSWER
-  keyboard: 📣 Channel / Group,🤖 Bot\n📃 Post views,🔗 Link URL\n🏠 Menu
+  keyboard: 📣 Channel / Group,🤖 Bot\n📃 Post views,🔗 Link URL\n🖼️ Instagram,💬Twitter\n🏠 Menu
   aliases: /newad, 🔙 back
 CMD*/
 

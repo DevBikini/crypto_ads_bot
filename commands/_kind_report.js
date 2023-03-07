@@ -13,7 +13,7 @@ if (!options) {
   return
 }
 var buttong =
-  "🤖 Message Bots,💻 Visit Sites,📣 Join Chats,👁 Watch Ads\n🔗 Shork Link,🤑 Task Earn,❇️ Advertise Channel\n💰 Balance,🙌🏻 Referrals,⚙️ Settings\n📊 My ads"
+  "🤖 Message Bots,💻 Visit Sites,📣 Join Chats,👁 Watch Ads\n🔗 Shork Link,🤑 Task Earn,❇️ Advertise Channel\nInstagram,Twitter\n💰 Balance,🙌🏻 Referrals,⚙️ Settings\n📊 My ads"
 var id = options.id
 var promotion = options.promotion
 if (message == "❌ Cancel") {

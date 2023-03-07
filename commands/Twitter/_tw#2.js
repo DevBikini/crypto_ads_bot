@@ -1,9 +1,9 @@
 /*CMD
-  command: /channel#5
+  command: /tw#2
   help: 
   need_reply: true
   auto_retry_time: 
-  folder: 📣 Join Chats
+  folder: Twitter
   answer: 
   keyboard: 
   aliases: 
@@ -12,19 +12,17 @@ CMD*/
 var balance = Libs.ResourcesLib.userRes("balance")
 var payout = Libs.ResourcesLib.userRes("payout")
 var cur = Bot.getProperty("admin_currency")
-var budgets = Bot.getProperty("admin_budget_join")
-var include = message.includes("-") | !isNumeric(message) | (budgets > message)
+var budgets = Bot.getProperty("admin_budget_twitter")
+var include = message.includes("-") | !isNumeric(message) | (message < budgets)
 if (include) {
   Bot.sendMessage(
     "❌ *Send please an amount greater or equal to* " + budgets + " " + cur
   )
   Bot.run({
-    command: "/channel#5",
+    command: "/tw#2",
     options: {
       url: options.url,
-      name: options.name,
-      title: options.title,
-      description: options.description,
+      tw: options.tw,
       cpc: options.cpc
     }
   })
@@ -50,19 +48,15 @@ var total_click = validation()
 Bot.sendInlineKeyboard(
   [
     [
-      { title: "✏️ Edit", command: "/edit join " + ads },
-      { title: "Disable 🚫", command: "/Disabled join " + ads }
+      { title: "✏️ Edit", command: "/edit twitter " + ads },
+      { title: "Disable 🚫", command: "/Disabled twitter " + ads }
     ]
   ],
   "*Campaign #" +
     ads +
-    "* - Channel / Group 📣\n\n*Title*: " +
-    options.title +
-    "\n*Description*: " +
-    options.description +
-    "\n\n*Channel*: *" +
-    options.name +
-    "\nURL*: *" +
+    "* - Twitter\n\n*Twitter*: " +
+    options.tw +
+    "\n*URL*: *" +
     options.url +
     "\nStatus*: Enabled ✅\n\n*Daily budget*: " +
     message +
@@ -81,9 +75,8 @@ Bot.sendInlineKeyboard(
 var add = Bot.getProperty("all_in_ads", { list: {} })
 add.list[ads] = {
   ads: ads,
-  name: options.name,
+  tw: options.tw,
   link: options.url,
-  title: options.title,
   description: options.description,
   cpc: options.cpc,
   budget: message,
@@ -91,15 +84,16 @@ add.list[ads] = {
   total: total_click,
   status: "Enabled ✅",
   owner: user.telegramid,
-  promotion: "Channel / Group 📣"
+  promotion: "Twitter"
 }
 Bot.setProperty("all_in_ads", add, "json")
+//send new task in group
 var myads = Libs.ResourcesLib.userRes("myads")
 myads.add(1)
 Api.sendMessage({
   chat_id: "@CryptoAdAlert",
   text:
-    "✅<b> New Ad Created</b>\n\nTask : 📣 Join Chats\nCPC : <b>" +
+    "✅<b> New Ad Created</b>\n\nTask : Twitter\nCPC : <b>" +
     options.cpc +
     " " +
     cur +
@@ -118,7 +112,7 @@ function Getbalance() {
   if (balance.value() < budgets) {
     return payout.value()
   }
-  return balance.value()
+  return balance.value() + payout.value()
 }
 //validation.
 function validation() {

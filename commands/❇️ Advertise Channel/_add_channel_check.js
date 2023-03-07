@@ -9,8 +9,9 @@
   aliases: 
 CMD*/
 
+var json = JSON.parse(content)
 if (options) {
-  var status = options.result.status
+  var status = json.result.status
   if (status == "creator") {
     Bot.sendMessage(
       "➡️ *Enter the Price of your Channel per Post (Minimum 0.001 USD)*"
@@ -22,7 +23,6 @@ if (options) {
 
   return
 }
-var json = JSON.parse(content)
 if (json.result.status == "left") {
   Bot.sendMessage(
     "❌ Make the bot *ADMIN* of your channel, with the rights to send Messages!"

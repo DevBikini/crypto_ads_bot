@@ -57,5 +57,25 @@ if (admin == user.telegramid) {
     Bot.sendMessage("Updated.")
     return
   }
+  if (name == "instagram cpc") {
+    Bot.setProperty("admin_cpc_instagram", message, "string")
+    Bot.sendMessage("Updated.")
+    return
+  }
+  if (name == "instagram budget") {
+    Bot.setProperty("admin_budget_instagram", message, "string")
+    Bot.sendMessage("Updated.")
+    return
+  }
+  if (name == "twitter cpc") {
+    Bot.setProperty("admin_cpc_twitter", message, "string")
+    Bot.sendMessage("Updated.")
+    return
+  }
+  if (name == "twitter budget") {
+    Bot.setProperty("admin_budget_twitter", message, "string")
+    Bot.sendMessage("Updated.")
+    return
+  }
 }
 //security not an admin

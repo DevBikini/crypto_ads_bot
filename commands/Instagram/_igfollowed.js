@@ -63,6 +63,7 @@ if (json.cpc < Getbalance(json).value()) {
       json.link +
       "\nUser IG: " +
       instagram,
+    disable_web_page_preview: true,
     reply_markup: {
       inline_keyboard: [
         [

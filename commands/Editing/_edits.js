@@ -55,7 +55,26 @@ if (same == "budget" && see == "view") {
   })
   return
 }
+//edit budget instagram
+if (same == "budget" && see == "instagram") {
+  Bot.sendMessage("Enter a budget for your ad:")
+  Bot.run({
+    command: "/Budget",
+    options: { data: see, ads: json.ads, message_id: message_id }
+  })
+  return
+}
+//edit budget twitter
+if (same == "budget" && see == "twitter") {
+  Bot.sendMessage("Enter a budget for your ad:")
+  Bot.run({
+    command: "/Budget",
+    options: { data: see, ads: json.ads, message_id: message_id }
+  })
+  return
+}
 //edit cpc
+//NEW LINE HERE
 if (same == "cpc" && see == "bot") {
   Bot.sendMessage("Enter a cpc for your ad:")
   Bot.run({
@@ -91,7 +110,26 @@ if (same == "cpc" && see == "view") {
   })
   return
 }
+//edit cpc instagram
+if (same == "cpc" && see == "instagram") {
+  Bot.sendMessage("Enter a cpc for your ad:")
+  Bot.run({
+    command: "/Cpc",
+    options: { data: see, ads: json.ads, message_id: message_id }
+  })
+  return
+}
+//edit cpc twitter
+if (same == "cpc" && see == "twitter") {
+  Bot.sendMessage("Enter a cpc for your ad:")
+  Bot.run({
+    command: "/Cpc",
+    options: { data: see, ads: json.ads, message_id: message_id }
+  })
+  return
+}
 //edit url
+//NEW LINE HERE
 if (same == "url" && see == "bot") {
   Bot.sendMessage("Enter a Url for your ad:")
   Bot.run({
@@ -127,7 +165,26 @@ if (same == "url" && see == "view") {
   })
   return
 }
+//edit url instagram
+if (same == "url" && see == "instagram") {
+  Api.answerCallbackQuery({
+    callback_query_id: request.id,
+    text: "you can't edit this",
+    show_alert: false
+  })
+  return
+}
+//edit url twitter
+if (same == "url" && see == "twitter") {
+  Api.answerCallbackQuery({
+    callback_query_id: request.id,
+    text: "you can't edit this",
+    show_alert: false
+  })
+  return
+}
 //edit description
+//NEW LINE HERE.
 if (same == "description" && see == "bot") {
   Bot.sendMessage("Enter a description for your ad:")
   Bot.run({
@@ -163,7 +220,26 @@ if (same == "description" && see == "view") {
   })
   return
 }
+//edit description instagram
+if (same == "description" && see == "instagram") {
+  Api.answerCallbackQuery({
+    callback_query_id: request.id,
+    text: "you can't edit this",
+    show_alert: false
+  })
+  return
+}
+//edit description twitter
+if (same == "description" && see == "twitter") {
+  Api.answerCallbackQuery({
+    callback_query_id: request.id,
+    text: "you can't edit this",
+    show_alert: false
+  })
+  return
+}
 //edit title
+//NEW LINE HERE
 if (same == "title" && see == "bot") {
   Bot.sendMessage("Enter a title for your ad:")
   Bot.run({
@@ -199,7 +275,26 @@ if (same == "title" && see == "view") {
   })
   return
 }
+//edit title instagram
+if (same == "title" && see == "instagram") {
+  Api.answerCallbackQuery({
+    callback_query_id: request.id,
+    text: "you can't edit this",
+    show_alert: false
+  })
+  return
+}
+//edit title twitter
+if (same == "title" && see == "twitter") {
+  Api.answerCallbackQuery({
+    callback_query_id: request.id,
+    text: "you can't edit this",
+    show_alert: false
+  })
+  return
+}
 //back edit main
+//NE WLINE HERE
 if (same == "back" && see == "bot") {
   var sts = GetStatus(json).sts
   var cdm = GetStatus(json).cdm
@@ -401,7 +496,104 @@ if (same == "back" && see == "view") {
   })
   return
 }
+//back instagram main
+if (same == "back" && see == "instagram") {
+  var sts = GetStatus(json).sts
+  var cdm = GetStatus(json).cdm
+  var button = [
+    [
+      { text: "✏️ Edit", callback_data: "/edit instagram " + json.ads },
+      { text: sts, callback_data: cdm }
+    ]
+  ]
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Instagram\n\n<b>Instagram</b>: " +
+    json.ig +
+    "\n<b>URL</b>: " +
+    json.link +
+    "\n<b>Status</b>: " +
+    json.status +
+    "\n\n<b>Daily budget</b>: " +
+    json.budget +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    json.total +
+    " total / " +
+    json.clicks +
+    " today"
+  Api.editMessageText({
+    message_id: message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  Api.answerCallbackQuery({
+    callback_query_id: request.id,
+    text: "⬅️ Back",
+    show_alert: false
+  })
+  return
+}
+//back twitter main
+if (same == "back" && see == "twitter") {
+  var sts = GetStatus(json).sts
+  var cdm = GetStatus(json).cdm
+  var button = [
+    [
+      { text: "✏️ Edit", callback_data: "/edit twitter " + json.ads },
+      { text: sts, callback_data: cdm }
+    ]
+  ]
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Twitter\n\n<b>Twitter</b>: " +
+    json.tw +
+    "\n<b>URL</b>: " +
+    json.link +
+    "\n<b>Status</b>: " +
+    json.status +
+    "\n\n<b>Daily budget</b>: " +
+    json.budget +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    json.total +
+    " total / " +
+    json.clicks +
+    " today"
+  Api.editMessageText({
+    message_id: message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  Api.answerCallbackQuery({
+    callback_query_id: request.id,
+    text: "⬅️ Back",
+    show_alert: false
+  })
+  return
+}
 //delete ad
+//NEW LINE HERE
 if (same == "delete" && see == "bot") {
   Api.editMessageText({
     message_id: message_id,
@@ -473,11 +665,47 @@ if (same == "delete" && see == "view") {
   })
   return
 }
+//instagram
+if (same == "delete" && see == "instagram") {
+  Api.editMessageText({
+    message_id: message_id,
+    text:
+      "Are you sure you want to *delete* this ad?\n\n*This action cannot be undone*.",
+    parse_mode: "Markdown",
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: "✅ Yes", callback_data: "/delete " + number_ads },
+          { text: "❌ Cancel", callback_data: "/edit instagram " + number_ads }
+        ]
+      ]
+    }
+  })
+  return
+}
+//twitter
+if (same == "delete" && see == "twitter") {
+  Api.editMessageText({
+    message_id: message_id,
+    text:
+      "Are you sure you want to *delete* this ad?\n\n*This action cannot be undone*.",
+    parse_mode: "Markdown",
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: "✅ Yes", callback_data: "/delete " + number_ads },
+          { text: "❌ Cancel", callback_data: "/edit twitter " + number_ads }
+        ]
+      ]
+    }
+  })
+  return
+}
 //function
 function GetStatus(json) {
   if (json.status == "Enabled ✅") {
-    return { sts: "Disable 🚫", cdm: "/Disabled bot " + json.ads }
+    return { sts: "Disable 🚫", cdm: "/Disabled " + see + " " + json.ads }
   }
-  return { sts: "Enable ✅", cdm: "/Enabled bot " + json.ads }
+  return { sts: "Enable ✅", cdm: "/Enabled " + see + " " + json.ads }
 }
 

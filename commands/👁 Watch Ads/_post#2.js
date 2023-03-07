@@ -53,7 +53,7 @@ Bot.sendInlineKeyboard(
   [
     [
       { title: "✏️ Edit", command: "/edit view " + ads },
-      { title: "Disable 🚫", command: "/disabled view " + ads }
+      { title: "Disable 🚫", command: "/Disabled view " + ads }
     ]
   ],
   "*Campaign #" +

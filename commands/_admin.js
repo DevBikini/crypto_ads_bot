@@ -19,15 +19,19 @@ if (admin == user.telegramid) {
   return
 }
 function adminLogin() {
-  var currency = Bot.getProperty("admin_currency")
-  var cpc_bot = Bot.getProperty("admin_cpc_bot")
-  var budget_bot = Bot.getProperty("admin_budget_bot")
-  var cpc_visit = Bot.getProperty("admin_cpc_visit")
-  var budget_visit = Bot.getProperty("admin_budget_visit")
-  var cpc_join = Bot.getProperty("admin_cpc_join")
-  var budget_join = Bot.getProperty("admin_budget_join")
-  var cpc_view = Bot.getProperty("admin_cpc_view")
-  var budget_view = Bot.getProperty("admin_budget_view")
+  var currency = GetPropM("admin_currency")
+  var cpc_bot = GetPropM("admin_cpc_bot")
+  var budget_bot = GetPropM("admin_budget_bot")
+  var cpc_visit = GetPropM("admin_cpc_visit")
+  var budget_visit = GetPropM("admin_budget_visit")
+  var cpc_join = GetPropM("admin_cpc_join")
+  var budget_join = GetPropM("admin_budget_join")
+  var cpc_view = GetPropM("admin_cpc_view")
+  var budget_view = GetPropM("admin_budget_view")
+  var cpc_instagram = GetPropM("admin_cpc_instagram")
+  var budget_instagram = GetPropM("admin_budget_instagram")
+  var cpc_twitter = GetPropM("admin_cpc_twitter")
+  var budget_twitter = GetPropM("admin_budget_twitter")
   Api.sendMessage({
     text:
       "Hello admin *" +
@@ -50,8 +54,16 @@ function adminLogin() {
       budget_join +
       "\n_______________________*\n👁 Watch Ads\n\n ▪️ Mini. CPC per Click in watch ad\n*" +
       cpc_view +
-      "*\n▪️ Mini. Budget in watch ad\n*" +
+      "*\n▪️ Mini. Budget in Instagram ad\n*" +
       budget_view +
+      "\n_______________________*\n🖼️ Instagram\n\n ▪️ Mini. CPC per Click in Instagram ad\n*" +
+      cpc_instagram +
+      "*\n▪️ Mini. Budget in Twitter ad\n*" +
+      budget_instagram +
+      "\n_______________________*\n💬Twitter\n\n ▪️ Mini. CPC per Click in Twitter ad\n*" +
+      cpc_twitter +
+      "*\n▪️ Mini. Budget in Twitter ad\n*" +
+      budget_twitter +
       "*",
     parse_mode: "Markdown",
     reply_markup: {
@@ -77,6 +89,19 @@ function button() {
       { text: "Min. Watch CPC", callback_data: "/setB view cpc" },
       { text: "Min. Watch Budget", callback_data: "/setB view budget" }
     ],
+    [
+      { text: "Min. Instagram CPC", callback_data: "/setB instagram cpc" },
+      { text: "Min. IG Budget", callback_data: "/setB instagram budget" }
+    ],
+    [
+      { text: "Min. Twitter CPC", callback_data: "/setB twitter cpc" },
+      { text: "Min. Tw Budget", callback_data: "/setB twitter budget" }
+    ],
     [{ text: "Currency", callback_data: "/setB set currency" }]
   ]
 }
+//function
+function GetPropM(name) {
+  return Bot.getProperty(name)
+}
+

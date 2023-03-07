@@ -258,6 +258,111 @@ if (same == "view") {
   }
   Bot.setProperty("all_in_ads", add, "json")
 }
+
+//Instagram
+if (same == "instagram") {
+  var button = [
+    [
+      { text: "✏️ Edit", callback_data: "/edit instagram " + json.ads },
+      { text: "Disable 🚫", callback_data: "/Disabled instagram " + json.ads }
+    ]
+  ]
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Instagram\n\n<b>Instagram</b>: " +
+    json.ig +
+    "\n<b>URL</b>: " +
+    json.link +
+    "\n<b>Status</b>: " +
+    status +
+    "\n\n<b>Daily budget</b>: " +
+    json.budget +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    json.total +
+    " total / 0 today"
+  Api.editMessageText({
+    message_id: request.message.message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  var add = Bot.getProperty("all_in_ads", { list: {} })
+  add.list[number_ads] = {
+    ads: json.ads,
+    ig: json.ig,
+    link: json.link,
+    cpc: json.cpc,
+    budget: json.budget,
+    clicks: 0,
+    total: total_click,
+    status: status,
+    owner: json.owner,
+    promotion: json.promotion
+  }
+  Bot.setProperty("all_in_ads", add, "json")
+}
+//Twitter
+if (same == "twitter") {
+  var button = [
+    [
+      { text: "✏️ Edit", callback_data: "/edit twitter " + json.ads },
+      { text: "Disable 🚫", callback_data: "/Disabled twitter " + json.ads }
+    ]
+  ]
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Twitter\n\n<b>Twitter</b>: " +
+    json.tw +
+    "\n<b>URL</b>: " +
+    json.link +
+    "\n<b>Status</b>: " +
+    status +
+    "\n\n<b>Daily budget</b>: " +
+    json.budget +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    json.total +
+    " total / 0 today"
+  Api.editMessageText({
+    message_id: request.message.message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  var add = Bot.getProperty("all_in_ads", { list: {} })
+  add.list[number_ads] = {
+    ads: json.ads,
+    tw: json.tw,
+    link: json.link,
+    cpc: json.cpc,
+    budget: json.budget,
+    clicks: 0,
+    total: total_click,
+    status: status,
+    owner: json.owner,
+    promotion: json.promotion
+  }
+  Bot.setProperty("all_in_ads", add, "json")
+}
 //function
 function Getbalance(json) {
   if (!balance.value()) {

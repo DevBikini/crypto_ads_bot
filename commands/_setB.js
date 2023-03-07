@@ -60,3 +60,25 @@ if (name == "view" && center == "budget") {
   Bot.run({ command: "/setA", options: { name: "view budget" } })
   return
 }
+//Instagram 
+if (name == "instagram" && center == "cpc") {
+  Bot.sendMessage("Enter your minimum cpc per click")
+  Bot.run({ command: "/setA", options: { name: "instagram cpc" } })
+  return
+}
+if (name == "instagram" && center == "budget") {
+  Bot.sendMessage("Enter your minimum budget")
+  Bot.run({ command: "/setA", options: { name: "instagram budget" } })
+  return
+}
+//twitter
+if (name == "twitter" && center == "cpc") {
+  Bot.sendMessage("Enter your minimum cpc per click")
+  Bot.run({ command: "/setA", options: { name: "twitter cpc" } })
+  return
+}
+if (name == "twitter" && center == "budget") {
+  Bot.sendMessage("Enter your minimum budget")
+  Bot.run({ command: "/setA", options: { name: "twitter budget" } })
+  return
+}

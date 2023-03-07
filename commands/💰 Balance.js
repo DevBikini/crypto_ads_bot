@@ -30,11 +30,11 @@ if (!security) {
 var currency = Bot.getProperty("admin_currency")
 var payout = Libs.ResourcesLib.userRes("payout")
 var balance = Libs.ResourcesLib.userRes("balance")
-var plus = balance.value() + payout.value()
+var all_balance = balance.value() + payout.value()
 Bot.sendKeyboard(
   "➕ Deposit,➖ Withdraw\n🏠 Menu",
   "🔸️ *Balance*\n     " +
-    plus.toFixed(10) +
+    all_balance.toFixed(10) +
     " " +
     currency +
     "!\n🔸️ *Available for payout*\n     " +

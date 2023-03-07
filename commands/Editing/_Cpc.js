@@ -16,7 +16,7 @@ var cur = Bot.getProperty("admin_currency")
 var message_id = options.message_id
 var see = options.data
 var number_ads = options.ads
-var cpc =  Bot.getProperty("admin_cpc_"+see)
+var cpc = Bot.getProperty("admin_cpc_" + see)
 if (message.includes("-") | !isNumeric(message) | (message < cpc)) {
   Bot.sendMessage(
     "❌ *Send please an amount greater or equal to* " + cpc + " " + cur
@@ -258,6 +258,106 @@ if (see == "view") {
   add.list[number_ads] = {
     ads: json.ads,
     name: json.name,
+    link: json.link,
+    title: json.title,
+    description: json.description,
+    cpc: message,
+    budget: json.budget,
+    clicks: json.clicks,
+    total: json.total,
+    status: json.status,
+    owner: json.owner,
+    promotion: json.promotion
+  }
+  Bot.setProperty("all_in_ads", add, "json")
+  return
+}
+if (see == "instagram") {
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Instagram\n\n<b>Instagram</b>: " +
+    json.ig +
+    "\n<b>URL</b>: " +
+    json.link +
+    "\n<b>Status</b>: " +
+    json.status +
+    "\n\n<b>Daily budget</b>: " +
+    json.budget +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    message +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    json.total +
+    " total / " +
+    json.clicks +
+    " today"
+  Api.editMessageText({
+    message_id: message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  var add = Bot.getProperty("all_in_ads", { list: {} })
+  add.list[number_ads] = {
+    ads: json.ads,
+    ig: json.ig,
+    link: json.link,
+    title: json.title,
+    description: json.description,
+    cpc: message,
+    budget: json.budget,
+    clicks: json.clicks,
+    total: json.total,
+    status: json.status,
+    owner: json.owner,
+    promotion: json.promotion
+  }
+  Bot.setProperty("all_in_ads", add, "json")
+  return
+}
+if (see == "twitter") {
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Teitter\n\n<b>Twitter</b>: " +
+    json.tw +
+    "\n<b>URL</b>: " +
+    json.link +
+    "\n<b>Status</b>: " +
+    json.status +
+    "\n\n<b>Daily budget</b>: " +
+    json.budget +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    message +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    json.total +
+    " total / " +
+    json.clicks +
+    " today"
+  Api.editMessageText({
+    message_id: message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  var add = Bot.getProperty("all_in_ads", { list: {} })
+  add.list[number_ads] = {
+    ads: json.ads,
+    tw: json.tw,
     link: json.link,
     title: json.title,
     description: json.description,

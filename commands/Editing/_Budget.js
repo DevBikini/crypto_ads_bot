@@ -288,6 +288,106 @@ if (see == "view") {
   Bot.setProperty("all_in_ads", add, "json")
   return
 }
+if (see == "instagram") {
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Instagram\n\n<b>Instagram</b>: " +
+    json.ig +
+    "\n<b>URL</b>: " +
+    json.link +
+    "\n<b>Status</b>: " +
+    json.status +
+    "\n\n<b>Daily budget</b>: " +
+    message +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    total_click +
+    " total / " +
+    json.clicks +
+    " today"
+  Api.editMessageText({
+    message_id: message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  var add = Bot.getProperty("all_in_ads", { list: {} })
+  add.list[number_ads] = {
+    ads: json.ads,
+    ig: json.ig,
+    link: json.link,
+    title: json.title,
+    description: json.description,
+    cpc: json.cpc,
+    budget: message,
+    clicks: json.clicks,
+    total: total_click,
+    status: json.status,
+    owner: json.owner,
+    promotion: json.promotion
+  }
+  Bot.setProperty("all_in_ads", add, "json")
+  return
+}
+if (see == "twitter") {
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Post views 📃\n\n<b>Channel</b>: " +
+    json.tw +
+    "\n<b>URL</b>: " +
+    json.link +
+    "\n<b>Status</b>: " +
+    json.status +
+    "\n\n<b>Daily budget</b>: " +
+    message +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    json.cpc +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    total_click +
+    " total / " +
+    json.clicks +
+    " today"
+  Api.editMessageText({
+    message_id: message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  var add = Bot.getProperty("all_in_ads", { list: {} })
+  add.list[number_ads] = {
+    ads: json.ads,
+    tw: json.tw,
+    link: json.link,
+    title: json.title,
+    description: json.description,
+    cpc: json.cpc,
+    budget: message,
+    clicks: json.clicks,
+    total: total_click,
+    status: json.status,
+    owner: json.owner,
+    promotion: json.promotion
+  }
+  Bot.setProperty("all_in_ads", add, "json")
+  return
+}
 //function
 function GetClicks() {
   if (node.includes(".")) {

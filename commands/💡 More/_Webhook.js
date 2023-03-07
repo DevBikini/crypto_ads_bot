@@ -54,4 +54,8 @@ User.setProperty("MynumberN", notify.value(), "integers")
 var save_notify = Bot.getProperty("broadcast_notification", { list: {} })
 save_notify[notify.value()] = { notification: "true", user: user.telegramid }
 Bot.setProperty("broadcast_notification", save_notify, "json")
+Bot.sendKeyboard(
+  "🤖 Message Bots,💻 Visit Sites,📣 Join Chats,👁 Watch Ads\n🔗 Shork Link,🤑 Task Earn,❇️ Advertise Channel\nInstagram,Twitter\n💰 Balance,🙌🏻 Referrals,⚙️ Settings\n📊 My ads",
+  "*Welcome to Crypto Ad Bot!* 🔥\n\nThis bot lets you earn Cryptocurrency by completing simple tasks.\n\nPress *🖥 Visit sites* to earn by clicking links\nPress *🤖 Message bots* to earn by talking to bots\nPress *📣 Join chats* to earn by joining chats\nPress *💡 More* for other tasks\n\nYou can also create your own ads with /newad."
+)
 

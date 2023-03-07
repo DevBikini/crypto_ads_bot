@@ -335,3 +335,150 @@ if (know == "view") {
   })
   return
 }
+//instagram
+if (know == "instagram") {
+  var button = [
+    [
+      {
+        text: "Edit title",
+        callback_data: "/edits title " + number_ads + " instagram"
+      },
+      {
+        text: "Edit description",
+        callback_data: "/edits description " + number_ads + " instagram"
+      }
+    ],
+    [
+      {
+        text: "Edit URL",
+        callback_data: "/edits url " + number_ads + " instagram"
+      },
+      {
+        text: "Edit CPC",
+        callback_data: "/edits cpc " + number_ads + " instagram"
+      }
+    ],
+    [
+      {
+        text: "Edit budget",
+        callback_data: "/edits budget " + number_ads + " instagram"
+      },
+      {
+        text: "🗑 Delete",
+        callback_data: "/edits delete " + number_ads + " instagram"
+      }
+    ],
+    [
+      {
+        text: "⬅️ Back",
+        callback_data: "/edits back " + number_ads + " instagram"
+      }
+    ]
+  ]
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Instagram\n\n<b>Instagram</b>: " +
+    json.ig +
+    "\n<b>URL</b>: " +
+    link +
+    "\n<b>Status</b>: " +
+    status +
+    "\n\n<b>Daily budget</b>: " +
+    budget +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    cpc +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    total +
+    " total / " +
+    clicks +
+    " today"
+  Api.editMessageText({
+    message_id: message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  return
+}
+//twitter
+if (know == "twitter") {
+  var button = [
+    [
+      {
+        text: "Edit title",
+        callback_data: "/edits title " + number_ads + " twitter"
+      },
+      {
+        text: "Edit description",
+        callback_data: "/edits description " + number_ads + " twitter"
+      }
+    ],
+    [
+      {
+        text: "Edit URL",
+        callback_data: "/edits url " + number_ads + " twitter"
+      },
+      {
+        text: "Edit CPC",
+        callback_data: "/edits cpc " + number_ads + " twitter"
+      }
+    ],
+    [
+      {
+        text: "Edit budget",
+        callback_data: "/edits budget " + number_ads + " twitter"
+      },
+      {
+        text: "🗑 Delete",
+        callback_data: "/edits delete " + number_ads + " twitter"
+      }
+    ],
+    [
+      {
+        text: "⬅️ Back",
+        callback_data: "/edits back " + number_ads + " twitter"
+      }
+    ]
+  ]
+  var text =
+    "<b>Campaign #" +
+    json.ads +
+    "</b> - Twitter\n\n<b>Twitter</b>: " +
+    json.tw +
+    "\n<b>URL</b>: " +
+    link +
+    "\n<b>Status</b>: " +
+    status +
+    "\n\n<b>Daily budget</b>: " +
+    budget +
+    " " +
+    cur +
+    "\n<b>CPC</b>: " +
+    cpc +
+    " " +
+    cur +
+    "\n<b>Clicks</b>: " +
+    total +
+    " total / " +
+    clicks +
+    " today"
+  Api.editMessageText({
+    message_id: message_id,
+    text: text,
+    parse_mode: "html",
+    disable_web_page_preview: true,
+    reply_markup: {
+      inline_keyboard: button
+    }
+  })
+  return
+}
+

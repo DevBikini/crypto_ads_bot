@@ -1,5 +1,5 @@
 /*CMD
-  command: /go_withdraw_DGB
+  command: /go_withdraw_BTT
   help: 
   need_reply: true
   auto_retry_time: 
@@ -32,13 +32,13 @@ if (amount > balance.value()) {
   )
   return
 }
-var ltc = 100 * parseFloat(amount)
+var ltc = 4420000 * parseFloat(amount)
 Bot.sendMessage(
   "💰 Amount to receive: *" +
     ltc.toFixed(10) +
-    " DGB*\n\n➡ Send now your *DGB address to withdraw*:"
+    " BTT*\n\n➡ Send now your *BTT address to withdraw*:"
 )
 Bot.run({
-  command: "/go_withdrawProgress_DGB",
+  command: "/go_withdrawProgress_BTT",
   options: { amount: ltc.toFixed(10), amo: amount }
 })

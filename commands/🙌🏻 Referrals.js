@@ -1,15 +1,21 @@
 /*CMD
   command: 🙌🏻 Referrals
   help: 
-  need_reply: 
+  need_reply: false
   auto_retry_time: 
   folder: 
-  answer: 
-  keyboard: 
+
+  <<ANSWER
+
+  ANSWER
+
+  <<KEYBOARD
+
+  KEYBOARD
   aliases: /referrals
 CMD*/
 
-Libs.ReferralLib.setLinkPrefix("ref")
+Libs.ReferralLib.setLinkPrefix("r")
 var reflink = Libs.ReferralLib.getLink()
 var refcount = Libs.ReferralLib.getRefCount()
 Bot.sendKeyboard(

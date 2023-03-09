@@ -4,8 +4,14 @@
   need_reply: true
   auto_retry_time: 
   folder: Withdraw 
-  answer: 
-  keyboard: 
+
+  <<ANSWER
+
+  ANSWER
+
+  <<KEYBOARD
+
+  KEYBOARD
   aliases: 
 CMD*/
 
@@ -57,6 +63,14 @@ if (message == "TRX") {
   Message()
   Bot.run({
     command: "/go_withdraw_TRX",
+    options: { me: "ok" }
+  })
+  return
+}
+if (message == "BTT") {
+  Message()
+  Bot.run({
+    command: "/go_withdraw_BTT",
     options: { me: "ok" }
   })
   return

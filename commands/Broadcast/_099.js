@@ -1,18 +1,28 @@
 /*CMD
   command: /099
   help: 
-  need_reply: 
+  need_reply: false
   auto_retry_time: 
   folder: Broadcast
-  answer: 
-  keyboard: 
+
+  <<ANSWER
+
+  ANSWER
+
+  <<KEYBOARD
+
+  KEYBOARD
   aliases: 
 CMD*/
 
 var notify = Libs.ResourcesLib.anotherChatRes("notify", "global")
 var nbb = User.getProperty("MynumberN")
 var no = Libs.ResourcesLib.anotherChatRes("BGB", "global")
-//no.set(0)
+if(params){
+no.set(0)
+Bot.sendMessage("reset")
+return 
+}
 
 Bot.sendMessage(
   "Registered Total: " +
